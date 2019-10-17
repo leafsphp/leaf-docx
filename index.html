@@ -33,7 +33,7 @@
     <a class="item" href="introduction\getting-started.html">
       <b>Getting Started</b>
     </a>
-    <a class="item" href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.1.0">
+    <a class="item" href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.2.0">
       <b>New in 1.1.0</b>
     </a>
     <div class="item">
@@ -82,7 +82,7 @@
         <a class="item" href="#">JWT</a>
       </div>
     </div>
-  </div>      
+  </div>
 
 
   <div class="pusher">
@@ -138,8 +138,8 @@
     <div class="zoomed masthead segment">
       <div class="ui container">
         <div class="introduction">
-          <a class="ui black version label" href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.1.0" target="_blank">
-            v1.1.0
+          <a class="ui black version label" href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.2.0" target="_blank">
+            v1.2.0
           </a>
           <br/>
           <h1 class="ui inverted header">
@@ -153,7 +153,7 @@
           <div class="ui hidden divider"></div>
 
           <a href="introduction\getting-started.html" class="ui huge inverted download button">Get Started</a>
-          <a href="assets/1.1.0.zip" class="ui huge inverted basic button" download>Download v1.1.0</a>
+          <a href="assets/1.1.0.zip" class="ui huge inverted basic button" download>Download v1.2.0</a>
         </div>
         <!-- <div class="inverted advertisement">
           
@@ -172,12 +172,12 @@
         <div class="row">
           <div class="twelve wide column">
             <div class="hidden code" data-type="php">
-              // Routes
-              $leaf->get('/', function() use($response) {
-                return $response->respond(["message" => "hello"]);
-              });
+              // Sample index.php
+              require_once __DIR__ . '/vendor/autoload.php';
 
-
+              
+              $response = new \Leaf\Core\Response();
+              
               $leaf->get('/book/{id}', function($id) use($response) {
                 return $response->respond(["id" => $id]);
               });
