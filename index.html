@@ -186,6 +186,8 @@
                 $title = $request->getParam('title');
                 return $response->respond(["message" => "hello"]);
               });
+
+              $leaf->run();
             </div>
             <h1 class="ui header">Quickly Create PHP Projects</h1>
             <p>Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.</p>
