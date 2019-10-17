@@ -175,8 +175,9 @@
               // Sample index.php
               require_once __DIR__ . '/vendor/autoload.php';
 
-              
-              $response = new \Leaf\Core\Response();
+$leaf = new \Leaf\Core\Leaf();
+
+$response = new \Leaf\Core\Response();
               
               $leaf->get('/book/{id}', function($id) use($response) {
                 return $response->respond(["id" => $id]);
