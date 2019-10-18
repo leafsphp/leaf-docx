@@ -178,14 +178,16 @@
 $leaf = new \Leaf\Core\Leaf();
 
 $response = new \Leaf\Core\Response();
+
+$request = new \Leaf\Core\Request();
               
               $leaf->get('/book/{id}', function($id) use($response) {
-                return $response->respond(["id" => $id]);
+                echo $response->respond(["id" => $id]);
               });
               
               $leaf->post('/books/add', function() use($request, $response) {
                 $title = $request->getParam('title');
-                return $response->respond(["message" => "hello"]);
+                echo $response->respond(["message" => "hello"]);
               });
 
               

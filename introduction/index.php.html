@@ -87,7 +87,7 @@
         <a class="ui logo icon image" href="..\index.html">
           <img src="..\images\logo.png" />
         </a>
-        <a href="..\index.html"><b>UI Docs</b></a>
+        <a href="..\index.html"><b>Leaf Docs</b></a>
       </div>
       <a class="item" href="..\getting-started.html">
         <b>Getting Started</b>
@@ -168,7 +168,7 @@
               <a class="ui logo icon image" href="..\index.html">
                 <img src="..\images\logo.png" />
               </a>
-              <a href="..\index.html"><b>UI Docs</b></a>
+              <a href="..\index.html"><b>Leaf Docs</b></a>
             </div>
             <a class="item" href="./getting-started.html">
               <b>Getting Started</b>
@@ -282,62 +282,92 @@ $leaf->run();
             <div class="ui large info message">
               <div class="ui header">Setup</div>
               <p>
-                If you just need the files you can download them as a zip from
-                GitHub.
+                You can download the leaf starter here.
               </p>
               <a
-                href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.2.0"
+                href="https://github.com/leafsphp/leaf-starter"
                 class="ui secondary button"
-                >Download Zip</a
-              >
+                >Download Zip
+              </a>
               <!-- <a href="https://github.com/" class="ui button" target="_blank">View all Leaf Repos </a> -->
             </div>
 
-            <h2 class="ui dividing header">Installing Leaf PHP</h2>
+            <h2 class="ui dividing header">Rendering HTML</h2>
 
             <div class="no example">
-              <h4 class="ui header">Install with composer</h4>
+              <h4 class="ui header">Basic HTML</h4>
               <p>
-                If you don't already have composer, you can get it at the
-                <a href="https://getcomposer.org/" target="_blank"
-                  >download page</a
-                >
-                on
-                <a href="https://getcomposer.org/" target="_blank"
-                  >getcomposer.org</a
-                >
+                Since Leaf doesn't restrict you from using your default PHP, you can use <code>echo</code> to output HTML code, like this:
               </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <p>After installing composer,</p>
-                <div class="ignored code" data-type="bash">
-                  composer require leafs/leaf
-                </div>
+              <div class="ignored code" data-type="html">
+                echo "<h2>Hello World</h2>";
               </div>
+
+              <p>
+                Though this method works, it is not recommended since the default ouput type for Leaf is <code>JSON</code>, for this reason,
+                Leaf has prepared a Response object with a bunch of handy methods(view <a href="../core/response.html">Response</a> for more info)
+              </p>
+              <p>
+                This Response object contains a couple of methods for handling HTML properly with the right headers...let's take a look
+              </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">Use the starter template</h4>
+              <h4 class="ui header">RenderMarkup()</h4>
               <p>
-                This method uses git. If you don't already have git, you can get
-                it at the
-                <a href="https://git-scm.com/" target="_blank">download page</a>
+                This method simply renders any html passed into it with a content-type of <code>text/html</code>
               </p>
 
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="bash">
-                  git clone git@github.com:leafsphp/leaf-starter.git cd
-                  leaf-starter php -S localhost:8000
-                </div>
+              <div class="ignored code" data-type="php">
+require_once __DIR__ ."/vendor/autoload.php";
+
+use Leaf\Core\Leaf;
+use Leaf\Core\Response;
+
+$leaf = new Leaf();
+$response = new Response();
+
+$leaf->get('/', function() use($response) {
+  echo $response->renderMarkup("<h2>HTML Code</h2>");
+});
+
+$leaf->run();
               </div>
             </div>
+
+
+            <div class="no example">
+              <h4 class="ui header">RenderHtmlPage()</h4>
+              <p>
+                This method simply displays an already created html/PHP page with the appropriate content type. This method is especially suited to
+                server side routing.
+              </p>
+
+              <div class="ignored code" data-type="php">
+require_once __DIR__ ."/vendor/autoload.php";
+
+use Leaf\Core\Leaf;
+use Leaf\Core\Response;
+
+$leaf = new Leaf();
+$response = new Response();
+
+$leaf->get('/', function() use($response) {
+  $response->renderHtmlPage('./link/to/page');
+});
+
+$leaf->run();
+              </div>
+            </div>
+
+            You can read more on responses <a href="../core/response.html">here</a>
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="./re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
             <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
+            <a href="../core/response.html" style="font-size: 18px;">Response</a><br />
             <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
-            <a href="../core/response.html" style="font-size: 18px;">Response</a>
+            <a href="../config/database.html" style="font-size: 18px;">Database</a>
           </div>
 
           <div class="ui  vertical footer segment">
