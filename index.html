@@ -230,13 +230,12 @@ $response = new \Leaf\Core\Response();
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
               // generate JWT token
-              $leaf->post('/login', function() use($response, $authentication) {
-                /* login code */
-                $token = $authentication->createSimpleToken($user_id_to_encode, 'This is a secret key');
-                return $response->respond(["message" => "hello"]);
+              $leaf->post('/token/create', function() use($response, $authentication) {
+                $token = $authentication->createSimpleToken(22, 'Secret key');
+                return $response->respond(["token" => $token]);
               });
             </div>
-            
+            <a href="core/simple-authentication.html">View Authentication Docs</a>
           </div>
         </div>
     </div>
