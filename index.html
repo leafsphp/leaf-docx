@@ -148,16 +148,16 @@
     <div class="zoomed masthead segment">
       <div class="ui container">
         <div class="introduction">
-          <a class="ui black version label" href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.2.0" target="_blank">
+          <!-- <a class="ui black version label" href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.2.0" target="_blank">
             v1.2.0
           </a>
-          <br/>
+          <br/> -->
           <h1 class="ui inverted header">
             <span class="library">
               Leaf PHP
             </span>
             <span class="tagline">
-              Simple modern PHP starter for all your PHP projects.
+              Create clean, simple but powerful web applications and APIs quickly.
             </span>
           </h1>
           <div class="ui hidden divider"></div>
@@ -204,7 +204,7 @@ $request = new \Leaf\Core\Request();
               $leaf->run();
             </div>
             <h1 class="ui header">Quickly Create PHP Projects</h1>
-            <p>Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.</p>
+            <p>Leaf is a PHP micro-framework <!--inspired by Slim--> which helps you create web applications and APIs from the ground up in minutes.</p>
           </div>
         </div>
       </div>
@@ -214,7 +214,7 @@ $request = new \Leaf\Core\Request();
             <h2 class="ui header">Structured PHP</h2>
             <p>PHP is a free language, a language with only a handful of rules.</p>
             <p>This freedom gives rise to a lot of problems for developers since there's usually many ways to achieve the same thing.</p>
-            <p>Though not a framework, Leaf gives you a particular structure to follow whiles maintaining PHP's freedom.</p>
+            <p>Leaf gives you a particular structure to follow whiles maintaining PHP's freedom.</p>
             <p>
           </div>
           <div class="nine wide column">
@@ -238,6 +238,24 @@ $request = new \Leaf\Core\Request();
             <h2 class="ui header">Simple PHP methods</h2>
             <p>Leaf PHP provides you with very simple methods to handle various situations.</p>
             <p>With a clean structure and simple code, it's super easy to master Leaf's API.</p>
+          </div>
+          <div class="nine wide column">
+            <div class="hidden code" data-type="php">
+              // get request params
+              $leaf->post('/name/add', function() use($request) {
+  $name = $request->getParam('name');
+});
+            </div>
+            <a href="core/request.html">View Request Docs</a>
+          </div>
+        </div>
+        <div class="ui divider"></div>
+        <div class="row">
+          <div class="seven wide column">
+            <h2 class="ui header">Clean, Fast, Reliable</h2>
+            <p>Leaf PHP uses only components written by leaf in raw, tested PHP.</p>
+            <p>This means that in terms of performance, Leaf is the fastest PHP framework.</p>
+            <p>Leaf also uses clean, minimal code to achieve complex results.</p>
           </div>
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
