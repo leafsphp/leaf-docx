@@ -119,7 +119,7 @@
         </a>
 
         <div class="item">
-          Getting Started
+          Response
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -198,10 +198,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Getting Started
+                  Response
 
                   <div class="sub header">
-                    Getting up and running with Leaf PHP
+                    Leaf's handy response class
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -218,86 +218,146 @@
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">Preface</h2>
+            <h2 class="ui dividing header">Overview</h2>
+            <p>
+              Leaf tries as much as possible to use raw PHP written from scratch, so, instead of using PSR-7 like most frameworks do, Leaf has written predefined response methods.
+            </p>
 
             <div class="no example">
-              <h4 class="ui header">What is Leaf</h4>
+              <h4 class="ui header">Including Response</h4>
+              <p>
+                To include the Response object in a route, use this:
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Response;
 
-              <p>
-                Basically, Leaf is a PHP starter kit that helps you quickly
-                write simple yet powerful web applications and APIs without any
-                framework..
-              </p>
-              <p>
-                Leaf gives you a simple but very efficient structure for what
-                ever kind of app you wish to build.
-              </p>
+$response = new Response();
 
-              <p>
-                Leaf also includes a bunch of handy functions that help you
-                achieve a whole lot simmpler and faster.
+$leaf->get('/', function() use($response) {
+  $response->renderHtmlPage('./link/to/page');
+});
+                </div>
+                Here, we set <code>$response</code> to the <code>Response</code> class, and we pass it into the route with <code>use()</code>.
               </p>
-              <p>Simply install leaf, and you're good to go.</p>
             </div>
-            <div class="ui large info message">
-              <div class="ui header">Setup</div>
-              <p>
-                If you just need the files you can download them as a zip from
-                GitHub.
-              </p>
-              <a
-                href="https://github.com/leafsphp/leaf/tree/v1.2.0"
-                class="ui secondary button"
-                >Download Zip</a
-              >
-              <!-- <a href="https://github.com/leafsphp" class="ui button" target="_blank">View all Leaf Repos </a> -->
-            </div>
+            
+            
 
-            <h2 class="ui dividing header">Installing Leaf PHP</h2>
+            <h2 class="ui dividing header">Response Methods</h2>
 
             <div class="no example">
-              <h4 class="ui header">Install with composer</h4>
+              <h4 class="ui header">respond()</h4>
               <p>
-                If you don't already have composer, you can get it at the
-                <a href="https://getcomposer.org/" target="_blank"
-                  >download page</a
-                >
-                on
-                <a href="https://getcomposer.org/" target="_blank"
-                  >getcomposer.org</a
-                >
+                Respond is a method built for APIs and direct responses to the user. This response is encoded as JSON and output as such
               </p>
 
               <div class="ui active basic tab vertical segment" data-tab="mac">
-                <p>After installing composer,</p>
-                <div class="ignored code" data-type="bash">
-                  composer require leafs/leaf
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Response;
+
+$response = new Response();
+
+$leaf->get('/', function() use($response) {
+  $response->respond(["message" => "something"]);
+});
                 </div>
               </div>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">Use the starter template</h4>
+              <h4 class="ui header">respondWithCode()</h4>
               <p>
-                This method uses git. If you don't already have git, you can get
-                it at the
-                <a href="https://git-scm.com/" target="_blank">download page</a>
+                RespondWithCode is also a method built for APIs and direct responses to the user. This response is encoded as JSON and output as such, but it includes a section for the http code(default is 200)
               </p>
 
               <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="bash">
-                  git clone git@github.com:leafsphp/leaf-starter.git cd
-                  leaf-starter php -S localhost:8000
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Response;
+
+$response = new Response();
+
+$leaf->get('/', function() use($response) {
+  $response->respondWithCode(["message" => "something"], 200);
+});
                 </div>
               </div>
+            </div>
+
+
+            <div class="no example">
+              <h4 class="ui header">throwErr()</h4>
+              <p>
+                throwErr is also a method built for APIs and direct responses to the user, however, this method is suitable for errors only. 
+                The response is encoded as JSON and output as such, also, the correct headers are set for the error. It also includes a section for the http error code.<br>
+                More info on http status codes <a href="https://www.restapitutorial.com/httpstatuscodes.html" target="_blank" rel="noopener noreferrer">here</a>
+              </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Response;
+
+$response = new Response();
+
+$leaf->get('/name', function() use($response) {
+  $name = "something";
+  $name ==  null ? $response->throwErr('Name is null', $code) : null;
+});
+                </div>
+              </div>
+            </div>
+
+
+            <div class="no example">
+              <h4 class="ui header">renderHtmlPage()</h4>
+              <p>
+                renderHtmlPage is a method built for websites and webapps. This method is can be used with the routing to achieve server side routing, for example:
+              </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Response;
+
+$response = new Response();
+
+$leaf->get('/homepage', function() use($response) {
+  $response->renderHtmlPage('link/to/home.html');
+});
+                </div>
+                With this, whenever the route <code>/homepage</code> is invoked, Leaf loads up <code>home.html</code> and outputs it to the user
+              </div>
+            </div>
+
+
+            <div class="no example">
+              <h4 class="ui header">renderMarkup()</h4>
+              <p>
+                renderMarkup is another method built for websites and webapps. This method outputs any html entered into it with a content type of text/html:
+              </p>
+              For instance, with this code,
+              <div class="ignored code" data-type="html">
+                $code = "<h2>Hello</h2>";
+              </div>
+
+              We simply pass it into the response...like this
+              <div class="ignored code" data-type="php">
+use Leaf\Core\Response;
+
+$response = new Response();
+
+$leaf->get('/homepage', function() use($response) {
+  // $code defined
+  $response->renderMarkup($code);
+});
+              </div>
+              You might be wondering why we don't just use <div class="ignored code" data-type="html">echo "<h1>hello</h1>";</div>
+              The reason is, Leaf has default headers which set the content type to JSON, in order to correctly output HTML, you need to change this....Leaf has taken care of this, all within <code>renderMarkup</code> and <code>renderHtmlPage</code>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="./re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
             <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
-            <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
-            <a href="../core/response.html" style="font-size: 18px;">Response</a>
+            <a href="./request.html" style="font-size: 18px;">Request</a><br />
+            <a href="./simple-authentication.html" style="font-size: 18px;">Simple Authentication</a><br />
+            <a href="../config/database.html" style="font-size: 18px;">Database Config</a>
           </div>
 
           <div class="ui  vertical footer segment">
