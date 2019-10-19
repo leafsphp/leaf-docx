@@ -57,7 +57,7 @@
         <b>Getting Started</b>
       </a>
       <a class="item" href="./new.html">
-        <b>New in v1.10</b>
+        <b>New in v1.2.0</b>
       </a>
       <div class="item">
         <div class="header">Introduction</div>
@@ -148,7 +148,7 @@
               <b>Getting Started</b>
             </a>
             <a class="item" href="./new.html">
-              <b>New in v1.10</b>
+              <b>New in v1.2.0</b>
             </a>
             <div class="item">
               <div class="header">Introduction</div>
@@ -228,77 +228,84 @@
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">Preface</h2>
+            <h2 class="ui dividing header">Overview</h2>
 
             <div class="no example">
-              <h4 class="ui header">What is Leaf</h4>
-
+              <h4 class="ui header">Working with tokens</h4>
               <p>
-                Basically, Leaf is a PHP starter kit that helps you quickly
-                write simple yet powerful web applications and APIs without any
-                framework..
-              </p>
-              <p>
-                Leaf gives you a simple but very efficient structure for what
-                ever kind of app you wish to build.
-              </p>
-
-              <p>
-                Leaf also includes a bunch of handy functions that help you
-                achieve a whole lot simmpler and faster.
-              </p>
-              <p>Simply install leaf, and you're good to go.</p>
-            </div>
-            <div class="ui large info message">
-              <div class="ui header">Setup</div>
-              <p>
-                If you just need the files you can download them as a zip from
-                GitHub.
-              </p>
-              <a
-                href="https://github.com/leafsphp/leaf/tree/v1.2.0"
-                class="ui secondary button"
-                >Download Zip</a
-              >
-              <!-- <a href="https://github.com/leafsphp" class="ui button" target="_blank">View all Leaf Repos </a> -->
-            </div>
-
-            <h2 class="ui dividing header">Installing Leaf PHP</h2>
-
-            <div class="no example">
-              <h4 class="ui header">Install with composer</h4>
-              <p>
-                If you don't already have composer, you can get it at the
-                <a href="https://getcomposer.org/" target="_blank"
-                  >download page</a
-                >
-                on
-                <a href="https://getcomposer.org/" target="_blank"
-                  >getcomposer.org</a
-                >
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <p>After installing composer,</p>
-                <div class="ignored code" data-type="bash">
-                  composer require leafs/leaf
+                Leaf provides you with the $jwt object which includes various methods for creating and parsing token data....but we do not advice directly using the $jwt object. For this reason, a special $authentication object has been created to work with all the $jwt data.
+                To use $authentication, 
+                <div class="ignored code" data-type="php">
+                  $authentication = new Leaf\Core\Authentication();
                 </div>
+              </p>
+            </div>
+            
+            <h2 class="ui dividing header">Authentication methods:</h2>
+
+            <div class="no example">
+              <h4 class="ui header">generateSimpleToken()</h4>
+              <p>
+                This method generates a new JSON Web Token. It takes 2 arguments. check out <a href="https://tools.ietf.org/html/rfc7519#section-4.1">JWT</a> for more info on JWT params
+                <ul>
+                  <li>(int) - A user id to encode</li>
+                  <li>(string) - A secret phrase to encode with the token</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $token = $authentication->generateSimpleToken(24', 'LEAF PHP SECRET CODE 1442');
               </div>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">Use the starter template</h4>
+              <h4 class="ui header">generateToken()</h4>
               <p>
-                This method uses git. If you don't already have git, you can get
-                it at the
-                <a href="https://git-scm.com/" target="_blank">download page</a>
+                This method generates a new JSON Web Token: the same as <code>generateSimpleToken()</code>, the only difference is that this method gives you more control over the token
+                i.e. expiry time..... It takes 4 parameters. check out <a href="https://tools.ietf.org/html/rfc7519#section-4.1">JWT</a> for more info on JWT params
+                <ul>
+                  <li>(int) - A user id to encode</li>
+                  <li>(int) - Expiry time....this is the amount of time the token will last from the current time</li>
+                  <li>(string) - A secret phrase to encode with the token</li>
+                  <li>(string) - iss - issuer....identifies the principal that issued the JWT - default is localhost</li>
+                </ul>
               </p>
 
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="bash">
-                  git clone git@github.com:leafsphp/leaf-starter.git cd
-                  leaf-starter php -S localhost:8000
-                </div>
+              <div class="ignored code" data-type="bash">
+                $token = $authentication->generateToken(24', 3600, 'LEAF PHP SECRET CODE 1442', 'localhost');
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">validateToken()</h4>
+              <p>
+                This method is used to confirm the identity of a token from an authorization header
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $token = $authentication->validateToken();
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">getBearerToken()</h4>
+              <p>
+                This method is used to get the bearer token from an authorization header
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $token = $authentication->getBearerToken();
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">getAuthorizationHeader()</h4>
+              <p>
+                This method is used to an authorization header
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $authHeader = $authentication->getAuthorizationHeader();
               </div>
             </div>
 
