@@ -84,6 +84,11 @@
           <a class="item" href="../routing/sub-routing.html">Sub routing</a>
           <a class="item" href="../routing/named-parameters.html">Named parameters</a>
           <a class="item" href="../routing/pcre-patterns.html">PCRE based patterns</a>
+          <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
+          <a class="item" href="../routing/controllers.html">Using Controllers</a>
+          <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
+          <a class="item" href="../routing/middleware.html">Using Middleware</a>
+          <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
         </div>
       </div>
 
@@ -170,6 +175,11 @@
                 <a class="item" href="../routing/sub-routing.html">Sub routing</a>
                 <a class="item" href="../routing/named-parameters.html">Named parameters</a>
                 <a class="item" href="../routing/pcre-patterns.html">PCRE based patterns</a>
+          <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
+          <a class="item" href="../routing/controllers.html">Using Controllers</a>
+          <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
+          <a class="item" href="../routing/middleware.html">Using Middleware</a>
+          <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
               </div>
             </div>
 
@@ -375,6 +385,24 @@
 
               <div class="ignored code" data-type="bash">
                 $leaf->all('/post/{id}', function($id) {
+                  // your code
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Route "Hooking"</h4>
+              <p>
+                You can add a route that handles a couple of HTTP methods with the Leaf router's match() method. It accepts three arguments:
+                <ul>
+                  <li>The HTTP method(s) seperated by <code>|</code></li>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="php">
+                $leaf->match('GET|POST', '/people', function() {
                   // your code
                 });
               </div>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <!-- Standard Meta -->
@@ -9,39 +9,39 @@
       content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
     />
 
-    <link rel="image_src" type="image/jpeg" href="images\logo.png" />
+    <link rel="image_src" type="image/jpeg" href="..\images\logo.png" />
     <link rel="shortcut icon" type="image/jpeg" href="..\images\logo.png" />
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Getting Started</title>
+    <title>Optional Route Subpatterns</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
 
-    <script src="javascript\library\detect.min.js"></script>
-    <script src="javascript\library\jquery.min.js"></script>
-    <script src="javascript\library\clipboard.min.js"></script>
-    <script src="javascript\library\cookie.min.js"></script>
-    <script src="javascript\library\easing.min.js"></script>
-    <script src="javascript\library\highlight.min.js"></script>
-    <script src="javascript\library\history.min.js"></script>
-    <script src="javascript\library\tablesort.min.js"></script>
-    <script src="javascript\library\underscore.min.js"></script>
+    <script src="..\javascript\library\detect.min.js"></script>
+    <script src="..\javascript\library\jquery.min.js"></script>
+    <script src="..\javascript\library\clipboard.min.js"></script>
+    <script src="..\javascript\library\cookie.min.js"></script>
+    <script src="..\javascript\library\easing.min.js"></script>
+    <script src="..\javascript\library\highlight.min.js"></script>
+    <script src="..\javascript\library\history.min.js"></script>
+    <script src="..\javascript\library\tablesort.min.js"></script>
+    <script src="..\javascript\library\underscore.min.js"></script>
 
-    <script src="dist\semantic.min.js"></script>
+    <script src="..\dist\semantic.min.js"></script>
 
-    <script src="javascript\docs.js"></script>
+    <script src="..\javascript\docs.js"></script>
 
     <link
       rel="stylesheet"
       type="text/css"
       class="ui"
-      href="dist\semantic.min.css"
+      href="..\dist\semantic.min.css"
     />
 
-    <link rel="stylesheet" type="text/css" href="stylesheets\docs.css" />
-    <link rel="stylesheet" type="text/css" href="stylesheets\rtl.css" />
+    <link rel="stylesheet" type="text/css" href="..\stylesheets\docs.css" />
+    <link rel="stylesheet" type="text/css" href="..\stylesheets\rtl.css" />
 
     
   </head>
@@ -49,7 +49,7 @@
     <div class="ui vertical inverted sidebar menu" id="toc">
       <div class="item">
         <a class="ui logo icon image" href="..\index.html">
-          <img src="images\logo.png" />
+          <img src="..\images\logo.png" />
         </a>
         <a href="..\index.html"><b>Leaf Docs</b></a>
       </div>
@@ -124,7 +124,12 @@
         </a>
 
         <div class="item">
-          Getting Started
+          Optional Route Subpatterns
+        </div>
+        <div class="right menu">
+          <div class="vertically fitted borderless item">
+            <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -135,7 +140,7 @@
           <div class="ui vertical inverted menu">
             <div class="item">
               <a class="ui logo icon image" href="..\index.html">
-                <img src="images\logo.png" />
+                <img src="..\images\logo.png" />
               </a>
               <a href="..\index.html"><b>Leaf Docs</b></a>
             </div>
@@ -203,10 +208,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Getting Started
+                  Optional Route Subpatterns
 
                   <div class="sub header">
-                    Getting up and running with Leaf PHP
+                    Dynamic routing with Optional Route Subpatterns
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -223,84 +228,51 @@
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">Preface</h2>
+            <h2 class="ui dividing header">Overview</h2>
 
             <div class="no example">
-              <h4 class="ui header">What is Leaf</h4>
-
+              <h4 class="ui header">Optional Route Subpatterns</h4>
+              <i>This guide assumes you have read <a href="./simple-routing.html">Simple Routing</a> and either <a href="./named-parameters.html">named params</a> or <a href="./pcre-patterns.html">PCRE based patterns</a></i>
               <p>
-                Basically, Leaf is a PHP starter kit that helps you quickly
-                write simple yet powerful web applications and APIs without any
-                framework..
+				Route subpatterns can be made optional by making the subpatterns optional by adding a ? after them. Think of blog URLs in the form of /blog(/year)(/month)(/day)(/slug):
+				<div class="ignored code" data-type="php">
+					$leaf->get('/blog(/\d+)?(/\d+)?(/\d+)?(/[a-z0-9_-]+)?', function($year = null, $month = null, $day = null, $slug = null) {
+        if (!$year) { echo 'Blog overview'; return; }
+        if (!$month) { echo 'Blog year overview'; return; }
+        if (!$day) { echo 'Blog month overview'; return; }
+        if (!$slug) { echo 'Blog day overview'; return; }
+        echo 'Blogpost ' . htmlentities($slug) . ' detail';
+  }
+);
+				</div>
+				The code snippet above responds to the URLs /blog, /blog/year, /blog/year/month, /blog/year/month/day, and /blog/year/month/day/slug.
               </p>
               <p>
-                Leaf gives you a simple but very efficient structure for what
-                ever kind of app you wish to build.
+                Note: With optional parameters it is important that the leading / of the subpatterns is put inside the subpattern itself. Don't forget to set default values for the optional parameters.
               </p>
-
               <p>
-                Leaf also includes a bunch of handy functions that help you
-                achieve a whole lot simmpler and faster.
+                The code snipped above unfortunately also responds to URLs like /blog/foo and states that the overview needs to be shown - which is incorrect. Optional subpatterns can be made successive by extending the parenthesized subpatterns so that they contain the other optional subpatterns: The pattern should resemble /blog(/year(/month(/day(/slug)))) instead of the previous /blog(/year)(/month)(/day)(/slug):
+                <div class="ignored code" data-type="php">
+$leaf->get('/blog(/\d+(/\d+(/\d+(/[a-z0-9_-]+)?)?)?)?', function($year = null, $month = null, $day = null, $slug = null) {
+    // ...
+});
+				</div>
+				Note: It is highly recommended to always define successive optional parameters.
               </p>
-              <p>Simply install leaf, and you're good to go.</p>
-            </div>
-            <div class="ui large info message">
-              <div class="ui header">Setup</div>
               <p>
-                If you just need the files you can download them as a zip from
-                GitHub.
-              </p>
-              <a
-                href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.2.0"
-                class="ui secondary button"
-                >Download Zip</a
-              >
-              <!-- <a href="https://github.com/" class="ui button" target="_blank">View all Leaf Repos </a> -->
-            </div>
-
-            <h2 class="ui dividing header">Installing Leaf PHP</h2>
-
-            <div class="no example">
-              <h4 class="ui header">Install with composer</h4>
-              <p>
-                If you don't already have composer, you can get it at the
-                <a href="https://getcomposer.org/" target="_blank"
-                  >download page</a
-                >
-                on
-                <a href="https://getcomposer.org/" target="_blank"
-                  >getcomposer.org</a
-                >
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <p>After installing composer,</p>
-                <div class="ignored code" data-type="bash">
-                  composer require leafs/leaf
+                To make things complete use <a href="http://www.php.net/manual/en/regexp.reference.repetition.php">quantifiers</a> to require the correct amount of numbers in the URL:
+                <div class="ignored code" data-type="php">
+$leaf->get('/blog(/\d{4}(/\d{2}(/\d{2}(/[a-z0-9_-]+)?)?)?)?', function($year = null, $month = null, $day = null, $slug = null) {
+    // ...
+});
                 </div>
-              </div>
-            </div>
-
-            <div class="no example">
-              <h4 class="ui header">Use the starter template</h4>
-              <p>
-                This method uses git. If you don't already have git, you can get
-                it at the
-                <a href="https://git-scm.com/" target="_blank">download page</a>
               </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="bash">
-                  git clone git@github.com:leafsphp/leaf-starter.git cd
-                  leaf-starter php -S localhost:8000
-                </div>
-              </div>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
-            <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
+            <a href="./pcre-patterns.html" style="font-size: 18px;">PCRE based patterns</a><br />
+            <a href="../routing/404-handling.html" style="font-size: 18px;">Handling 404</a><br />
             <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
             <a href="../core/response.html" style="font-size: 18px;">Response</a>
           </div>
@@ -327,6 +299,6 @@
       };
     </script>
 
-    <script src="javascript\library\less.min.js"></script>
+    <script src="..\javascript\library\less.min.js"></script>
   </body>
 </html>
