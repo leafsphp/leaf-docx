@@ -231,9 +231,7 @@
                 <div class="ignored code" data-type="php">
 require_once __DIR__ . "/vendor/autoload.php";
 
-use Leaf\Core\Leaf;
-
-$leaf = new Leaf();
+$leaf = new Leaf\Core\Leaf();
 
 $leaf->get('/', function() {
   echo "Hello World";

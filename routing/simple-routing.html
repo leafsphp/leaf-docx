@@ -227,17 +227,31 @@
                 As explained <a href="../introduction/re-routing-to-index.html">before</a>, Leaf uses a single root file, to which all the server requests are redirected.
                 Leaf then takes these requests and matches them to rules you have defined. The results are then displayed to the user. It's actually a very simple concept.
               </p>
+              <p style="font-size: 20px !important;">
+                In order to use Leaf's router in your project, you have to imoprt it
+                <div class="ignored code" data-type="bash">
+                  $leaf = new Leaf\Core\Leaf();
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Using a different router</h4>
               <p>
                 Leaf uses a router based on the <a href="https://github.com/bramus/router">bramus/router</a> component as for it's core, but this is seperated from the rest of Leaf itself,
                  so, you can tie in any routing library of your choice.
               </p>
-              <p style="font-size: 20px !important;">
-                In order to use routing in your project, you have to imoprt the core router
-                <div class="ignored code" data-type="bash">
-                  use Leaf\Core\Leaf;
-                  $leaf = new Leaf();
-                </div>
-              </p>
+              1. Install it
+              <div class="ignored code" data-type="bash">
+                composer require .../whatever-router
+              </div>
+              2. Import it into your project
+              <div class="ignored code" data-type="bash">
+                $app  = new WhatEver\Router();
+                
+                // you can still use Leaf modules
+                $response = new Leaf\Core\Response();
+              </div>
             </div>
 
             <h2 class="ui dividing header">Creating Routes</h2>
@@ -350,7 +364,7 @@
             </div>
 
             <div class="no example">
-              <h4 class="ui header">PATCH requests</h4>
+              <h4 class="ui header">ALL requests</h4>
               <p>
                 You can add a route that handles all HTTP requests with the Leaf router's all() method. It accepts two arguments:
                 <ul>
