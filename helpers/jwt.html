@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Getting Started</title>
+    <title>JWT</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -124,7 +124,7 @@
         </a>
 
         <div class="item">
-          Getting Started
+          JWT
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -208,10 +208,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Getting Started
+                  JWT
 
                   <div class="sub header">
-                    Getting up and running with Leaf PHP
+                    Introduction to JWT
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -231,75 +231,38 @@
             <h2 class="ui dividing header">Preface</h2>
 
             <div class="no example">
-              <h4 class="ui header">What is Leaf</h4>
-
+              <h4 class="ui header">What is a JSON Web Token?</h4>
               <p>
-                Basically, Leaf is a PHP starter kit that helps you quickly
-                write simple yet powerful web applications and APIs without any
-                framework..
+               According to <a href="https://jwt.io/introduction">the JWT site</a>, JSON Web Token (JWT) is an open standard (<a href="https://tools.ietf.org/html/rfc7519" target="_blank" rel="noopener noreferrer">RFC 7519</a> ) 
+               that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. 
+               JWTs can be signed using a secret (with the HMAC algorithm) or a public/private key pair using RSA or ECDSA.
               </p>
               <p>
-                Leaf gives you a simple but very efficient structure for what
-                ever kind of app you wish to build.
+                Leaf comes along with a JWT object that comes with all JWT's functionality. Although you can use this directly, Leaf Core comes with a better alternative which makes working with JWT even simpler: Leaf Core's <a href="../core/simple-authentication.html">Simple Authentication</a>
               </p>
-
-              <p>
-                Leaf also includes a bunch of handy functions that help you
-                achieve a whole lot simmpler and faster.
-              </p>
-              <p>Simply install leaf, and you're good to go.</p>
-            </div>
-            <div class="ui large info message">
-              <div class="ui header">Setup</div>
-              <p>
-                If you just need the files you can download them as a zip from
-                GitHub.
-              </p>
-              <a
-                href="https://github.com/leafsphp/leaf/tree/v1.2.0"
-                class="ui secondary button"
-                >Download Zip</a
-              >
-              <!-- <a href="https://github.com/leafsphp" class="ui button" target="_blank">View all Leaf Repos </a> -->
             </div>
 
-            <h2 class="ui dividing header">Installing Leaf PHP</h2>
-
+            <h2 class="ui dividing header">Using the JWT object</h2>
             <div class="no example">
-              <h4 class="ui header">Install with composer</h4>
+              <h4 class="ui header">Intro</h4>
               <p>
-                If you don't already have composer, you can get it at the
-                <a href="https://getcomposer.org/" target="_blank"
-                  >download page</a
-                >
-                on
-                <a href="https://getcomposer.org/" target="_blank"
-                  >getcomposer.org</a
-                >
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <p>After installing composer,</p>
-                <div class="ignored code" data-type="bash">
-                  composer require leafs/leaf
+                To use JWT, you must import it just like all other modules.
+                <div class="ignored code" data-type="php">
+                  $jwt =new Leaf\Helpers\JWT();
                 </div>
-              </div>
+                More info <a href="https://jwt.io">here</a>
+              </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">Use the starter template</h4>
+              <h4 class="ui header">Simple Authentication</h4>
               <p>
-                This method uses git. If you don't already have git, you can get
-                it at the
-                <a href="https://git-scm.com/" target="_blank">download page</a>
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="bash">
-                  git clone git@github.com:leafsphp/leaf-starter.git cd
-                  leaf-starter php -S localhost:8000
+                To use Simple Authentication, you must import it just like all other modules.
+                <div class="ignored code" data-type="php">
+                  $authentication =new Leaf\Core\Authentication();
                 </div>
-              </div>
+                View the <a href="../core/simple-authentication.html">simple auth docs</a>
+              </p>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
