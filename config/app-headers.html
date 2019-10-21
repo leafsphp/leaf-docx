@@ -228,78 +228,54 @@
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">Preface</h2>
+            <h2 class="ui dividing header">Overview</h2>
 
             <div class="no example">
-              <h4 class="ui header">What is Leaf</h4>
-
+              <h4 class="ui header">Why Header Configuration?</h4>
               <p>
-                Basically, Leaf is a PHP starter kit that helps you quickly
-                write simple yet powerful web applications and APIs without any
-                framework..
+                Header configuaration helps us achieve so much ranging from responses to error codes and so much more, 
+                but for this guide, we'll be talking about <code>Header config</code> in relation to CORS. CORS usually creates a lot of problems for 
+                developers, and this is as a result of poor header config. So, let's get started.
               </p>
               <p>
-                Leaf gives you a simple but very efficient structure for what
-                ever kind of app you wish to build.
+                You can test your CORS Support here: <a href="http://www.test-cors.org/" target="_blank">http://www.test-cors.org/</a><br>
+                You can read the specification here: <a href="https://www.w3.org/TR/cors/" target="_blank">https://www.w3.org/TR/cors/</a>
               </p>
-
-              <p>
-                Leaf also includes a bunch of handy functions that help you
-                achieve a whole lot simmpler and faster.
-              </p>
-              <p>Simply install leaf, and you're good to go.</p>
-            </div>
-            <div class="ui large info message">
-              <div class="ui header">Setup</div>
-              <p>
-                If you just need the files you can download them as a zip from
-                GitHub.
-              </p>
-              <a
-                href="https://github.com/leafsphp/leaf/tree/v1.2.0"
-                class="ui secondary button"
-                >Download Zip</a
-              >
-              <!-- <a href="https://github.com/leafsphp" class="ui button" target="_blank">View all Leaf Repos </a> -->
             </div>
 
-            <h2 class="ui dividing header">Installing Leaf PHP</h2>
-
+            <h2 class="ui dividing header">Solution</h2>
             <div class="no example">
-              <h4 class="ui header">Install with composer</h4>
+              <h4 class="ui header">Access-Control-Allow-Origin</h4>
               <p>
-                If you don't already have composer, you can get it at the
-                <a href="https://getcomposer.org/" target="_blank"
-                  >download page</a
-                >
-                on
-                <a href="https://getcomposer.org/" target="_blank"
-                  >getcomposer.org</a
-                >
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <p>After installing composer,</p>
-                <div class="ignored code" data-type="bash">
-                  composer require leafs/leaf
+                When an app/site(siteX) tries to fetch content from your Leaf app, you can send an Access-Control-Allow-Origin response header to tell the browser that the content of this page is accessible to certain origins. 
+                (An origin is a domain, plus a scheme and port number.) By default, your Leaf app's content isn't available to any other origin; using the Access-Control-Allow-Origin header opens a door for cross-origin access by specific requesting origins.
+                You can authorize <code>siteX</code> by adding <code>Access-Control-Allow-Origin: siteX</code> or you can allow all origins by adding <code>Access-Control-Allow-Origin: *</code>.
+                <div class="ignored code" data-type="php">
+                  header('Access-Control-Allow-Origin: *');
                 </div>
-              </div>
+              </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">Use the starter template</h4>
+              <h4 class="ui header">Access-Control-Allow-Headers</h4>
               <p>
-                This method uses git. If you don't already have git, you can get
-                it at the
-                <a href="https://git-scm.com/" target="_blank">download page</a>
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="bash">
-                  git clone git@github.com:leafsphp/leaf-starter.git cd
-                  leaf-starter php -S localhost:8000
+                The Access-Control-Allow-Headers header is used in response to a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Preflighted_requests">preflight request</a> to indicate which HTTP headers can be used when making the actual request.
+                <div class="ignored code" data-type="php">
+                  header('Access-Control-Allow-Headers: *');
+                  header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization');
                 </div>
-              </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Access-Control-Allow-Methods</h4>
+              <p>
+                The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods">Access-Control-Allow-Methods</a> header specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request. The conditions under which a request is preflighted are discussed above.
+                <div class="ignored code" data-type="php">
+                  header('Access-Control-Allow-Methods: *');
+                  header('Access-Control-Allow-Methods: POST, GET, OPTIONS, ...');
+                </div>
+              </p>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
