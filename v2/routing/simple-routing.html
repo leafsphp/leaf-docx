@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+
+    <link rel="image_src" type="image/jpeg" href="..\images\logo.png" />
+    <link rel="shortcut icon" type="image/jpeg" href="..\images\logo.png" />
+
+    <!-- Site Properities -->
+    <meta name="generator" content="DocPad v6.79.4" />
+    <title>Simple Routing</title>
+
+    <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
+    <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
+
+    <script src="..\javascript\library\detect.min.js"></script>
+    <script src="..\javascript\library\jquery.min.js"></script>
+    <script src="..\javascript\library\clipboard.min.js"></script>
+    <script src="..\javascript\library\cookie.min.js"></script>
+    <script src="..\javascript\library\easing.min.js"></script>
+    <script src="..\javascript\library\highlight.min.js"></script>
+    <script src="..\javascript\library\history.min.js"></script>
+    <script src="..\javascript\library\tablesort.min.js"></script>
+    <script src="..\javascript\library\underscore.min.js"></script>
+
+    <script src="..\dist\semantic.min.js"></script>
+
+    <script src="..\javascript\docs.js"></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      class="ui"
+      href="..\dist\semantic.min.css"
+    />
+
+    <link rel="stylesheet" type="text/css" href="..\stylesheets\docs.css" />
+    <link rel="stylesheet" type="text/css" href="..\stylesheets\rtl.css" />
+
+    
+  </head>
+  <body id="example" class="cla" ontouchstart="">
+    <div class="ui vertical inverted sidebar menu" id="toc">
+      <div class="item">
+        <a class="ui logo icon image" href="..\index.html">
+          <img alt="pic" src="..\images\logo.png" />
+        </a>
+        <a href="..\index.html"><b>Leaf Docs</b></a>
+      </div>
+      <a class="item" href="./getting-started.html">
+        <b>Getting Started</b>
+      </a>
+      <a class="item" href="./new.html">
+        <b>New in v1.2.0</b>
+      </a>
+      <div class="item">
+        <div class="header">Introduction</div>
+        <div class="menu">
+          <a class="item" href="../introduction/re-routing-to-index.html">Re-routing to index</a>
+          <a class="item" href="../introduction/index.php.html">Your First Leaf App</a>
+          <!-- <a class="item" href="../introduction/init.html">Class Initialisations</a> -->
+        </div>
+      </div>
+
+      <div class="item">
+        <div class=" header">Config</div>
+        <div class="menu">
+          <a class="item" href="../config/database.html">Database</a>
+          <a class="item" href="../config/app-headers.html">App Headers</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class=" header">Routing</div>
+        <div class="menu">
+          <a class="item" href="../routing/simple-routing.html">Simple routing</a>
+          <a class="item" href="../routing/404-handling.html">404 handling</a>
+          <a class="item" href="../routing/sub-routing.html">Sub routing</a>
+          <a class="item" href="../routing/named-parameters.html">Named parameters</a>
+          <a class="item" href="../routing/pcre-patterns.html">PCRE based patterns</a>
+          <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
+          <a class="item" href="../routing/controllers.html">Using Controllers</a>
+          <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
+          <a class="item" href="../routing/middleware.html">Using Middleware</a>
+          <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class=" header">Core Modules</div>
+        <div class="menu">
+          <a class="item" href="../core/simple-authentication.html">Simple Authentication</a>
+          <!-- <a class="item" href="../core/field-validation.html">Field Validation</a> -->
+          <a class="item" href="../core/date-manipulation.html">Date Manipulation</a>
+          <a class="item" href="../core/request.html">Request</a>
+          <a class="item" href="../core/response.html">Response</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class=" header">Helpers</div>
+        <div class="menu">
+          <a class="item" href="../helpers/constants.html">Constants</a>
+          <a class="item" href="../helpers/jwt.html">JWT</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui black big launch right attached fixed button">
+      <i class="content icon"></i>
+      <span class="text">Menu</span>
+    </div>
+
+    <div class="ui fixed inverted main menu">
+      <div class="ui container">
+        <a class="launch icon item">
+          <i class="content icon"></i>
+        </a>
+
+        <div class="item">
+          Simple Routing
+        </div>
+        <div class="right menu">
+          <div class="vertically fitted borderless item">
+            <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pusher">
+      <div class="full height">
+        <div class="toc">
+          <div class="ui vertical inverted menu">
+            <div class="item">
+              <a class="ui logo icon image" href="..\index.html">
+                <img alt="pic" src="..\images\logo.png" />
+              </a>
+              <a href="..\index.html"><b>Leaf Docs</b></a>
+            </div>
+            <a class="item" href="./getting-started.html">
+              <b>Getting Started</b>
+            </a>
+            <a class="item" href="./new.html">
+              <b>New in v1.2.0</b>
+            </a>
+            <div class="item">
+              <div class="header">Introduction</div>
+              <div class="menu">
+                <a class="item" href="../introduction/re-routing-to-index.html">Re-routing to index</a>
+                <a class="item" href="../introduction/index.php.html">Your First Leaf App</a>
+                <!-- <a class="item" href="../introduction/init.html">Class Initialisations</a> -->
+              </div>
+            </div>
+
+            <div class="item">
+              <div class=" header">Config</div>
+              <div class="menu">
+                <a class="item" href="../config/database.html">Database</a>
+                <a class="item" href="../config/app-headers.html">App Headers</a>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class=" header">Routing</div>
+              <div class="menu">
+                <a class="item" href="../routing/simple-routing.html">Simple routing</a>
+                <a class="item" href="../routing/404-handling.html">404 handling</a>
+                <a class="item" href="../routing/sub-routing.html">Sub routing</a>
+                <a class="item" href="../routing/named-parameters.html">Named parameters</a>
+                <a class="item" href="../routing/pcre-patterns.html">PCRE based patterns</a>
+          <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
+          <a class="item" href="../routing/controllers.html">Using Controllers</a>
+          <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
+          <a class="item" href="../routing/middleware.html">Using Middleware</a>
+          <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class=" header">Core Modules</div>
+              <div class="menu">
+                <a class="item" href="../core/simple-authentication.html">Simple Authentication</a>
+                <!-- <a class="item" href="../core/field-validation.html">Field Validation</a> -->
+                <a class="item" href="../core/date-manipulation.html">Date Manipulation</a>
+                <a class="item" href="../core/request.html">Request</a>
+                <a class="item" href="../core/response.html">Response</a>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class=" header">Helpers</div>
+              <div class="menu">
+                <a class="item" href="../helpers/constants.html">Constants</a>
+                <a class="item" href="../helpers/jwt.html">JWT</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="article">
+          <div class="ui masthead vertical segment">
+            <div class="ui container">
+              <div class="introduction">
+                <h1 class="ui header">
+                  Simple Routing
+
+                  <div class="sub header">
+                    Creating and handling routes
+                    <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+                  </div>
+                </h1>
+
+                <div class="ui hidden divider"></div>
+
+                <!-- <div class="ui right floated main menu">
+        <a class="bug popup icon item" data-content="Edit This Page" href="#">
+          <i class="edit icon"></i>
+        </a>
+      </div> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="main ui intro container">
+            <h2 class="ui dividing header">Overview</h2>
+
+            <div class="no example">
+              <h4 class="ui header">Understanding Routing</h4>
+
+              <p>
+                As explained <a href="../introduction/re-routing-to-index.html">before</a>, Leaf uses a single root file, to which all the server requests are redirected.
+                Leaf then takes these requests and matches them to rules you have defined. The results are then displayed to the user. It's actually a very simple concept.
+              </p>
+              <p style="font-size: 20px !important;">
+                In order to use Leaf's router in your project, you have to imoprt it
+                <div class="ignored code" data-type="bash">
+                  $leaf = new Leaf\Core\Leaf();
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Using a different router</h4>
+              <p>
+                Leaf uses a router based on the <a href="https://github.com/Leaf's Core router">Leaf's Core router</a> component as for it's core, but this is seperated from the rest of Leaf itself,
+                 so, you can tie in any routing library of your choice.
+              </p>
+              1. Install it
+              <div class="ignored code" data-type="bash">
+                composer require .../whatever-router
+              </div>
+              2. Import it into your project
+              <div class="ignored code" data-type="bash">
+                $app  = new WhatEver\Router();
+                
+                // you can still use Leaf modules
+                $response = new Leaf\Core\Response();
+              </div>
+            </div>
+
+            <h2 class="ui dividing header">Creating Routes</h2>
+            You can define application routes using proxy methods on the Leaf\Core\Leaf instance. Leaf supports a whole bunch of HTTP methods, see <a href="#supported-methods">all supported methods</a>.
+
+            <div class="no example">
+              <h4 class="ui header">GET requests</h4>
+              <p>
+                You can add a route that handles only GET HTTP requests with the Leaf router's get() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->get('/home', function() {
+                  // your code
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">POST requests</h4>
+              <p>
+                You can add a route that handles only POST HTTP requests with the Leaf router's post() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->post('/users/add', function() use($request) {
+                  $user = $request->getParam('user');
+                  // create a new user
+                });
+              </div>
+
+              <h5>Using Post Params</h5>
+              View <a href="../core/request.html">Request</a> for more info on handling params
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">PUT requests</h4>
+              <p>
+                You can add a route that handles only PUT HTTP requests with the Leaf router’s put() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->put('/book/edit/{id}', function($id) {
+                  // your code
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">DELETE requests</h4>
+              <p>
+                You can add a route that handles only DELETE HTTP requests with the Leaf router's delete() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->delete('/quotes/{id}', function($id) {
+                  // delete quote
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">OPTIONS requests</h4>
+              <p>
+                You can add a route that handles only OPTIONS HTTP requests with the Leaf router's options() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->options('/quotes/{id}', function($id) {
+                  // return headers
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">PATCH requests</h4>
+              <p>
+                You can add a route that handles only PATCH HTTP requests with the Leaf router's patch() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->patch('/post/{id}', function($id) {
+                  // your code
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">ALL requests</h4>
+              <p>
+                You can add a route that handles all HTTP requests with the Leaf router's all() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->all('/post/{id}', function($id) {
+                  // your code
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Route "Hooking"</h4>
+              <p>
+                You can add a route that handles a couple of HTTP methods with the Leaf router's match() method. It accepts three arguments:
+                <ul>
+                  <li>The HTTP method(s) seperated by <code>|</code></li>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="php">
+                $leaf->match('GET|POST', '/people', function() {
+                  // your code
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Running your routes</h4>
+              <p>
+                After setting all the routes, you'll need to dispatch the routes. This is achieved through Leaf's run() method.
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->run();
+              </div>
+            </div>
+            
+
+            <h2 class="ui dividing header">Next Steps</h2>
+
+            <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
+            <a href="../core/response.html" style="font-size: 18px;">Response</a><br>
+            <a href="../routing/named-parameters.html" style="font-size: 18px;">Named Parameters</a><br />
+            <a href="../routing/404-handling.html" style="font-size: 18px;">Handling 404</a><br />
+          </div>
+
+          <div class="ui  vertical footer segment">
+            <div class="ui center aligned container">
+              <img alt="pic" src="..\images\logo.png" class="ui centered mini image" />
+              <div class="ui horizontal small divided link list">
+                <a class="item" href="#" target="_blank">Free & Open Source (MIT)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      window.less = {
+        async: true,
+        environment: "production",
+        fileAsync: false,
+        onReady: false,
+        useFileCache: true
+      };
+    </script>
+
+    <script src="..\javascript\library\less.min.js"></script>
+  </body>
+</html>
