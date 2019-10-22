@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
-  <link rel="image_src" type="image/jpeg" href="images\logo.png">
-  <link rel="shortcut icon" type="image/jpeg" href="images\logo.png">
+  <link rel="image_src" type="image/jpeg" href="..\images\logo.png">
+  <link rel="shortcut icon" type="image/jpeg" href="..\images\logo.png">
 
   <!-- Site Properities -->
   <!-- <meta name="generator" content="DocPad v6.79.4"> -->
@@ -20,13 +20,13 @@
   <link rel="stylesheet" type="text/css" href="..\stylesheets\docs.css">
   <link rel="stylesheet" type="text/css" href="..\stylesheets\rtl.css">
   <link rel="stylesheet" type="text/css" href="..\stylesheets\home.css">
-  <link rel="stylesheet/less" type="text/css" href="src\definitions\elements\button.less">
+  <link rel="stylesheet/less" type="text/css" href="..\src\definitions\elements\button.less">
 </head>
 <body id="example" class="index" ontouchstart="">
   <div class="ui vertical inverted sidebar menu" id="toc">
     <div class="item">
       <a class="ui logo icon image" href="index.html">
-        <img alt="pic" src="images\logo.png">
+        <img alt="pic" src="..\images\logo.png">
       </a>
       <a href="index.html"><b>Leaf Docs</b></a>
     </div>
@@ -76,7 +76,8 @@
         <!-- <a class="item" href="./core/field-validation.html">Field Validation</a>-->
         <a class="item" href="./core/date-manipulation.html">Date Manipulation</a>  
         <a class="item" href="./core/request.html">Request</a>  
-        <a class="item" href="./core/response.html">Response</a>  
+        <a class="item" href="./core/response.html">Response</a>
+        <a class="item" href="./core/session.html">Session</a>
       </div>
     </div>
 
@@ -114,7 +115,7 @@
             <div class="ui logo shape">
               <div class="sides">
                 <div class="active ui side">
-                  <img alt="pic" class="ui image" src="images\logo.png">
+                  <img alt="pic" class="ui image" src="..\images\logo.png">
                 </div>
               </div>
             </div>
@@ -159,7 +160,7 @@
           <br/>
           <h1 class="ui inverted header">
             <span class="library">
-              Leaf PHP
+              Leaf PHP <small style="font-size: 22px !important;;">2.0.0</small>
             </span>
             <span class="tagline">
               Create clean, simple but powerful web applications and APIs quickly.
@@ -192,21 +193,21 @@
 
 $leaf = new Leaf\Core\Leaf();
 
-$response = new Leaf\Core\Response();
+$response = new Leaf\Core\Http\Response();
 
-$request = new Leaf\Core\Request();
+$request = new Leaf\Core\Http\Request();
               
 $leaf->get('/book/{id}', function($id) use($response) {
-  echo $response->respond(["id" => $id]);
+  $response->respond(["id" => $id]);
 });
 
 $leaf->get('/home', function() use($response) {
-  echo $response->renderHtmlPage('./index.html');
+  $response->renderHtmlPage('./index.html');
 });
 
 $leaf->post('/books/add', function() use($request, $response) {
   $title = $request->getParam('title');
-  echo $response->respond(["message" => "hello"]);
+  $response->respond(["message" => "hello"]);
 });
 
 $leaf->run();
@@ -218,25 +219,27 @@ $leaf->run();
       </div>
       <div class="stackable very relaxed ui grid container">
         <div class="row">
+          <div class="seven wide column" style="margin-bottom: -100px !important;;">
+            <h2>What's new in 2.0.0</h2>
+          </div>
+        </div>
+        <div class="row">
           <div class="seven wide column">
-            <h2 class="ui header">Structured PHP</h2>
-            <p>PHP is a free language, a language with only a handful of rules.</p>
-            <p>This freedom gives rise to a lot of problems for developers since there's usually many ways to achieve the same thing.</p>
-            <p>Leaf gives you a particular structure to follow whiles maintaining PHP's freedom.</p>
+            <h2 class="ui header">Session Support</h2>
+            <p>Leaf now has support for the normal php session and has provided very handy method for approprately using it.</p>
+            <p>This will provide an extra way for handling users, even in APIs;  You can use sessions instead of tokens....or you can just use both😅😅.</p>
             <p>
           </div>
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
-              // simple structure
-              $leaf->get('/', function() use($response) {
-                return $response->respond(["message" => "hello"]);
-              });
+$leaf = new Leaf\Core\Leaf;
+$response = new Leaf\Core\Http\Response;
+$session = new Leaf\Core\Http\Session;
 
-              
-              $leaf->post('/books/add', function() use($request, $response) {
-                $title = $request->getParam('title');
-                return $response->respond(["message" => "hello"]);
-              });
+$leaf->get('/session/create', function() use($session, $response) {
+  $session->set('name', 'Michael');
+  $response->respond(['message' => 'session created']);
+});
             </div>
           </div>
         </div>
@@ -327,7 +330,7 @@ $leaf->run();
           </div> -->
         </div>
         <div class="ui section divider"></div>
-        <img alt="pic" src="images\logo.png" class="ui centered mini image">
+        <img alt="pic" src="..\images\logo.png" class="ui centered mini image">
         <div class="ui horizontal small divided link list">
           <a class="item" href="#" target="_blank">Free & Open Source (MIT)</a>
         </div>
@@ -342,8 +345,8 @@ $leaf->run();
           eventSupport = ('querySelector' in document && 'addEventListener' in window)
           jsonSupport  = (typeof JSON !== 'undefined'),
           jQuery       = (eventSupport && jsonSupport)
-            ? '/javascript/library/jquery.min.js'
-            : '/javascript/library/jquery.legacy.min.js'
+            ? '../javascript/library/jquery.min.js'
+            : '../javascript/library/jquery.legacy.min.js'
         ;
         document.write('<script src="' + jQuery + '"><\/script>');
       }());
@@ -362,12 +365,12 @@ $leaf->run();
         ignore_class : ['code', 'anchor']
       };
     </script>
-    <script type="text/javascript" src="//cdn.transifex.com/live.js"></script>
-    <script src="javascript\library\highlight.min.js"></script>
-    <script src="javascript\library\easing.min.js"></script>
+    <script type="text/javascript" src="https://cdn.transifex.com/live.js"></script>
+    <script src="..\javascript\library\highlight.min.js"></script>
+    <script src="..\javascript\library\easing.min.js"></script>
     <script src="..\dist\semantic.min.js"></script>
-    <script src="javascript\docs.js"></script>
-    <script src="javascript\home.js"></script>
+    <script src="..\javascript\docs.js"></script>
+    <script src="..\javascript\home.js"></script>
     <script>
       window.less = {
         async        : true,
@@ -377,7 +380,7 @@ $leaf->run();
         useFileCache : true
       };
     </script>
-    <script src="javascript\library\less.min.js"></script>
+    <script src="..\javascript\library\less.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150463804-1"></script>
     <script>
