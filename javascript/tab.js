@@ -6,9 +6,9 @@ semantic.dropdown.ready = function() {
 
   $.fn.api.settings.mockResponse = function(settings) {
     var response = {
-      first  : '<h3 class="ui header">AJAX Tab One</h3><img class="ui wireframe image" src="/images/wireframe/paragraph.png"><img class="ui wireframe image" src="/images/wireframe/paragraph.png">',
-      second : '<h3 class="ui header">AJAX Tab Two</h3><img class="ui wireframe image" src="/images/wireframe/paragraph.png"><img class="ui wireframe image" src="/images/wireframe/paragraph.png">',
-      third  : '<h3 class="ui header">AJAX Tab Three</h3><img class="ui wireframe image" src="/images/wireframe/paragraph.png"><img class="ui wireframe image" src="/images/wireframe/paragraph.png">'
+      first  : '<h3 class="ui header">AJAX Tab One</h3><img alt="pic" class="ui wireframe image" src="/images/wireframe/paragraph.png"><img alt="pic" class="ui wireframe image" src="/images/wireframe/paragraph.png">',
+      second : '<h3 class="ui header">AJAX Tab Two</h3><img alt="pic" class="ui wireframe image" src="/images/wireframe/paragraph.png"><img alt="pic" class="ui wireframe image" src="/images/wireframe/paragraph.png">',
+      third  : '<h3 class="ui header">AJAX Tab Three</h3><img alt="pic" class="ui wireframe image" src="/images/wireframe/paragraph.png"><img alt="pic" class="ui wireframe image" src="/images/wireframe/paragraph.png">'
     };
     return response[settings.urlData.tab];
   };

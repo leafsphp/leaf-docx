@@ -722,7 +722,7 @@ semantic.ready = function() {
                   $(this).replaceWith('<p></p>');
                 }
                 else if(image) {
-                  $(this).replaceWith('<img>');
+                  $(this).replaceWith('<img alt="pic">');
                 }
               })
             ;
