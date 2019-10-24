@@ -33,11 +33,11 @@
     <a class="item" href="introduction\getting-started.html">
       <b>Getting Started</b>
     </a>
-    <a class="item" href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v2.0.0">
-      <b>New in v2.0.0</b>
+    <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
+      <b>New in v1.3.0</b>
     </a>
     <a class="item" href="v2/introduction/getting-started.html">
-      <b>View v2.0.0 docs</b>
+      <b>View v1.3.0 docs</b>
     </a>
     <div class="item">
       <div class="header">Introduction</div>
@@ -162,7 +162,7 @@
           <br/>
           <h1 class="ui inverted header">
             <span class="library">
-              Leaf PHP <small style="font-size: 22px !important;">1.2.0</small>
+              Leaf PHP <!-- <small style="font-size: 22px !important;">1.2.0</small> -->
             </span>
             <span class="tagline">
               Create clean, simple but powerful web applications and APIs quickly.
@@ -171,7 +171,7 @@
           <div class="ui hidden divider"></div>
 
           <a href="introduction\getting-started.html" class="ui huge inverted download button">Get Started</a>
-          <a href="v2/index.html" class="ui huge inverted basic button">Checkout v2.0.0</a>
+          <a href="./v1.3.0/index.html" target="_blank" class="ui huge inverted basic button">Checkout v1.3.0</a>
         </div>
         <!-- <div class="inverted advertisement">
           
@@ -193,11 +193,9 @@
               // Sample index.php
               require_once __DIR__ . '/vendor/autoload.php';
 
-$leaf = new Leaf\Core\Leaf();
-
-$response = new Leaf\Core\Response();
-
-$request = new Leaf\Core\Request();
+$leaf = new Leaf\Core\Leaf;
+$response = new Leaf\Core\Response;
+$request = new Leaf\Core\Request;
               
 $leaf->get('/book/{id}', function($id) use($response) {
   echo $response->respond(["id" => $id]);
@@ -232,13 +230,13 @@ $leaf->run();
             <div class="hidden code" data-type="php">
               // simple structure
               $leaf->get('/', function() use($response) {
-                return $response->respond(["message" => "hello"]);
+                echo $response->respond(["message" => "hello"]);
               });
 
               
               $leaf->post('/books/add', function() use($request, $response) {
                 $title = $request->getParam('title');
-                return $response->respond(["message" => "hello"]);
+                echo $response->respond(["message" => "hello"]);
               });
             </div>
           </div>
@@ -253,6 +251,8 @@ $leaf->run();
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
               // get request params
+              $request = new Leaf\Core\Request;
+
               $leaf->post('/name/add', function() use($request) {
   $name = $request->getParam('name');
 });
@@ -270,11 +270,13 @@ $leaf->run();
           </div>
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
-              // generate JWT token
-              $leaf->post('/token/create', function() use($response, $authentication) {
-                $token = $authentication->createSimpleToken(22, 'Secret key');
-                return $response->respond(["token" => $token]);
-              });
+// generate JWT token
+$authentication = new Leaf\Core\Authentication;
+
+$leaf->post('/token/create', function() use($response, $authentication) {
+  $token = $authentication->createSimpleToken(22, 'Secret key');
+  echo $response->respond(["token" => $token]);
+});
             </div>
             <a href="core/simple-authentication.html">View Authentication Docs</a>
           </div>
