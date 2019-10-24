@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Handling 404</title>
+    <title>Requests</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -59,7 +59,7 @@
       <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
       <b>New in v1.3.0</b>
     </a>
-      <a class="item" href="v2/introduction/getting-started.html">
+      <a class="item" href="v1.3.0/introduction/getting-started.html">
         <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
@@ -128,7 +128,7 @@
         </a>
 
         <div class="item">
-          Handling 404
+          Requests
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -213,10 +213,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Handling 404
+                  Requests
 
                   <div class="sub header">
-                    Handling 404 errors in your project
+                    Handling Requests with Leaf
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -234,50 +234,77 @@
 
           <div class="main ui intro container">
             <h2 class="ui dividing header">Overview</h2>
+            <p>
+              Leaf tries as much as possible to use raw PHP written from scratch, so, instead of using PSR-7 like most frameworks do, Leaf has written predefined request methods. 
+              The request section basically deals with requests made to the app, so far, there are only two functions chained to the Request class. To use the request object, you simply need to pass $request into your $route like this.
+            </p>
 
             <div class="no example">
-              <h4 class="ui header">404 with Leaf Core Router</h4>
+              <h4 class="ui header">Including Request</h4>
               <p>
-                Leaf's core router has specially prepared for 404 errors, and is bent on giving users full control over displaying this error
+                To include the Request object in a route, use this:
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Http\Request;
+
+$request = new Request();
+
+$leaf->post('/name/add', function() use($request) {
+  $name = $request->getParam('name');
+});
+                </div>
+                Here, we set <code>$request</code> to the <code>Request</code> class, and we pass it into the route with <code>use()</code>.
               </p>
-              <p>
-                For this reason, we've prepared the <code>set404()</code> method, which takes in a function, let's take a look
-              </p>
-              <div class="ignored code" data-type="php">
-                $leaf->set404(function () {
-                  header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-                  echo '404, route not found!';
-                });
-              </div>
-              And that's all...It's that simple.<br>
-              You can even display an HTML/PHP page using Leaf Core's <code>Response</code>
-              <div class="ignored code" data-type="php">
-                $response = new Leaf\Core\Http\Response();
-
-
-
-                $leaf->set404(function () use($response) {
-                  header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-                  $response->renderHtmlPage('..link/to/page');
-                });
-              </div>
             </div>
             
+            
 
+            <h2 class="ui dividing header">Request Methods</h2>
 
             <div class="no example">
-              <h4 class="ui header">404s with custom routers</h4>
+              <h4 class="ui header">getParam()</h4>
               <p>
-               Since leaf has nothing to do with routing in this case, handling 404s will have to be done in a way befitting the router you are using. Read the documentation of the router you are using for more info
+                getParam is a method built for APIs, but can be used in a normal web app/website. It takes in one parameter: the name of the param passed into the app through the request
+                It works just like how <code>$_POST['key']</code> does
               </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Http\Request;
+
+$request = new Request();
+
+$leaf->post('/name/add', function() use($request) {
+  $name = $request->getParam('name');
+});
+                </div>
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">getBody()</h4>
+              <p>
+                getBody() returns the key => value pairs of all the request data
+              </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Http\Request;
+
+$request = new Request();
+
+$leaf->post('/name/add', function() use($request) {
+  $body = $request->getBody();
+});
+                </div>
+              </div>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="../core/response.html" style="font-size: 18px;">Response</a><br>
-            <a href="../core/date-manipulation.html" style="font-size: 18px;">Leaf Dates</a><br />
-            <a href="../routing/named-parameters.html" style="font-size: 18px;">Named Parameters</a><br />
-            <a href="../routing/sub-routing.html" style="font-size: 18px;">Sub-routing</a>
+            <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
+            <a href="./response.html" style="font-size: 18px;">Response</a><br />
+            <a href="./simple-authentication.html" style="font-size: 18px;">Simple Authentication</a><br />
+            <a href="../config/database.html" style="font-size: 18px;">Database Config</a>
           </div>
 
           <div class="ui  vertical footer segment">

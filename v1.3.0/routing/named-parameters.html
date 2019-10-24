@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Optional Route Subpatterns</title>
+    <title>Named Params</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -59,7 +59,7 @@
       <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
       <b>New in v1.3.0</b>
     </a>
-      <a class="item" href="v2/introduction/getting-started.html">
+      <a class="item" href="v1.3.0/introduction/getting-started.html">
         <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
@@ -128,7 +128,7 @@
         </a>
 
         <div class="item">
-          Optional Route Subpatterns
+          Named Params
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -213,10 +213,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Optional Route Subpatterns
+                  Dynamic Placeholder-based Route Patterns(Named Params)
 
                   <div class="sub header">
-                    Dynamic routing with Optional Route Subpatterns
+                    Dynamic routing with named parameters
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -236,39 +236,32 @@
             <h2 class="ui dividing header">Overview</h2>
 
             <div class="no example">
-              <h4 class="ui header">Optional Route Subpatterns</h4>
-              <i>This guide assumes you have read <a href="./simple-routing.html">Simple Routing</a> and either <a href="./named-parameters.html">named params</a> or <a href="./pcre-patterns.html">PCRE based patterns</a></i>
+              <h4 class="ui header">Named Params</h4>
+              <i>This guide assumes you have read <a href="./simple-routing.html">Simple Routing</a></i>
               <p>
-				Route subpatterns can be made optional by making the subpatterns optional by adding a ? after them. Think of blog URLs in the form of /blog(/year)(/month)(/day)(/slug):
-				<div class="ignored code" data-type="php">
-					$leaf->get('/blog(/\d+)?(/\d+)?(/\d+)?(/[a-z0-9_-]+)?', function($year = null, $month = null, $day = null, $slug = null) {
-        if (!$year) { echo 'Blog overview'; return; }
-        if (!$month) { echo 'Blog year overview'; return; }
-        if (!$day) { echo 'Blog month overview'; return; }
-        if (!$slug) { echo 'Blog day overview'; return; }
-        echo 'Blogpost ' . htmlentities($slug) . ' detail';
-  }
-);
-				</div>
-				The code snippet above responds to the URLs /blog, /blog/year, /blog/year/month, /blog/year/month/day, and /blog/year/month/day/slug.
+                Basically, Dynamic Placeholder-based Route Patterns are just another way to use routes dynamically. This type of Route Patterns are the same as Dynamic PCRE-based Route Patterns, but with one difference: they don't use regexes to do the pattern matching but they use the more easy placeholders instead. 
+                Placeholders are strings surrounded by curly braces, e.g. {name}. You don't need to add parens around placeholders.
               </p>
               <p>
-                Note: With optional parameters it is important that the leading / of the subpatterns is put inside the subpattern itself. Don't forget to set default values for the optional parameters.
+                Examples
+                <ul>
+                  <li>/movies/{id}</li>
+                  <li>/profile/{username}</li>
+                </ul>
               </p>
               <p>
-                The code snipped above unfortunately also responds to URLs like /blog/foo and states that the overview needs to be shown - which is incorrect. Optional subpatterns can be made successive by extending the parenthesized subpatterns so that they contain the other optional subpatterns: The pattern should resemble /blog(/year(/month(/day(/slug)))) instead of the previous /blog(/year)(/month)(/day)(/slug):
+                Placeholders are easier to use than PRCEs, but offer you less control as they internally get translated to a PRCE that matches any character (.*).
                 <div class="ignored code" data-type="php">
-$leaf->get('/blog(/\d+(/\d+(/\d+(/[a-z0-9_-]+)?)?)?)?', function($year = null, $month = null, $day = null, $slug = null) {
-    // ...
+                  $leaf->get('/movies/{movieId}/photos/{photoId}', function($movieId, $photoId) {
+    echo 'Movie #' . $movieId . ', photo #' . $photoId);
 });
-				</div>
-				Note: It is highly recommended to always define successive optional parameters.
+                </div>
               </p>
               <p>
-                To make things complete use <a href="http://www.php.net/manual/en/regexp.reference.repetition.php">quantifiers</a> to require the correct amount of numbers in the URL:
+                Note: the name of the placeholder does not need to match with the name of the parameter that is passed into the route handling function...although it's adviced:
                 <div class="ignored code" data-type="php">
-$leaf->get('/blog(/\d{4}(/\d{2}(/\d{2}(/[a-z0-9_-]+)?)?)?)?', function($year = null, $month = null, $day = null, $slug = null) {
-    // ...
+                  $leaf->get('/movies/{foo}/photos/{bar}', function($movieId, $photoId) {
+    echo 'Movie #' . $movieId . ', photo #' . $photoId);
 });
                 </div>
               </p>
@@ -276,8 +269,8 @@ $leaf->get('/blog(/\d{4}(/\d{2}(/\d{2}(/[a-z0-9_-]+)?)?)?)?', function($year = n
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="./pcre-patterns.html" style="font-size: 18px;">PCRE based patterns</a><br />
-            <a href="../routing/404-handling.html" style="font-size: 18px;">Handling 404</a><br />
+            <a href="./optional-subpatterns.html" style="font-size: 18px;">Optional sub-patterns</a><br />
+            <a href="../core/simple-authentication.html" style="font-size: 18px;">Simple Authentication</a><br />
             <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
             <a href="../core/response.html" style="font-size: 18px;">Response</a>
           </div>

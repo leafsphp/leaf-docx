@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Session</title>
+    <title>Optional Route Subpatterns</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -59,7 +59,7 @@
       <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
       <b>New in v1.3.0</b>
     </a>
-      <a class="item" href="v2/introduction/getting-started.html">
+      <a class="item" href="v1.3.0/introduction/getting-started.html">
         <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
@@ -128,7 +128,7 @@
         </a>
 
         <div class="item">
-          Session
+          Optional Route Subpatterns
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -213,10 +213,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Session
+                  Optional Route Subpatterns
 
                   <div class="sub header">
-                    Using sessions with Leaf
+                    Dynamic routing with Optional Route Subpatterns
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -234,77 +234,52 @@
 
           <div class="main ui intro container">
             <h2 class="ui dividing header">Overview</h2>
-            <p>
-              Leaf v2 comes along with support for the native PHP session. We have directly tied it into leaf's core as a module, so you can use it without <code>middleware</code>
-              as done in some other API based frameworks.
-            </p>
 
             <div class="no example">
-              <h4 class="ui header">Including Session</h4>
+              <h4 class="ui header">Optional Route Subpatterns</h4>
+              <i>This guide assumes you have read <a href="./simple-routing.html">Simple Routing</a> and either <a href="./named-parameters.html">named params</a> or <a href="./pcre-patterns.html">PCRE based patterns</a></i>
               <p>
-                To include the Session object in a route, use this:
+				Route subpatterns can be made optional by making the subpatterns optional by adding a ? after them. Think of blog URLs in the form of /blog(/year)(/month)(/day)(/slug):
+				<div class="ignored code" data-type="php">
+					$leaf->get('/blog(/\d+)?(/\d+)?(/\d+)?(/[a-z0-9_-]+)?', function($year = null, $month = null, $day = null, $slug = null) {
+        if (!$year) { echo 'Blog overview'; return; }
+        if (!$month) { echo 'Blog year overview'; return; }
+        if (!$day) { echo 'Blog month overview'; return; }
+        if (!$slug) { echo 'Blog day overview'; return; }
+        echo 'Blogpost ' . htmlentities($slug) . ' detail';
+  }
+);
+				</div>
+				The code snippet above responds to the URLs /blog, /blog/year, /blog/year/month, /blog/year/month/day, and /blog/year/month/day/slug.
+              </p>
+              <p>
+                Note: With optional parameters it is important that the leading / of the subpatterns is put inside the subpattern itself. Don't forget to set default values for the optional parameters.
+              </p>
+              <p>
+                The code snipped above unfortunately also responds to URLs like /blog/foo and states that the overview needs to be shown - which is incorrect. Optional subpatterns can be made successive by extending the parenthesized subpatterns so that they contain the other optional subpatterns: The pattern should resemble /blog(/year(/month(/day(/slug)))) instead of the previous /blog(/year)(/month)(/day)(/slug):
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Session;
-
-$session = new Session();
-
-$leaf->post('/session/start', function() use($session, $request) {
-  $session->set('name', 'Michael Darko');
+$leaf->get('/blog(/\d+(/\d+(/\d+(/[a-z0-9_-]+)?)?)?)?', function($year = null, $month = null, $day = null, $slug = null) {
+    // ...
+});
+				</div>
+				Note: It is highly recommended to always define successive optional parameters.
+              </p>
+              <p>
+                To make things complete use <a href="http://www.php.net/manual/en/regexp.reference.repetition.php">quantifiers</a> to require the correct amount of numbers in the URL:
+                <div class="ignored code" data-type="php">
+$leaf->get('/blog(/\d{4}(/\d{2}(/\d{2}(/[a-z0-9_-]+)?)?)?)?', function($year = null, $month = null, $day = null, $slug = null) {
+    // ...
 });
                 </div>
-                Here, we set <code>$session</code> to the <code>Session</code> class, and we pass it into the route with <code>use()</code>.
               </p>
-            </div>
-            
-            
-
-            <h2 class="ui dividing header">Request Methods</h2>
-
-            <div class="no example">
-              <h4 class="ui header">getParam()</h4>
-              <p>
-                getParam is a method built for APIs, but can be used in a normal web app/website. It takes in one parameter: the name of the param passed into the app through the request
-                It works just like how <code>$_POST['key']</code> does
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Request;
-
-$request = new Request();
-
-$leaf->post('/name/add', function() use($request) {
-  $name = $request->getParam('name');
-});
-                </div>
-              </div>
-            </div>
-
-            <div class="no example">
-              <h4 class="ui header">getBody()</h4>
-              <p>
-                getBody() returns the key => value pairs of all the request data
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Request;
-
-$request = new Request();
-
-$leaf->post('/name/add', function() use($request) {
-  $body = $request->getBody();
-});
-                </div>
-              </div>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
-            <a href="./response.html" style="font-size: 18px;">Response</a><br />
-            <a href="./simple-authentication.html" style="font-size: 18px;">Simple Authentication</a><br />
-            <a href="../config/database.html" style="font-size: 18px;">Database Config</a>
+            <a href="./pcre-patterns.html" style="font-size: 18px;">PCRE based patterns</a><br />
+            <a href="../routing/404-handling.html" style="font-size: 18px;">Handling 404</a><br />
+            <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
+            <a href="../core/response.html" style="font-size: 18px;">Response</a>
           </div>
 
           <div class="ui  vertical footer segment">

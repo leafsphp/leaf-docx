@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Getting Started</title>
+    <title>Simple Routing</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -59,7 +59,7 @@
       <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
       <b>New in v1.3.0</b>
     </a>
-      <a class="item" href="v2/introduction/getting-started.html">
+      <a class="item" href="v1.3.0/introduction/getting-started.html">
         <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
@@ -128,7 +128,7 @@
         </a>
 
         <div class="item">
-          Getting Started
+          Simple Routing
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -213,10 +213,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Getting Started
+                  Simple Routing
 
                   <div class="sub header">
-                    Getting up and running with Leaf PHP
+                    Creating and handling routes
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -233,86 +233,204 @@
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">Preface</h2>
+            <h2 class="ui dividing header">Overview</h2>
 
             <div class="no example">
-              <h4 class="ui header">What is Leaf</h4>
+              <h4 class="ui header">Understanding Routing</h4>
 
               <p>
-                Basically, Leaf is a PHP starter kit that helps you quickly
-                write simple yet powerful web applications and APIs without any
-                framework..
+                As explained <a href="../introduction/re-routing-to-index.html">before</a>, Leaf uses a single root file, to which all the server requests are redirected.
+                Leaf then takes these requests and matches them to rules you have defined. The results are then displayed to the user. It's actually a very simple concept.
               </p>
-              <p>
-                Leaf gives you a simple but very efficient structure for what
-                ever kind of app you wish to build.
-              </p>
-
-              <p>
-                Leaf also includes a bunch of handy functions that help you
-                achieve a whole lot simmpler and faster.
-              </p>
-              <p>Simply install leaf, and you're good to go.</p>
-            </div>
-            <div class="ui large info message">
-              <div class="ui header">Setup</div>
-              <p>
-                If you just need the files you can download them as a zip from
-                GitHub.
-              </p>
-              <a
-                href="https://github.com/leafsphp/leaf/tree/v1.3.0"
-                class="ui secondary button"
-                >Download Zip</a
-              >
-              <!-- <a href="https://github.com/leafsphp" class="ui button" target="_blank">View all Leaf Repos </a> -->
-            </div>
-
-            <h2 class="ui dividing header">Installing Leaf PHP</h2>
-
-            <div class="no example">
-              <h4 class="ui header">Install with composer</h4>
-              <p>
-                If you don't already have composer, you can get it at the
-                <a href="https://getcomposer.org/" target="_blank"
-                  >download page</a
-                >
-                on
-                <a href="https://getcomposer.org/" target="_blank"
-                  >getcomposer.org</a
-                >
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <p>After installing composer,</p>
+              <p style="font-size: 20px !important;">
+                In order to use Leaf's router in your project, you have to imoprt it
                 <div class="ignored code" data-type="bash">
-                  composer require leafs/leaf
+                  $leaf = new Leaf\Core\Leaf();
                 </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Using a different router</h4>
+              <p>
+                Leaf uses a router based on the <a href="https://github.com/Leaf's Core router">Leaf's Core router</a> component as for it's core, but this is seperated from the rest of Leaf itself,
+                 so, you can tie in any routing library of your choice.
+              </p>
+              1. Install it
+              <div class="ignored code" data-type="bash">
+                composer require .../whatever-router
+              </div>
+              2. Import it into your project
+              <div class="ignored code" data-type="bash">
+                $app  = new WhatEver\Router();
+                
+                // you can still use Leaf modules
+                $response = new Leaf\Core\Http\Response();
+              </div>
+            </div>
+
+            <h2 class="ui dividing header">Creating Routes</h2>
+            You can define application routes using proxy methods on the Leaf\Core\Leaf instance. Leaf supports a whole bunch of HTTP methods, see <a href="#supported-methods">all supported methods</a>.
+
+            <div class="no example">
+              <h4 class="ui header">GET requests</h4>
+              <p>
+                You can add a route that handles only GET HTTP requests with the Leaf router's get() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->get('/home', function() {
+                  // your code
+                });
               </div>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">Use the starter template</h4>
+              <h4 class="ui header">POST requests</h4>
               <p>
-                This method uses git. If you don't already have git, you can get
-                it at the
-                <a href="https://git-scm.com/" target="_blank">download page</a>
+                You can add a route that handles only POST HTTP requests with the Leaf router's post() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
               </p>
 
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="bash">
-                  git clone git@github.com:leafsphp/leaf-starter.git cd
-                  leaf-starter php -S localhost:8000
-                </div>
+              <div class="ignored code" data-type="bash">
+                $leaf->post('/users/add', function() use($request) {
+                  $user = $request->getParam('user');
+                  // create a new user
+                });
+              </div>
+
+              <h5>Using Post Params</h5>
+              View <a href="../core/request.html">Request</a> for more info on handling params
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">PUT requests</h4>
+              <p>
+                You can add a route that handles only PUT HTTP requests with the Leaf router’s put() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->put('/book/edit/{id}', function($id) {
+                  // your code
+                });
               </div>
             </div>
+
+            <div class="no example">
+              <h4 class="ui header">DELETE requests</h4>
+              <p>
+                You can add a route that handles only DELETE HTTP requests with the Leaf router's delete() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->delete('/quotes/{id}', function($id) {
+                  // delete quote
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">OPTIONS requests</h4>
+              <p>
+                You can add a route that handles only OPTIONS HTTP requests with the Leaf router's options() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->options('/quotes/{id}', function($id) {
+                  // return headers
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">PATCH requests</h4>
+              <p>
+                You can add a route that handles only PATCH HTTP requests with the Leaf router's patch() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->patch('/post/{id}', function($id) {
+                  // your code
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">ALL requests</h4>
+              <p>
+                You can add a route that handles all HTTP requests with the Leaf router's all() method. It accepts two arguments:
+                <ul>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->all('/post/{id}', function($id) {
+                  // your code
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Route "Hooking"</h4>
+              <p>
+                You can add a route that handles a couple of HTTP methods with the Leaf router's match() method. It accepts three arguments:
+                <ul>
+                  <li>The HTTP method(s) seperated by <code>|</code></li>
+                  <li>The route pattern (with optional <a href="./named-parameters.html">named placeholders</a> or <a href="./pcre-patterns.html">PCRE based patterns</a>)</li>
+                  <li>The route callback</li>
+                </ul>
+              </p>
+
+              <div class="ignored code" data-type="php">
+                $leaf->match('GET|POST', '/people', function() {
+                  // your code
+                });
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Running your routes</h4>
+              <p>
+                After setting all the routes, you'll need to dispatch the routes. This is achieved through Leaf's run() method.
+              </p>
+
+              <div class="ignored code" data-type="bash">
+                $leaf->run();
+              </div>
+            </div>
+            
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="./re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
-            <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
             <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
-            <a href="../core/response.html" style="font-size: 18px;">Response</a>
+            <a href="../core/response.html" style="font-size: 18px;">Response</a><br>
+            <a href="../routing/named-parameters.html" style="font-size: 18px;">Named Parameters</a><br />
+            <a href="../routing/404-handling.html" style="font-size: 18px;">Handling 404</a><br />
           </div>
 
           <div class="ui  vertical footer segment">

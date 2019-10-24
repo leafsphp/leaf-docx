@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <!-- Standard Meta -->
@@ -14,30 +14,30 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Getting Started</title>
+    <title>Leaf Dates</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
 
-    <script src="javascript\library\detect.min.js"></script>
-    <script src="javascript\library\jquery.min.js"></script>
-    <script src="javascript\library\clipboard.min.js"></script>
-    <script src="javascript\library\cookie.min.js"></script>
-    <script src="javascript\library\easing.min.js"></script>
-    <script src="javascript\library\highlight.min.js"></script>
-    <script src="javascript\library\history.min.js"></script>
-    <script src="javascript\library\tablesort.min.js"></script>
-    <script src="javascript\library\underscore.min.js"></script>
+    <script src="..\..\javascript\library\detect.min.js"></script>
+    <script src="..\..\javascript\library\jquery.min.js"></script>
+    <script src="..\..\javascript\library\clipboard.min.js"></script>
+    <script src="..\..\javascript\library\cookie.min.js"></script>
+    <script src="..\..\javascript\library\easing.min.js"></script>
+    <script src="..\..\javascript\library\highlight.min.js"></script>
+    <script src="..\..\javascript\library\history.min.js"></script>
+    <script src="..\..\javascript\library\tablesort.min.js"></script>
+    <script src="..\..\javascript\library\underscore.min.js"></script>
 
-    <script src="..\dist\semantic.min.js"></script>
+    <script src="..\..\dist\semantic.min.js"></script>
 
-    <script src="javascript\docs.js"></script>
+    <script src="..\..\javascript\docs.js"></script>
 
     <link
       rel="stylesheet"
       type="text/css"
       class="ui"
-      href="..\dist\semantic.min.css"
+      href="..\..\dist\semantic.min.css"
     />
 
     <link rel="stylesheet" type="text/css" href="..\..\stylesheets\docs.css" />
@@ -59,7 +59,7 @@
       <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
       <b>New in v1.3.0</b>
     </a>
-      <a class="item" href="v2/introduction/getting-started.html">
+      <a class="item" href="v1.3.0/introduction/getting-started.html">
         <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
@@ -128,7 +128,12 @@
         </a>
 
         <div class="item">
-          Getting Started
+          Leaf Dates
+        </div>
+        <div class="right menu">
+          <div class="vertically fitted borderless item">
+            <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -208,10 +213,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Getting Started
+                  Leaf Dates
 
                   <div class="sub header">
-                    Getting up and running with Leaf PHP
+                    Handling Dates with Leaf Custom Dates
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -228,83 +233,94 @@
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">Preface</h2>
+            <h2 class="ui dividing header">Overview</h2>
 
             <div class="no example">
-              <h4 class="ui header">What is Leaf</h4>
-
+              <h4 class="ui header">Using Leaf Dates</h4>
               <p>
-                Basically, Leaf is a PHP starter kit that helps you quickly
-                write simple yet powerful web applications and APIs without any
-                framework..
-              </p>
-              <p>
-                Leaf gives you a simple but very efficient structure for what
-                ever kind of app you wish to build.
-              </p>
-
-              <p>
-                Leaf also includes a bunch of handy functions that help you
-                achieve a whole lot simmpler and faster.
-              </p>
-              <p>Simply install leaf, and you're good to go.</p>
-            </div>
-            <div class="ui large info message">
-              <div class="ui header">Setup</div>
-              <p>
-                If you just need the files you can download them as a zip from
-                GitHub.
-              </p>
-              <a
-                href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.3.0"
-                class="ui secondary button"
-                >Download Zip</a
-              >
-              <!-- <a href="https://github.com/" class="ui button" target="_blank">View all Leaf Repos </a> -->
-            </div>
-
-            <h2 class="ui dividing header">Installing Leaf PHP</h2>
-
-            <div class="no example">
-              <h4 class="ui header">Install with composer</h4>
-              <p>
-                If you don't already have composer, you can get it at the
-                <a href="https://getcomposer.org/" target="_blank"
-                  >download page</a
-                >
-                on
-                <a href="https://getcomposer.org/" target="_blank"
-                  >getcomposer.org</a
-                >
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <p>After installing composer,</p>
-                <div class="ignored code" data-type="bash">
-                  composer require leafs/leaf
+                Just like all of Leaf's other functionality, the dates module will also have to be imported
+                <div class="ignored code" data-type="php">
+                  $date = new Leaf\Core\CustomDate();
                 </div>
-              </div>
+                After this, all the CustomDate methods will be available to us:
+              </p>
+            </div>
+
+            <h2 class="ui dividing header">CustomDate Function</h2>
+            Basically, CustomDate just gives you methods to manipulate the date and time, faster that <code>DateTime()</code> would allow. Let's take a look at these methods.
+            <div class="no example">
+              <h4 class="ui header">Timestamp</h4>
+              <p>
+                Timestamp as the name implies, generates a new random timestamp.
+                <div class="ignored code" data-type="php">
+                  $timestamp = $date->Timestamp();
+                </div>
+              </p>
+            </div>
+            
+            <div class="no example">
+              <h4 class="ui header">GetDateFromTimeStamp</h4>
+              <p>
+                This method gets the date in YYYY-MM-DD format from an existing timestamp
+                <div class="ignored code" data-type="php">
+                  $parsedDate = $date->GetDateFromTimeStamp($timestamp);
+                </div>
+              </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">Use the starter template</h4>
+              <h4 class="ui header">GetMonthFromNumber</h4>
               <p>
-                This method uses git. If you don't already have git, you can get
-                it at the
-                <a href="https://git-scm.com/" target="_blank">download page</a>
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="bash">
-                  git clone git@github.com:leafsphp/leaf-starter.git cd
-                  leaf-starter php -S localhost:8000
+                This gets the month in words from a number (0-11)
+                <div class="ignored code" data-type="php">
+                  $month = $date->GetMonthFromNumber($number);
                 </div>
-              </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">GetDayFromNumber</h4>
+              <p>
+                This gets the day in words from a number (1-7)
+                <div class="ignored code" data-type="php">
+                  $month = $date->GetDayFromNumber($number);
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">GetEnglishDateFromTimeStamp</h4>
+              <p>
+                This gets the date in the format (MM DD, YYYY) from an existing timestamp
+                <div class="ignored code" data-type="php">
+                  $parsedDate = $date->GetEnglishDateFromTimeStamp($timestamp);
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">GetEnglishTimeStampFromTimeStamp</h4>
+              <p>
+                This gets the date in the format (DD MM, YYYY HH:MM:SS) from a timestamp
+                <div class="ignored code" data-type="php">
+                  $parsedDate = $date->GetEnglishTimeStampFromTimeStamp($timestamp);
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">GetTimeFromTimeStamp</h4>
+              <p>
+                This gets the time in the format (HH:MM:SS) from a timestamp
+                <div class="ignored code" data-type="php">
+                  $parsedDate = $date->GetTimeFromTimeStamp($timestamp);
+                </div>
+              </p>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
+            <a href="./re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
             <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
             <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
             <a href="../core/response.html" style="font-size: 18px;">Response</a>
@@ -332,6 +348,6 @@
       };
     </script>
 
-    <script src="javascript\library\less.min.js"></script>
+    <script src="..\..\javascript\library\less.min.js"></script>
   </body>
 </html>

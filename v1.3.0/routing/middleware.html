@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Requests</title>
+    <title>MiddleWare</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -59,7 +59,7 @@
       <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
       <b>New in v1.3.0</b>
     </a>
-      <a class="item" href="v2/introduction/getting-started.html">
+      <a class="item" href="v1.3.0/introduction/getting-started.html">
         <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
@@ -128,7 +128,7 @@
         </a>
 
         <div class="item">
-          Requests
+          MiddleWare
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -213,10 +213,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Requests
+                  MiddleWare
 
                   <div class="sub header">
-                    Handling Requests with Leaf
+                    Handling MiddleWare
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -234,77 +234,56 @@
 
           <div class="main ui intro container">
             <h2 class="ui dividing header">Overview</h2>
-            <p>
-              Leaf tries as much as possible to use raw PHP written from scratch, so, instead of using PSR-7 like most frameworks do, Leaf has written predefined request methods. 
-              The request section basically deals with requests made to the app, so far, there are only two functions chained to the Request class. To use the request object, you simply need to pass $request into your $route like this.
-            </p>
 
             <div class="no example">
-              <h4 class="ui header">Including Request</h4>
+              <h4 class="ui header">Before Route Middlewares</h4>
               <p>
-                To include the Request object in a route, use this:
-                <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Request;
-
-$request = new Request();
-
-$leaf->post('/name/add', function() use($request) {
-  $name = $request->getParam('name');
-});
-                </div>
-                Here, we set <code>$request</code> to the <code>Request</code> class, and we pass it into the route with <code>use()</code>.
+                Leaf's Core router supports Before Route Middlewares, which are executed before the route handling is processed.
               </p>
+              <p>
+                Like route handling functions, you hook a handling function to a combination of one or more HTTP request methods and a specific route pattern.
+              </p>
+              <div class="ignored code" data-type="php">
+                $leaf->before('GET|POST', '/admin/.*', function() {
+    if (!isset($_SESSION['user'])) {
+        header('location: /auth/login');
+        exit();
+    }
+});
+              </div>
+              Unlike route handling functions, more than one before route middleware is executed when more than one route match is found.
             </div>
             
-            
-
-            <h2 class="ui dividing header">Request Methods</h2>
 
             <div class="no example">
-              <h4 class="ui header">getParam()</h4>
+              <h4 class="ui header">Before Router Middlewares</h4>
               <p>
-                getParam is a method built for APIs, but can be used in a normal web app/website. It takes in one parameter: the name of the param passed into the app through the request
-                It works just like how <code>$_POST['key']</code> does
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Request;
-
-$request = new Request();
-
-$leaf->post('/name/add', function() use($request) {
-  $name = $request->getParam('name');
+			   Before route middlewares are route specific. Using a general route pattern (viz. all URLs), they can become Before Router Middlewares (in other projects sometimes referred to as before app middlewares) which are always executed, no matter what the requested URL is.
+			   <div class="ignored code" data-type="php">
+				   $leaf->before('GET', '/.*', function() {
+    // ... this will always be executed
 });
-                </div>
-              </div>
-            </div>
-
-            <div class="no example">
-              <h4 class="ui header">getBody()</h4>
+			   </div>
+              </p>
+			</div>
+			
+			<div class="no example">
+              <h4 class="ui header">After Router Middleware / Run Callback</h4>
               <p>
-                getBody() returns the key => value pairs of all the request data
+			   Run one (1) middleware function, name the After Router Middleware (in other projects sometimes referred to as after app middlewares) after the routing was processed. Just pass it along the $leaf->run() function. The run callback is route independent.
+			   <div class="ignored code" data-type="php">
+				   $leaf->run(function() { … });
+			   </div>
+			   Note: If the route handling function has exit()ed the run callback won't be run.
               </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Request;
-
-$request = new Request();
-
-$leaf->post('/name/add', function() use($request) {
-  $body = $request->getBody();
-});
-                </div>
-              </div>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
-            <a href="./response.html" style="font-size: 18px;">Response</a><br />
-            <a href="./simple-authentication.html" style="font-size: 18px;">Simple Authentication</a><br />
-            <a href="../config/database.html" style="font-size: 18px;">Database Config</a>
+            <a href="../core/response.html" style="font-size: 18px;">Response</a><br>
+            <a href="../core/date-manipulation.html" style="font-size: 18px;">Leaf Dates</a><br />
+            <a href="../routing/named-parameters.html" style="font-size: 18px;">Named Parameters</a><br />
+            <a href="../routing/sub-routing.html" style="font-size: 18px;">Sub-routing</a>
           </div>
 
           <div class="ui  vertical footer segment">

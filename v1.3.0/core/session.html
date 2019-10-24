@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Named Params</title>
+    <title>Session</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -59,7 +59,7 @@
       <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
       <b>New in v1.3.0</b>
     </a>
-      <a class="item" href="v2/introduction/getting-started.html">
+      <a class="item" href="v1.3.0/introduction/getting-started.html">
         <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
@@ -128,7 +128,7 @@
         </a>
 
         <div class="item">
-          Named Params
+          Session
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -213,10 +213,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Dynamic Placeholder-based Route Patterns(Named Params)
+                  Session
 
                   <div class="sub header">
-                    Dynamic routing with named parameters
+                    Using sessions with Leaf
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -234,45 +234,77 @@
 
           <div class="main ui intro container">
             <h2 class="ui dividing header">Overview</h2>
+            <p>
+              Leaf v1.3.0 comes along with support for the native PHP session. We have directly tied it into leaf's core as a module, so you can use it without <code>middleware</code>
+              as done in some other API based frameworks.
+            </p>
 
             <div class="no example">
-              <h4 class="ui header">Named Params</h4>
-              <i>This guide assumes you have read <a href="./simple-routing.html">Simple Routing</a></i>
+              <h4 class="ui header">Including Session</h4>
               <p>
-                Basically, Dynamic Placeholder-based Route Patterns are just another way to use routes dynamically. This type of Route Patterns are the same as Dynamic PCRE-based Route Patterns, but with one difference: they don't use regexes to do the pattern matching but they use the more easy placeholders instead. 
-                Placeholders are strings surrounded by curly braces, e.g. {name}. You don't need to add parens around placeholders.
-              </p>
-              <p>
-                Examples
-                <ul>
-                  <li>/movies/{id}</li>
-                  <li>/profile/{username}</li>
-                </ul>
-              </p>
-              <p>
-                Placeholders are easier to use than PRCEs, but offer you less control as they internally get translated to a PRCE that matches any character (.*).
+                To include the Session object in a route, use this:
                 <div class="ignored code" data-type="php">
-                  $leaf->get('/movies/{movieId}/photos/{photoId}', function($movieId, $photoId) {
-    echo 'Movie #' . $movieId . ', photo #' . $photoId);
+use Leaf\Core\Http\Session;
+
+$session = new Session();
+
+$leaf->post('/session/start', function() use($session, $request) {
+  $session->set('name', 'Michael Darko');
 });
                 </div>
+                Here, we set <code>$session</code> to the <code>Session</code> class, and we pass it into the route with <code>use()</code>.
               </p>
+            </div>
+            
+            
+
+            <h2 class="ui dividing header">Request Methods</h2>
+
+            <div class="no example">
+              <h4 class="ui header">getParam()</h4>
               <p>
-                Note: the name of the placeholder does not need to match with the name of the parameter that is passed into the route handling function...although it's adviced:
+                getParam is a method built for APIs, but can be used in a normal web app/website. It takes in one parameter: the name of the param passed into the app through the request
+                It works just like how <code>$_POST['key']</code> does
+              </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
                 <div class="ignored code" data-type="php">
-                  $leaf->get('/movies/{foo}/photos/{bar}', function($movieId, $photoId) {
-    echo 'Movie #' . $movieId . ', photo #' . $photoId);
+use Leaf\Core\Http\Request;
+
+$request = new Request();
+
+$leaf->post('/name/add', function() use($request) {
+  $name = $request->getParam('name');
 });
                 </div>
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">getBody()</h4>
+              <p>
+                getBody() returns the key => value pairs of all the request data
               </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Http\Request;
+
+$request = new Request();
+
+$leaf->post('/name/add', function() use($request) {
+  $body = $request->getBody();
+});
+                </div>
+              </div>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="./optional-subpatterns.html" style="font-size: 18px;">Optional sub-patterns</a><br />
-            <a href="../core/simple-authentication.html" style="font-size: 18px;">Simple Authentication</a><br />
-            <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
-            <a href="../core/response.html" style="font-size: 18px;">Response</a>
+            <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
+            <a href="./response.html" style="font-size: 18px;">Response</a><br />
+            <a href="./simple-authentication.html" style="font-size: 18px;">Simple Authentication</a><br />
+            <a href="../config/database.html" style="font-size: 18px;">Database Config</a>
           </div>
 
           <div class="ui  vertical footer segment">

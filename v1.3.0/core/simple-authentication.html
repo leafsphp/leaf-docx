@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Leaf Dates</title>
+    <title>Simple Authentication</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -59,7 +59,7 @@
       <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
       <b>New in v1.3.0</b>
     </a>
-      <a class="item" href="v2/introduction/getting-started.html">
+      <a class="item" href="v1.3.0/introduction/getting-started.html">
         <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
@@ -128,7 +128,7 @@
         </a>
 
         <div class="item">
-          Leaf Dates
+          Simple Authentication
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -213,10 +213,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Leaf Dates
+                  Simple Authentication
 
                   <div class="sub header">
-                    Handling Dates with Leaf Custom Dates
+                    Simple Authentication methods for faster development
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -236,86 +236,82 @@
             <h2 class="ui dividing header">Overview</h2>
 
             <div class="no example">
-              <h4 class="ui header">Using Leaf Dates</h4>
+              <h4 class="ui header">Working with tokens</h4>
               <p>
-                Just like all of Leaf's other functionality, the dates module will also have to be imported
+                Leaf provides you with the $jwt object which includes various methods for creating and parsing token data....but we do not advice directly using the $jwt object. For this reason, a special $authentication object has been created to work with all the $jwt data.
+                To use $authentication, 
                 <div class="ignored code" data-type="php">
-                  $date = new Leaf\Core\CustomDate();
-                </div>
-                After this, all the CustomDate methods will be available to us:
-              </p>
-            </div>
-
-            <h2 class="ui dividing header">CustomDate Function</h2>
-            Basically, CustomDate just gives you methods to manipulate the date and time, faster that <code>DateTime()</code> would allow. Let's take a look at these methods.
-            <div class="no example">
-              <h4 class="ui header">Timestamp</h4>
-              <p>
-                Timestamp as the name implies, generates a new random timestamp.
-                <div class="ignored code" data-type="php">
-                  $timestamp = $date->Timestamp();
+                  $authentication = new Leaf\Core\Authentication();
                 </div>
               </p>
             </div>
             
+            <h2 class="ui dividing header">Authentication methods:</h2>
+
             <div class="no example">
-              <h4 class="ui header">GetDateFromTimeStamp</h4>
+              <h4 class="ui header">generateSimpleToken()</h4>
               <p>
-                This method gets the date in YYYY-MM-DD format from an existing timestamp
-                <div class="ignored code" data-type="php">
-                  $parsedDate = $date->GetDateFromTimeStamp($timestamp);
-                </div>
+                This method generates a new JSON Web Token. It takes 2 arguments. check out <a href="https://tools.ietf.org/html/rfc7519#section-4.1">JWT</a> for more info on JWT params
+                <ul>
+                  <li>(int) - A user id to encode</li>
+                  <li>(string) - A secret phrase to encode with the token</li>
+                </ul>
               </p>
+
+              <div class="ignored code" data-type="bash">
+                $token = $authentication->generateSimpleToken(24', 'LEAF PHP SECRET CODE 1442');
+              </div>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">GetMonthFromNumber</h4>
+              <h4 class="ui header">generateToken()</h4>
               <p>
-                This gets the month in words from a number (0-11)
-                <div class="ignored code" data-type="php">
-                  $month = $date->GetMonthFromNumber($number);
-                </div>
+                This method generates a new JSON Web Token: the same as <code>generateSimpleToken()</code>, the only difference is that this method gives you more control over the token
+                i.e. expiry time..... It takes 4 parameters. check out <a href="https://tools.ietf.org/html/rfc7519#section-4.1">JWT</a> for more info on JWT params
+                <ul>
+                  <li>(int) - A user id to encode</li>
+                  <li>(int) - Expiry time....this is the amount of time the token will last from the current time</li>
+                  <li>(string) - A secret phrase to encode with the token</li>
+                  <li>(string) - iss - issuer....identifies the principal that issued the JWT - default is localhost</li>
+                </ul>
               </p>
+
+              <div class="ignored code" data-type="bash">
+                $token = $authentication->generateToken(24', 3600, 'LEAF PHP SECRET CODE 1442', 'localhost');
+              </div>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">GetDayFromNumber</h4>
+              <h4 class="ui header">validateToken()</h4>
               <p>
-                This gets the day in words from a number (1-7)
-                <div class="ignored code" data-type="php">
-                  $month = $date->GetDayFromNumber($number);
-                </div>
+                This method is used to confirm the identity of a token from an authorization header
               </p>
+
+              <div class="ignored code" data-type="bash">
+                $token = $authentication->validateToken();
+              </div>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">GetEnglishDateFromTimeStamp</h4>
+              <h4 class="ui header">getBearerToken()</h4>
               <p>
-                This gets the date in the format (MM DD, YYYY) from an existing timestamp
-                <div class="ignored code" data-type="php">
-                  $parsedDate = $date->GetEnglishDateFromTimeStamp($timestamp);
-                </div>
+                This method is used to get the bearer token from an authorization header
               </p>
+
+              <div class="ignored code" data-type="bash">
+                $token = $authentication->getBearerToken();
+              </div>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">GetEnglishTimeStampFromTimeStamp</h4>
+              <h4 class="ui header">getAuthorizationHeader()</h4>
               <p>
-                This gets the date in the format (DD MM, YYYY HH:MM:SS) from a timestamp
-                <div class="ignored code" data-type="php">
-                  $parsedDate = $date->GetEnglishTimeStampFromTimeStamp($timestamp);
-                </div>
+                This method is used to an authorization header
               </p>
-            </div>
 
-            <div class="no example">
-              <h4 class="ui header">GetTimeFromTimeStamp</h4>
-              <p>
-                This gets the time in the format (HH:MM:SS) from a timestamp
-                <div class="ignored code" data-type="php">
-                  $parsedDate = $date->GetTimeFromTimeStamp($timestamp);
-                </div>
-              </p>
+              <div class="ignored code" data-type="bash">
+                $authHeader = $authentication->getAuthorizationHeader();
+              </div>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>

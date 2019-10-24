@@ -169,7 +169,7 @@
           <div class="ui hidden divider"></div>
 
           <a href="introduction\getting-started.html" class="ui huge inverted download button">Get Started</a>
-          <a href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.3.0" class="ui huge inverted basic button" download>Download v1.3.0</a>
+          <a href="https://github.com/leafsphp/leaf/tree/v1.3.0" class="ui huge inverted basic button" download>Download v1.3.0</a>
         </div>
         <!-- <div class="inverted advertisement">
           
@@ -191,11 +191,9 @@
               // Sample index.php
               require_once __DIR__ . '/vendor/autoload.php';
 
-$leaf = new Leaf\Core\Leaf();
-
-$response = new Leaf\Core\Http\Response();
-
-$request = new Leaf\Core\Http\Request();
+$leaf = new Leaf\Core\Leaf;
+$response = new Leaf\Core\Http\Response;
+$request = new Leaf\Core\Http\Request;
               
 $leaf->get('/book/{id}', function($id) use($response) {
   $response->respond(["id" => $id]);
@@ -246,39 +244,27 @@ $leaf->get('/session/create', function() use($session, $response) {
         <div class="ui divider"></div>
         <div class="row">
           <div class="seven wide column">
-            <h2 class="ui header">Simple PHP methods</h2>
-            <p>Leaf PHP provides you with very simple methods to handle various situations.</p>
-            <p>With a clean structure and simple code, it's super easy to master Leaf's API.</p>
+            <h2 class="ui header">More Date Syntaxes</h2>
+            <p>Leaf PHP comes with more handy functions in this version. One of them is the <code>Date</code> object(previously CustomDate).</p>
+            <p>With the new <code>Date</code> object, you can make your apps and APIs quicker.</p>
           </div>
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
-              // get request params
-              $leaf->post('/name/add', function() use($request) {
-  $name = $request->getParam('name');
-});
+$date = new Leaf\Core\Date;
+
+$date->setTimeZone('Africa/Accra');
+$date->now();
             </div>
             <a href="core/request.html">View Request Docs</a>
           </div>
         </div>
         <div class="ui divider"></div>
         <div class="row">
-          <div class="seven wide column">
-            <h2 class="ui header">Clean, Fast, Reliable</h2>
-            <p>Leaf PHP uses only components written by leaf in raw, tested PHP.</p>
-            <p>This means that in terms of performance, Leaf is the fastest PHP framework.</p>
-            <p>Leaf also uses clean, minimal code to achieve complex results.</p>
-          </div>
-          <div class="nine wide column">
-            <div class="hidden code" data-type="php">
-              // generate JWT token
-              $leaf->post('/token/create', function() use($response, $authentication) {
-                $token = $authentication->createSimpleToken(22, 'Secret key');
-                return $response->respond(["token" => $token]);
-              });
-            </div>
-            <a href="core/simple-authentication.html">View Authentication Docs</a>
+          <div class="seven wide column" style="margin-bottom: -100px !important;;">
+            <h2>Find out more <a href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md" target="_blank" rel="noopener noreferrer">here</a></h2>
           </div>
         </div>
+      </div>
     </div>
     <div class="ui email alternate stripe vertical segment">
       <div class="ui center aligned grid container">
@@ -308,15 +294,15 @@ $leaf->get('/session/create', function() use($session, $response) {
           <div class="three wide column">
             <h4 class="ui header">Community</h4>
             <div class="ui link list">
-              <a class="item" href="https://github.com/mr-phlames/leaf-php-boilerplate/issues" target="_blank">Submit an Issue</a>
+              <a class="item" href="https://github.com/leafsphp/leaf/issues" target="_blank">Submit an Issue</a>
               <a class="item" href="cla.html" target="_blank">CLA</a>
             </div>
           </div>
           <div class="three wide column">
             <h4 class="ui header">Network</h4>
             <div class="ui link list">
-              <a class="item" href="https://github.com/mr-phlames/leaf-php-boilerplate/" target="_blank">GitHub Repo</a>
-              <a class="item" href="https://github.com/mr-phlames/leaf-php-boilerplate/tree/v1.0.0">1.0.0 Docs</a>
+              <a class="item" href="https://github.com/leafsphp/leaf/" target="_blank">GitHub Repo</a>
+              <a class="item" href="https://github.com/leafsphp/leaf/tree/v1.0.0">1.0.0 Docs</a>
             </div>
           </div>
           <!-- <div class="seven wide right floated column">

@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Subfolder support</title>
+    <title>Database Config</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -59,7 +59,7 @@
       <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
       <b>New in v1.3.0</b>
     </a>
-      <a class="item" href="v2/introduction/getting-started.html">
+      <a class="item" href="v1.3.0/introduction/getting-started.html">
         <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
@@ -128,7 +128,7 @@
         </a>
 
         <div class="item">
-          Subfolder support
+          Database Config
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -213,10 +213,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Subfolder support
+                  Database Config
 
                   <div class="sub header">
-                    Subfolder support
+                    Working with databases in Leaf
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -236,64 +236,68 @@
             <h2 class="ui dividing header">Overview</h2>
 
             <div class="no example">
-              <h4 class="ui header">Before Route Middlewares</h4>
+              <h4 class="ui header">Databse Overview</h4>
               <p>
-                Out-of-the box Leaf's Core router will run in any (sub)folder you place it into … no adjustments to your code are needed. You can freely move your entry script index.php around, and the router will automatically adapt itself to work relatively from the current folder's path by mounting all routes onto that basePath.
+                Leaf doesn't come with a full featured database layer, however, we have miniature database manipulation methods.<br>
+                To use these methods, 
+                <div class="ignored code" data-type="php">
+                  $database = new Leaf\Config\Database();
+                </div>
+                Now these methods are available in our code...let's take a look
               </p>
-              <p>
-				Say you have a server hosting the domain www.example.org using public_html/ as its document root, with this little entry script index.php:
-				<div class="ignored code" data-type="php">
-					$leaf->get('/', function() { echo 'Index'; });
-$leaf->get('/hello', function() { echo 'Hello!'; });
-				</div>
-				<ul>
-					<li>
-						If your were to place this file (along with its accompanying .htaccess file or the like) at the document root level (e.g. public_html/index.php), Leaf's Core router will mount all routes onto the domain root (e.g. /) and thus respond to https://www.example.org/ and https://www.example.org/hello.
-					</li>
-					<li>
-						If you were to move this file (along with its accompanying .htaccess file or the like) into a subfolder (e.g. public_html/demo/index.php), Leaf's Core router will mount all routes onto the current path (e.g. /demo) and thus repsond to https://www.example.org/demo and https://www.example.org/demo/hello. There's no need for $leaf->mount(…) in this case.
-					</li>
-				</ul>
-			  </p>
             </div>
-            
+
+            <h2 class="ui dividing header">Database Connection</h2>
 
             <div class="no example">
-              <h4 class="ui header">Disabling subfolder support</h4>
+              <h4 class="ui header">Mysqli connection</h4>
               <p>
-			   In case you don't want Leaf's Core router to automatically adapt itself to the folder its being placed in, it's possible to manually override the basePath by calling setBasePath(). This is necessary in the (uncommon) situation where your entry script and your entry URLs are not tightly coupled (e.g. when the entry script is placed into a subfolder that does not need be part of the URLs it responds to)..
-			   <div class="ignored code" data-type="php">
-				   // Override auto base path detection
-$leaf->setBasePath('/');
+                We have prepared a simple mysqli connection object for you
+                <div class="ignored code" data-type="php">
+                  use Leaf\Config\Database;
+                  
+                  $database = new Database();
+                  $connection = $database->connectMysqli($host, $user, $password, $dbname);
+                </div>
+              </p>
+            </div>
 
-$leaf->get('/', function() { echo 'Index'; });
-$leaf->get('/hello', function() { echo 'Hello!'; });
-
-$leaf->run();
-			   </div>
-			  </p>
-			  <p>
-				  If you were to place this file into a subfolder (e.g. public_html/some/sub/folder/index.php), it will still mount the routes onto the domain root (e.g. /) and thus respond to https://www.example.org/ and https://www.example.org/hello (given that your .htaccess file – placed at the document root level – rewrites requests to it)
-			  </p>
-			</div>
-			
-			<div class="no example">
-              <h4 class="ui header">After Router Middleware / Run Callback</h4>
+            <div class="no example">
+              <h4 class="ui header">PDO connection</h4>
               <p>
-			   Run one (1) middleware function, name the After Router Middleware (in other projects sometimes referred to as after app middlewares) after the routing was processed. Just pass it along the $leaf->run() function. The run callback is route independent.
-			   <div class="ignored code" data-type="php">
-				   $leaf->run(function() { … });
-			   </div>
-			   Note: If the route handling function has exit()ed the run callback won't be run.
+                We have prepared a simple PDO connection object for you
+                <div class="ignored code" data-type="php">
+                  use Leaf\Config\Database;
+                  
+                  $database = new Database();
+                  $connection = $database->connectPDO($host, $dbname, $user, $password);
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Using connection in a route</h4>
+              <p>
+                To use the connection object inside a route($leaf) use:
+                <div class="ignored code" data-type="php">
+                  use Leaf\Config\Database;
+                  
+$database = new Database();
+$connection = $database->connectPDO($host, $dbname, $user, $password);
+
+$leaf->post('/users/add', function() use($connection) {
+  // your code
+});
+                </div>
               </p>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="../core/response.html" style="font-size: 18px;">Response</a><br>
-            <a href="../core/date-manipulation.html" style="font-size: 18px;">Leaf Dates</a><br />
-            <a href="../routing/named-parameters.html" style="font-size: 18px;">Named Parameters</a><br />
-            <a href="../routing/sub-routing.html" style="font-size: 18px;">Sub-routing</a>
+            <a href="./re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
+            <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
+            <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
+            <a href="../core/response.html" style="font-size: 18px;">Response</a>
           </div>
 
           <div class="ui  vertical footer segment">

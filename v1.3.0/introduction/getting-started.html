@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Database Config</title>
+    <title>Getting Started</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -59,7 +59,7 @@
       <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
       <b>New in v1.3.0</b>
     </a>
-      <a class="item" href="v2/introduction/getting-started.html">
+      <a class="item" href="v1.3.0/introduction/getting-started.html">
         <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
@@ -128,7 +128,7 @@
         </a>
 
         <div class="item">
-          Database Config
+          Getting Started
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -213,10 +213,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Database Config
+                  Getting Started
 
                   <div class="sub header">
-                    Working with databases in Leaf
+                    Getting up and running with Leaf PHP
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -233,63 +233,78 @@
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">Overview</h2>
+            <h2 class="ui dividing header">Preface</h2>
 
             <div class="no example">
-              <h4 class="ui header">Databse Overview</h4>
+              <h4 class="ui header">What is Leaf</h4>
+
               <p>
-                Leaf doesn't come with a full featured database layer, however, we have miniature database manipulation methods.<br>
-                To use these methods, 
-                <div class="ignored code" data-type="php">
-                  $database = new Leaf\Config\Database();
-                </div>
-                Now these methods are available in our code...let's take a look
+                Basically, Leaf is a PHP starter kit that helps you quickly
+                write simple yet powerful web applications and APIs without any
+                framework..
               </p>
+              <p>
+                Leaf gives you a simple but very efficient structure for what
+                ever kind of app you wish to build.
+              </p>
+
+              <p>
+                Leaf also includes a bunch of handy functions that help you
+                achieve a whole lot simmpler and faster.
+              </p>
+              <p>Simply install leaf, and you're good to go.</p>
+            </div>
+            <div class="ui large info message">
+              <div class="ui header">Setup</div>
+              <p>
+                If you just need the files you can download them as a zip from
+                GitHub.
+              </p>
+              <a
+                href="https://github.com/leafsphp/leaf/tree/v1.3.0"
+                class="ui secondary button"
+                >Download Zip</a
+              >
+              <!-- <a href="https://github.com/leafsphp" class="ui button" target="_blank">View all Leaf Repos </a> -->
             </div>
 
-            <h2 class="ui dividing header">Database Connection</h2>
+            <h2 class="ui dividing header">Installing Leaf PHP</h2>
 
             <div class="no example">
-              <h4 class="ui header">Mysqli connection</h4>
+              <h4 class="ui header">Install with composer</h4>
               <p>
-                We have prepared a simple mysqli connection object for you
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
-                  
-                  $database = new Database();
-                  $connection = $database->connectMysqli($host, $user, $password, $dbname);
-                </div>
+                If you don't already have composer, you can get it at the
+                <a href="https://getcomposer.org/" target="_blank"
+                  >download page</a
+                >
+                on
+                <a href="https://getcomposer.org/" target="_blank"
+                  >getcomposer.org</a
+                >
               </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <p>After installing composer,</p>
+                <div class="ignored code" data-type="bash">
+                  composer require leafs/leaf
+                </div>
+              </div>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">PDO connection</h4>
+              <h4 class="ui header">Use the starter template</h4>
               <p>
-                We have prepared a simple PDO connection object for you
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
-                  
-                  $database = new Database();
-                  $connection = $database->connectPDO($host, $dbname, $user, $password);
-                </div>
+                This method uses git. If you don't already have git, you can get
+                it at the
+                <a href="https://git-scm.com/" target="_blank">download page</a>
               </p>
-            </div>
 
-            <div class="no example">
-              <h4 class="ui header">Using connection in a route</h4>
-              <p>
-                To use the connection object inside a route($leaf) use:
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
-                  
-$database = new Database();
-$connection = $database->connectPDO($host, $dbname, $user, $password);
-
-$leaf->post('/users/add', function() use($connection) {
-  // your code
-});
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="bash">
+                  git clone git@github.com:leafsphp/leaf-starter.git cd
+                  leaf-starter php -S localhost:8000
                 </div>
-              </p>
+              </div>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
