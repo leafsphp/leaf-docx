@@ -151,7 +151,7 @@
             <a class="item" href="./getting-started.html">
               <b>Getting Started</b>
             </a>
-            <a class="item" href="./new.html">
+            <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
               <b>New in v1.3.0</b>
             </a>
             <div class="item">
@@ -179,11 +179,11 @@
                 <a class="item" href="../routing/sub-routing.html">Sub routing</a>
                 <a class="item" href="../routing/named-parameters.html">Named parameters</a>
                 <a class="item" href="../routing/pcre-patterns.html">PCRE based patterns</a>
-          <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
-          <a class="item" href="../routing/controllers.html">Using Controllers</a>
-          <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
-          <a class="item" href="../routing/middleware.html">Using Middleware</a>
-          <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
+                <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
+                <a class="item" href="../routing/controllers.html">Using Controllers</a>
+                <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
+                <a class="item" href="../routing/middleware.html">Using Middleware</a>
+                <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
               </div>
             </div>
 
@@ -254,12 +254,10 @@
               <div class="ignored code" data-type="php">
                 $response = new Leaf\Core\Http\Response();
 
-
-
-                $leaf->set404(function () use($response) {
-                  header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-                  $response->renderHtmlPage('..link/to/page');
-                });
+$leaf->set404(function () use($response) {
+  header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+  $response->renderHtmlPage('..link/to/page');
+});
               </div>
             </div>
             

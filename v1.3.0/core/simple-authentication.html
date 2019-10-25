@@ -151,7 +151,7 @@
             <a class="item" href="./getting-started.html">
               <b>Getting Started</b>
             </a>
-            <a class="item" href="./new.html">
+            <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
               <b>New in v1.3.0</b>
             </a>
             <div class="item">
@@ -267,17 +267,15 @@
               <h4 class="ui header">generateToken()</h4>
               <p>
                 This method generates a new JSON Web Token: the same as <code>generateSimpleToken()</code>, the only difference is that this method gives you more control over the token
-                i.e. expiry time..... It takes 4 parameters. check out <a href="https://tools.ietf.org/html/rfc7519#section-4.1">JWT</a> for more info on JWT params
+                i.e. expiry time..... In v1.3, this method takes in 2 params, the entire payload of your JWT and a secret phrase. check out <a href="https://tools.ietf.org/html/rfc7519#section-4.1">JWT</a> for more info on JWT payload params.
                 <ul>
-                  <li>(int) - A user id to encode</li>
-                  <li>(int) - Expiry time....this is the amount of time the token will last from the current time</li>
+                  <li>(array) - JWT payload</li>
                   <li>(string) - A secret phrase to encode with the token</li>
-                  <li>(string) - iss - issuer....identifies the principal that issued the JWT - default is localhost</li>
                 </ul>
               </p>
 
               <div class="ignored code" data-type="bash">
-                $token = $authentication->generateToken(24', 3600, 'LEAF PHP SECRET CODE 1442', 'localhost');
+                $token = $authentication->generateToken($payload, "secret phrase");
               </div>
             </div>
 
@@ -316,7 +314,7 @@
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="./re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
+            <a href="./session.html" style="font-size: 18px;">Session</a><br />
             <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
             <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
             <a href="../core/response.html" style="font-size: 18px;">Response</a>

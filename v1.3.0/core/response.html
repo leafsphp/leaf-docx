@@ -151,7 +151,7 @@
             <a class="item" href="./getting-started.html">
               <b>Getting Started</b>
             </a>
-            <a class="item" href="./new.html">
+            <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
               <b>New in v1.3.0</b>
             </a>
             <div class="item">
@@ -235,7 +235,8 @@
           <div class="main ui intro container">
             <h2 class="ui dividing header">Overview</h2>
             <p>
-              Leaf tries as much as possible to use raw PHP written from scratch, so, instead of using PSR-7 like most frameworks do, Leaf has written predefined response methods.
+              Leaf tries as much as possible to use raw PHP written from scratch, so, instead of using PSR-7 like most frameworks do, Leaf has written predefined response methods.<br>
+              In v1.3, Request is now part of the HTTP namespace.
             </p>
 
             <div class="no example">
@@ -258,6 +259,7 @@ $leaf->get('/', function() use($response) {
             
 
             <h2 class="ui dividing header">Response Methods</h2>
+            In v1.3, Response methods no longer use the <code>echo</code> keyword. Everything is handled in Response.
 
             <div class="no example">
               <h4 class="ui header">respond()</h4>

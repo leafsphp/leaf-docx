@@ -151,7 +151,7 @@
             <a class="item" href="./getting-started.html">
               <b>Getting Started</b>
             </a>
-            <a class="item" href="./new.html">
+            <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
               <b>New in v1.3.0</b>
             </a>
             <div class="item">
@@ -179,11 +179,11 @@
                 <a class="item" href="../routing/sub-routing.html">Sub routing</a>
                 <a class="item" href="../routing/named-parameters.html">Named parameters</a>
                 <a class="item" href="../routing/pcre-patterns.html">PCRE based patterns</a>
-          <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
-          <a class="item" href="../routing/controllers.html">Using Controllers</a>
-          <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
-          <a class="item" href="../routing/middleware.html">Using Middleware</a>
-          <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
+                <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
+                <a class="item" href="../routing/controllers.html">Using Controllers</a>
+                <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
+                <a class="item" href="../routing/middleware.html">Using Middleware</a>
+                <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
               </div>
             </div>
 
@@ -195,7 +195,7 @@
                 <a class="item" href="../core/date-manipulation.html">Date Manipulation</a>
                 <a class="item" href="../core/request.html">Request</a>
                 <a class="item" href="../core/response.html">Response</a>
-          <a class="item" href="../core/session.html">Session</a>
+                <a class="item" href="../core/session.html">Session</a>
               </div>
             </div>
 
@@ -258,23 +258,53 @@ $leaf->post('/session/start', function() use($session, $request) {
             
             
 
-            <h2 class="ui dividing header">Request Methods</h2>
+            <h2 class="ui dividing header">Session Methods</h2>
 
             <div class="no example">
-              <h4 class="ui header">getParam()</h4>
+              <h4 class="ui header">Starting a new session</h4>
               <p>
-                getParam is a method built for APIs, but can be used in a normal web app/website. It takes in one parameter: the name of the param passed into the app through the request
-                It works just like how <code>$_POST['key']</code> does
+                Starting a new session with leaf is actually very simple😅..
+                <div class="ignored code" data-type="php">
+                  $session = new Leaf\Core\Http\Session;
+                </div>
+                This line of code checks for an active session....if none is found, it creates a new session, if one is running, it just instanciates the Session object to be used in Leaf
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">set()</h4>
+              <p>
+                set() simply adds another key value pair to the native $_SESSION array. It takes in 2 parameters: The array key and it's pair..both as strings
               </p>
 
               <div class="ui active basic tab vertical segment" data-tab="mac">
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Request;
+use Leaf\Core\Http\Session;
 
-$request = new Request();
+$session = new Session();
 
-$leaf->post('/name/add', function() use($request) {
-  $name = $request->getParam('name');
+$leaf->post('/name/add', function() use($session) {
+  $name = $session->set('name', 'Michael Darko');
+});
+                </div>
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">getParam()</h4>
+              <p>
+                getParam is a method built for APIs, but can be used in a normal web app/website. It takes in one parameter: the name of the param passed into the app through the session
+                It works just like how <code>$_SESSION['key']</code> does
+              </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Http\Session;
+
+$session = new Session();
+
+$leaf->post('/name/add', function() use($session) {
+  $name = $session->getParam('name');
 });
                 </div>
               </div>
@@ -283,17 +313,17 @@ $leaf->post('/name/add', function() use($request) {
             <div class="no example">
               <h4 class="ui header">getBody()</h4>
               <p>
-                getBody() returns the key => value pairs of all the request data
+                getBody() returns the key => value pairs of all the session data including any CSRF data
               </p>
 
               <div class="ui active basic tab vertical segment" data-tab="mac">
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Request;
+use Leaf\Core\Http\Session;
 
-$request = new Request();
+$session = new Session();
 
-$leaf->post('/name/add', function() use($request) {
-  $body = $request->getBody();
+$leaf->post('/name/add', function() use($session) {
+  $body = $session->getBody();
 });
                 </div>
               </div>

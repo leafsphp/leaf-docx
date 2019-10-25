@@ -151,7 +151,7 @@
             <a class="item" href="./getting-started.html">
               <b>Getting Started</b>
             </a>
-            <a class="item" href="./new.html">
+            <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
               <b>New in v1.3.0</b>
             </a>
             <div class="item">
@@ -238,23 +238,74 @@
             <div class="no example">
               <h4 class="ui header">Using Leaf Dates</h4>
               <p>
-                Just like all of Leaf's other functionality, the dates module will also have to be imported
+                Just like all of Leaf's other functionality, the dates module will also have to be imported. In v1.3, the <code>Date</code> object has been renamed to <code>Date</code>
                 <div class="ignored code" data-type="php">
-                  $date = new Leaf\Core\CustomDate();
+                  $date = new Leaf\Core\Date();
                 </div>
-                After this, all the CustomDate methods will be available to us:
+                After this, all the Date methods will be available to us:
               </p>
             </div>
 
-            <h2 class="ui dividing header">CustomDate Function</h2>
-            Basically, CustomDate just gives you methods to manipulate the date and time, faster that <code>DateTime()</code> would allow. Let's take a look at these methods.
+            <h2 class="ui dividing header">Date Function</h2>
+            Basically, Date just gives you methods to manipulate the date and time, faster that <code>DateTime()</code> would allow. Let's take a look at these methods.
+            
             <div class="no example">
-              <h4 class="ui header">Timestamp</h4>
+              <h4 class="ui header">randomTimestamp</h4>
               <p>
-                Timestamp as the name implies, generates a new random timestamp.
+                randomTimestamp as the name implies, generates a new random timestamp. This method was <code>Timestamp</code> in the previous version.
                 <div class="ignored code" data-type="php">
-                  $timestamp = $date->Timestamp();
+                  $timestamp = $date->randomTimestamp();
                 </div>
+                randomTimestamp is already configured to give a wide range of dates, but if you ever feel like customizing this range, just pass in params for <code>randomTimestamp</code><br>
+                <div class="ignored code" data-type="bash">
+                  randomTimestamp($start, $end);
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">randomDate</h4>
+              <p>
+                randomDate as the name implies, generates a new random date. This method is a new addition to the Date object.
+                <div class="ignored code" data-type="php">
+                  $timestamp = $date->randomDate();
+                </div>
+                Just like randomTimestamp, randomDate is already configured with a wide range of dates, but you can set a specific range with:
+                <div class="ignored code" data-type="bash">
+                  randomDate($start, $end);
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">getTimeZone</h4>
+              <p>
+                This method returns the current time zone of the user
+                <div class="ignored code" data-type="php">
+                  $timeZone = $date->getTimeZone();
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">now</h4>
+              <p>
+                now returns the timestamp of the current date and time. Now will return the date based on the timezone, therefore, it is recommended to use <code>now</code> together with <code>setTimeZone</code>
+                <div class="ignored code" data-type="php">
+                  $date->setTimeZone('Africa/Accra');
+                  $timeZone = $date->now();
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">setTimeZone</h4>
+              <p>
+                This method sets the timezone sets the timezone of the user. This method takes in one optional parameter, which is the timezone to set. If nothing is passed in there, the timezone is set to a GMT timezone.
+                <div class="ignored code" data-type="php">
+                  $timeZone = $date->setTimeZone('Timezone');
+                </div>
+                You can get a list of all PHP supported timezones <a href="https://www.w3schools.com/php/php_ref_timezones.asp">here</a>
               </p>
             </div>
             
@@ -271,7 +322,7 @@
             <div class="no example">
               <h4 class="ui header">GetMonthFromNumber</h4>
               <p>
-                This gets the month in words from a number (0-11)
+                This gets the month in words from a number (1-12)
                 <div class="ignored code" data-type="php">
                   $month = $date->GetMonthFromNumber($number);
                 </div>
