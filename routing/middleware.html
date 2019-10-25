@@ -49,15 +49,18 @@
     <div class="ui vertical inverted sidebar menu" id="toc">
       <div class="item">
         <a class="ui logo icon image" href="..\index.html">
-          <img src="..\images\logo.png" />
+          <img alt="pic" src="..\images\logo.png" />
         </a>
         <a href="..\index.html"><b>Leaf Docs</b></a>
       </div>
-      <a class="item" href="./getting-started.html">
+      <a class="item" href="../introduction/getting-started.html">
         <b>Getting Started</b>
       </a>
-      <a class="item" href="./new.html">
-        <b>New in v1.2.0</b>
+      <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
+      <b>New in v1.3.0</b>
+    </a>
+      <a class="item" href="../v1.3.0/introduction/getting-started.html">
+        <b>View v1.3.0 docs</b>
       </a>
       <div class="item">
         <div class="header">Introduction</div>
@@ -140,15 +143,15 @@
           <div class="ui vertical inverted menu">
             <div class="item">
               <a class="ui logo icon image" href="..\index.html">
-                <img src="..\images\logo.png" />
+                <img alt="pic" src="..\images\logo.png" />
               </a>
               <a href="..\index.html"><b>Leaf Docs</b></a>
             </div>
             <a class="item" href="./getting-started.html">
               <b>Getting Started</b>
             </a>
-            <a class="item" href="./new.html">
-              <b>New in v1.2.0</b>
+            <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
+              <b>New in v1.3.0</b>
             </a>
             <div class="item">
               <div class="header">Introduction</div>
@@ -175,11 +178,11 @@
                 <a class="item" href="../routing/sub-routing.html">Sub routing</a>
                 <a class="item" href="../routing/named-parameters.html">Named parameters</a>
                 <a class="item" href="../routing/pcre-patterns.html">PCRE based patterns</a>
-          <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
-          <a class="item" href="../routing/controllers.html">Using Controllers</a>
-          <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
-          <a class="item" href="../routing/middleware.html">Using Middleware</a>
-          <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
+                <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
+                <a class="item" href="../routing/controllers.html">Using Controllers</a>
+                <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
+                <a class="item" href="../routing/middleware.html">Using Middleware</a>
+                <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
               </div>
             </div>
 
@@ -237,8 +240,7 @@
               </p>
               <p>
                 Like route handling functions, you hook a handling function to a combination of one or more HTTP request methods and a specific route pattern.
-              </p>
-              <div class="ignored code" data-type="php">
+                <div class="ignored code" data-type="php">
                 $leaf->before('GET|POST', '/admin/.*', function() {
     if (!isset($_SESSION['user'])) {
         header('location: /auth/login');
@@ -247,6 +249,7 @@
 });
               </div>
               Unlike route handling functions, more than one before route middleware is executed when more than one route match is found.
+              </p>
             </div>
             
 
@@ -283,7 +286,7 @@
 
           <div class="ui  vertical footer segment">
             <div class="ui center aligned container">
-              <img src="..\images\logo.png" class="ui centered mini image" />
+              <img alt="pic" src="..\images\logo.png" class="ui centered mini image" />
               <div class="ui horizontal small divided link list">
                 <a class="item" href="#" target="_blank">Free & Open Source (MIT)</a>
               </div>

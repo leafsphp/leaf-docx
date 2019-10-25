@@ -8982,7 +8982,7 @@ $.fn.embed.settings = {
         html += '<i class="' + icon + ' icon"></i>';
       }
       if(image) {
-        html += '<img class="placeholder" src="' + image + '">';
+        html += '<img alt="pic" class="placeholder" src="' + image + '">';
       }
       return html;
     }
@@ -14852,7 +14852,7 @@ $.fn.search.settings = {
               if(result[fields.image] !== undefined) {
                 html += ''
                   + '<div class="image">'
-                  + ' <img src="' + result[fields.image] + '">'
+                  + ' <img alt="pic" src="' + result[fields.image] + '">'
                   + '</div>'
                 ;
               }
@@ -14904,7 +14904,7 @@ $.fn.search.settings = {
           if(result[fields.image] !== undefined) {
             html += ''
               + '<div class="image">'
-              + ' <img src="' + result[fields.image] + '">'
+              + ' <img alt="pic" src="' + result[fields.image] + '">'
               + '</div>'
             ;
           }
