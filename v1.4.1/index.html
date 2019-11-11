@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
-  <link rel="image_src" type="image/jpeg" href="images\logo.png">
-  <link rel="shortcut icon" type="image/jpeg" href="images\logo.png">
+  <link rel="image_src" type="image/jpeg" href="..\images\logo.png">
+  <link rel="shortcut icon" type="image/jpeg" href="..\images\logo.png">
 
   <!-- Site Properities -->
   <!-- <meta name="generator" content="DocPad v6.79.4"> -->
@@ -16,38 +16,26 @@
   <meta name="description" content="Leaf PHP is a micro-framework that allows you to create clean, simple but powerful web applications and APIs quickly..">
   <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
     
-  <link rel="stylesheet" type="text/css" class="ui" href="dist\semantic.min.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets\docs.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets\rtl.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets\home.css">
-  <link rel="stylesheet/less" type="text/css" href="src\definitions\elements\button.less">
+  <link rel="stylesheet" type="text/css" class="ui" href="..\dist\semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="..\stylesheets\docs.css">
+  <link rel="stylesheet" type="text/css" href="..\stylesheets\rtl.css">
+  <link rel="stylesheet" type="text/css" href="..\stylesheets\home.css">
+  <link rel="stylesheet/less" type="text/css" href="..\src\definitions\elements\button.less">
 </head>
 <body id="example" class="index" ontouchstart="">
   <div class="ui vertical inverted sidebar menu" id="toc">
     <div class="item">
       <a class="ui logo icon image" href="index.html">
-        <img alt="pic" src="images\logo.png">
+        <img alt="pic" src="..\images\logo.png">
       </a>
       <a href="index.html"><b>Leaf Docs</b></a>
     </div>
     <a class="item" href="introduction\getting-started.html">
       <b>Getting Started</b>
     </a>
-    <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.4.1/CHANGELOG.md">
-      <b>New in v1.4.1</b>
+    <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
+      <b>New in v1.3.0</b>
     </a>
-    <a class="item" href="v1.4.1/introduction/getting-started.html">
-      <b>View v1.4.1 docs</b>
-    </a>
-    <div class="item">
-      <div class="header">Versions</div>
-      <div class="menu">
-          <a class="item" href="./v1.3.0/index.html">Version 1.3.0</a>
-          <a class="item" href="./v1.4.0/index.html">Version 1.4.0</a>
-          <a class="item" href="./v1.4.1/index.html">Version 1.4.1</a>
-      </div>
-    </div>
-
     <div class="item">
       <div class="header">Introduction</div>
       <div class="menu">
@@ -88,7 +76,8 @@
         <!-- <a class="item" href="./core/field-validation.html">Field Validation</a>-->
         <a class="item" href="./core/date-manipulation.html">Date Manipulation</a>  
         <a class="item" href="./core/request.html">Request</a>  
-        <a class="item" href="./core/response.html">Response</a>  
+        <a class="item" href="./core/response.html">Response</a>
+        <a class="item" href="./core/session.html">Session</a>
       </div>
     </div>
 
@@ -126,7 +115,7 @@
             <div class="ui logo shape">
               <div class="sides">
                 <div class="active ui side">
-                  <img alt="pic" class="ui image" src="images\logo.png">
+                  <img alt="pic" class="ui image" src="..\images\logo.png">
                 </div>
               </div>
             </div>
@@ -171,7 +160,7 @@
           <br/>
           <h1 class="ui inverted header">
             <span class="library">
-              Leaf PHP <small style="font-size: 22px !important;">1.2.0</small>
+              Leaf PHP <small style="font-size: 22px !important;;">1.3.0</small>
             </span>
             <span class="tagline">
               Create clean, simple but powerful web applications and APIs quickly.
@@ -180,7 +169,7 @@
           <div class="ui hidden divider"></div>
 
           <a href="introduction\getting-started.html" class="ui huge inverted download button">Get Started</a>
-          <a href="./v1.4.1/index.html" target="_blank" class="ui huge inverted basic button">Checkout v1.4.1</a>
+          <a href="https://github.com/leafsphp/leaf/tree/v1.3.0" class="ui huge inverted basic button" download>Download v1.3.0</a>
         </div>
         <!-- <div class="inverted advertisement">
           
@@ -203,20 +192,20 @@
               require_once __DIR__ . '/vendor/autoload.php';
 
 $leaf = new Leaf\Core\Leaf;
-$response = new Leaf\Core\Response;
-$request = new Leaf\Core\Request;
+$response = new Leaf\Core\Http\Response;
+$request = new Leaf\Core\Http\Request;
               
 $leaf->get('/book/{id}', function($id) use($response) {
-  echo $response->respond(["id" => $id]);
+  $response->respond(["id" => $id]);
 });
 
 $leaf->get('/home', function() use($response) {
-  echo $response->renderHtmlPage('./index.html');
+  $response->renderHtmlPage('./index.html');
 });
 
 $leaf->post('/books/add', function() use($request, $response) {
   $title = $request->getParam('title');
-  echo $response->respond(["message" => "hello"]);
+  $response->respond(["message" => "hello"]);
 });
 
 $leaf->run();
@@ -228,68 +217,54 @@ $leaf->run();
       </div>
       <div class="stackable very relaxed ui grid container">
         <div class="row">
+          <div class="seven wide column" style="margin-bottom: -100px !important;;">
+            <h2>What's new in 1.3.0</h2>
+          </div>
+        </div>
+        <div class="row">
           <div class="seven wide column">
-            <h2 class="ui header">Structured PHP</h2>
-            <p>PHP is a free language, a language with only a handful of rules.</p>
-            <p>This freedom gives rise to a lot of problems for developers since there's usually many ways to achieve the same thing.</p>
-            <p>Leaf gives you a particular structure to follow whiles maintaining PHP's freedom.</p>
+            <h2 class="ui header">Session Support</h2>
+            <p>Leaf now has support for the normal php session and has provided very handy method for approprately using it.</p>
+            <p>This will provide an extra way for handling users, even in APIs;  You can use sessions instead of tokens....or you can just use both😅😅.</p>
             <p>
           </div>
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
-              // simple structure
-              $leaf->get('/', function() use($response) {
-                echo $response->respond(["message" => "hello"]);
-              });
+$leaf = new Leaf\Core\Leaf;
+$response = new Leaf\Core\Http\Response;
+$session = new Leaf\Core\Http\Session;
 
-              
-              $leaf->post('/books/add', function() use($request, $response) {
-                $title = $request->getParam('title');
-                echo $response->respond(["message" => "hello"]);
-              });
+$leaf->get('/session/create', function() use($session, $response) {
+  $session->set('name', 'Michael');
+  $response->respond(['message' => 'session created']);
+});
             </div>
           </div>
         </div>
         <div class="ui divider"></div>
         <div class="row">
           <div class="seven wide column">
-            <h2 class="ui header">Simple PHP methods</h2>
-            <p>Leaf PHP provides you with very simple methods to handle various situations.</p>
-            <p>With a clean structure and simple code, it's super easy to master Leaf's API.</p>
+            <h2 class="ui header">More Date Syntaxes</h2>
+            <p>Leaf PHP comes with more handy functions in this version. One of them is the <code>Date</code> object(previously CustomDate).</p>
+            <p>With the new <code>Date</code> object, you can make your apps and APIs quicker.</p>
           </div>
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
-              // get request params
-              $request = new Leaf\Core\Request;
+$date = new Leaf\Core\Date;
 
-              $leaf->post('/name/add', function() use($request) {
-  $name = $request->getParam('name');
-});
+$date->setTimeZone('Africa/Accra');
+$date->now();
             </div>
             <a href="core/request.html">View Request Docs</a>
           </div>
         </div>
         <div class="ui divider"></div>
         <div class="row">
-          <div class="seven wide column">
-            <h2 class="ui header">Clean, Fast, Reliable</h2>
-            <p>Leaf PHP uses only components written by leaf in raw, tested PHP.</p>
-            <p>This means that in terms of performance, Leaf is the fastest PHP framework.</p>
-            <p>Leaf also uses clean, minimal code to achieve complex results.</p>
-          </div>
-          <div class="nine wide column">
-            <div class="hidden code" data-type="php">
-// generate JWT token
-$authentication = new Leaf\Core\Authentication;
-
-$leaf->post('/token/create', function() use($response, $authentication) {
-  $token = $authentication->createSimpleToken(22, 'Secret key');
-  echo $response->respond(["token" => $token]);
-});
-            </div>
-            <a href="core/simple-authentication.html">View Authentication Docs</a>
+          <div class="seven wide column" style="margin-bottom: -100px !important;;">
+            <h2>Find out more <a href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md" target="_blank" rel="noopener noreferrer">here</a></h2>
           </div>
         </div>
+      </div>
     </div>
     <div class="ui email alternate stripe vertical segment">
       <div class="ui center aligned grid container">
@@ -341,7 +316,7 @@ $leaf->post('/token/create', function() use($response, $authentication) {
           </div> -->
         </div>
         <div class="ui section divider"></div>
-        <img alt="pic" src="images\logo.png" class="ui centered mini image">
+        <img alt="pic" src="..\images\logo.png" class="ui centered mini image">
         <div class="ui horizontal small divided link list">
           <a class="item" href="#" target="_blank">Free & Open Source (MIT)</a>
         </div>
@@ -356,8 +331,8 @@ $leaf->post('/token/create', function() use($response, $authentication) {
           eventSupport = ('querySelector' in document && 'addEventListener' in window)
           jsonSupport  = (typeof JSON !== 'undefined'),
           jQuery       = (eventSupport && jsonSupport)
-            ? '/javascript/library/jquery.min.js'
-            : '/javascript/library/jquery.legacy.min.js'
+            ? '../javascript/library/jquery.min.js'
+            : '../javascript/library/jquery.legacy.min.js'
         ;
         document.write('<script src="' + jQuery + '"><\/script>');
       }());
@@ -376,12 +351,12 @@ $leaf->post('/token/create', function() use($response, $authentication) {
         ignore_class : ['code', 'anchor']
       };
     </script>
-    <script type="text/javascript" src="//cdn.transifex.com/live.js"></script>
-    <script src="javascript\library\highlight.min.js"></script>
-    <script src="javascript\library\easing.min.js"></script>
-    <script src="dist\semantic.min.js"></script>
-    <script src="javascript\docs.js"></script>
-    <script src="javascript\home.js"></script>
+    <script type="text/javascript" src="https://cdn.transifex.com/live.js"></script>
+    <script src="..\javascript\library\highlight.min.js"></script>
+    <script src="..\javascript\library\easing.min.js"></script>
+    <script src="..\dist\semantic.min.js"></script>
+    <script src="..\javascript\docs.js"></script>
+    <script src="..\javascript\home.js"></script>
     <script>
       window.less = {
         async        : true,
@@ -391,7 +366,7 @@ $leaf->post('/token/create', function() use($response, $authentication) {
         useFileCache : true
       };
     </script>
-    <script src="javascript\library\less.min.js"></script>
+    <script src="..\javascript\library\less.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150463804-1"></script>
     <script>
