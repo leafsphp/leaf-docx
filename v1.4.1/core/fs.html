@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Getting Started</title>
+    <title>File System</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -56,16 +56,16 @@
       <a class="item" href="../introduction/getting-started.html">
         <b>Getting Started</b>
       </a>
-      <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
-      <b>New in v1.3.0</b>
+      <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.4.1/CHANGELOG.md">
+      <b>New in v1.4.1</b>
     </a>
-      <a class="item" href="v1.3.0/introduction/getting-started.html">
-        <b>View v1.3.0 docs</b>
+      <a class="item" href="v1.4.1/introduction/getting-started.html">
+        <b>View v1.4.1 docs</b>
       </a>
       <div class="item">
         <div class="header">Versions</div>
         <div class="menu">
-            <a class="item" href="./v1.3.0/index.html">Version 1.3.0</a>
+            <a class="item" href="./v1.4.1/index.html">Version v1.4.1</a>
             <a class="item" href="./v1.4.0/index.html">Version 1.4.0</a>
             <a class="item" href="./v1.4.1/index.html">Version 1.4.1</a>
         </div>
@@ -137,7 +137,7 @@
         </a>
 
         <div class="item">
-          Getting Started
+          Leaf FS
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -160,13 +160,13 @@
             <a class="item" href="../introduction/getting-started.html">
               <b>Getting Started</b>
             </a>
-            <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
-              <b>New in v1.3.0</b>
+            <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.4.1/CHANGELOG.md">
+              <b>New in v1.4.1</b>
             </a>
             <div class="item">
               <div class="header">Versions</div>
               <div class="menu">
-                  <a class="item" href="./v1.3.0/index.html">Version 1.3.0</a>
+                  <a class="item" href="./v1.4.1/index.html">Version v1.4.1</a>
                   <a class="item" href="./v1.4.0/index.html">Version 1.4.0</a>
                   <a class="item" href="./v1.4.1/index.html">Version 1.4.1</a>
               </div>
@@ -197,11 +197,11 @@
                 <a class="item" href="../routing/sub-routing.html">Sub routing</a>
                 <a class="item" href="../routing/named-parameters.html">Named parameters</a>
                 <a class="item" href="../routing/pcre-patterns.html">PCRE based patterns</a>
-          <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
-          <a class="item" href="../routing/controllers.html">Using Controllers</a>
-          <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
-          <a class="item" href="../routing/middleware.html">Using Middleware</a>
-          <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
+                <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
+                <a class="item" href="../routing/controllers.html">Using Controllers</a>
+                <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
+                <a class="item" href="../routing/middleware.html">Using Middleware</a>
+                <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
               </div>
             </div>
 
@@ -213,7 +213,7 @@
                 <a class="item" href="../core/date-manipulation.html">Date Manipulation</a>
                 <a class="item" href="../core/request.html">Request</a>
                 <a class="item" href="../core/response.html">Response</a>
-          <a class="item" href="../core/session.html">Session</a>
+                <a class="item" href="../core/session.html">Session</a>
               </div>
             </div>
 
@@ -231,106 +231,257 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Getting Started
+                  Leaf FS
 
                   <div class="sub header">
-                    Getting up and running with Leaf PHP
+                    Basic filesystem operations with Leaf
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
 
                 <div class="ui hidden divider"></div>
 
-                <!-- <div class="ui right floated main menu">
-        <a class="bug popup icon item" data-content="Edit This Page" href="#">
-          <i class="edit icon"></i>
-        </a>
-      </div> -->
+                <div class="ui right floated main menu">
+                  <!-- <a class="bug popup icon item" data-content="Edit This Page" href="#">
+                    <i class="edit icon"></i>
+                  </a> -->
+                  <a class="github popup icon item" data-content="View project on GitHub" href="https://github.com/leafsphp/leaf">
+                    <i class="alternate github icon"></i>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">Preface</h2>
+            <h2 class="ui dividing header">Overview</h2>
+            <p>
+              This is a simple functionality inspired by node js' FileSystem(fs) module. Leaf FS aims to make directory and file management 
+              much simpler than what you're currently used to, so as to speed up and ease the dev process.😊👌😎
+            </p>
+
+            <p>
+              Leaf FS allows you to read/write to file, create, rename, copy and paste files/directories all with just a few lines of code. All this is performed while maintaining Leaf's simplicity.
+            </p>
 
             <div class="no example">
-              <h4 class="ui header">What is Leaf</h4>
-
+              <h4 class="ui header">Including FS</h4>
               <p>
-                Basically, Leaf is a PHP starter kit that helps you quickly
-                write simple yet powerful web applications and APIs without any
-                framework..
-              </p>
-              <p>
-                Leaf gives you a simple but very efficient structure for what
-                ever kind of app you wish to build.
-              </p>
+                To include the Session object in a route, use this:
+                <div class="ignored code" data-type="php">
+use Leaf\Core\FS;
 
-              <p>
-                Leaf also includes a bunch of handy functions that help you
-                achieve a whole lot simmpler and faster.
-              </p>
-              <p>Simply install leaf, and you're good to go.</p>
-            </div>
-            <div class="ui large info message">
-              <div class="ui header">Setup</div>
-              <p>
-                If you just need the files you can download them as a zip from
-                GitHub.
-              </p>
-              <a
-                href="https://github.com/leafsphp/leaf/tree/v1.3.0"
-                class="ui secondary button"
-                >Download Zip</a
-              >
-              <!-- <a href="https://github.com/leafsphp" class="ui button" target="_blank">View all Leaf Repos </a> -->
-            </div>
+$fs = new FS(__DIR__);
 
-            <h2 class="ui dividing header">Installing Leaf PHP</h2>
-
-            <div class="no example">
-              <h4 class="ui header">Install with composer</h4>
-              <p>
-                If you don't already have composer, you can get it at the
-                <a href="https://getcomposer.org/" target="_blank"
-                  >download page</a
-                >
-                on
-                <a href="https://getcomposer.org/" target="_blank"
-                  >getcomposer.org</a
-                >
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <p>After installing composer,</p>
-                <div class="ignored code" data-type="bash">
-                  composer require leafs/leaf ^1.3.0
+$leaf->post('/books/add', function() use($fs) {
+  $book = [
+        "title" => "something.epub",
+        "content" => "something"
+  ];
+  $fs->mkDir("books");
+  $fs->setBaseDirectory("books");
+  $fs->createFile($book["title"]);
+  $fs->writeFile($book["title"], $book["content"]);
+  $fs->readFile($book["title"]);
+});
                 </div>
+                This is a simple example where we create a folder, set our working directory to the new folder, then we create a file in the
+                new folder and add some data to that new file.
+              </p>
+              <p>
+                Before we move on, keep in mind that the base directory in Leaf FS refers to the current working directory, changing the base
+                directory is just like using <code>cd</code> in a terminal.
+              </p>
+              <p>
+                Also, when initialising leaf FS, don't forget to pass in the base directory, you can use <code>__DIR__</code> or <code>"./"</code>
+                to set the base directory to the directory the file you're initialising Leaf FS is in.
+                <div class="ignored code" data-type="php">
+                  $fs = new Leaf\Core\FS("./");
+                </div>
+              </p>
+            </div>
+            
+            
+
+            <h2 class="ui dividing header">FS Directory Methods</h2>
+
+            <div class="no example">
+              <h4 class="ui header">Setting the Base Directory</h4>
+              <p>
+                Setting the base directory will change the folder you're working in...FS methods to read files and more will search the new base directory.
+                <div class="ignored code" data-type="php">
+                  $fs->setBaseDirectory("./path/to/new/base/dir");
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Returning the Base Directory</h4>
+              <p>
+                In case you need to find the current base directory.
+                <div class="ignored code" data-type="php">
+                  $fs->getBaseDirectory();
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">mkDir</h4>
+              <p>
+                This will create a new directory in the current directory, <span style="font-weight: 600 !important;">not in the base directory</span>
+              </p>
+
+              <p>
+                Let's take this directory structure below, we initialise Leaf FS in our index.php file. <br>
+                <code>
+                  ├───logs<br>
+                  ├───index.php
+                </code>
+              </p>
+              <div class="ignored code" data-type="bash">
+>> index.php
+
+// set the base directory to logs
+$fs->setBaseDirectory("logs");
+// create folder
+$fs->mkDir("new_logs");
+              </div>
+              <p>
+                After running this code, this is our new directory structure <br>
+                <code>
+                  ├───logs<br>
+                  ├───new_logs<br>
+                  ├───index.php<br>
+                </code><br>
+                mkDir uses the current dir that index.php file is in
+              </p>
+              <p>
+                You can also pass a path to mkDir
+                <div class="ignored code" data-type="php">
+                  $fs->makeDir("./home/items");
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">mkDirInBase</h4>
+              <p>
+                mkDirInBase is exactly the same as mkDir, except that mkDirInBase creates a new folder in the base directory.
+              </p>
+
+              <div class="ignored code" data-type="php">
+$fs->mkDirInBase("new");
               </div>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">Use the starter template</h4>
+              <h4 class="ui header">renameDir</h4>
               <p>
-                This method uses git. If you don't already have git, you can get
-                it at the
-                <a href="https://git-scm.com/" target="_blank">download page</a>
+                renameDir is used to rename a directory. It takes in two parameters: the directory you want to rename and it's new name/path.
               </p>
 
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="bash">
-                  git clone git@github.com:leafsphp/leaf-starter.git cd
-                  leaf-starter php -S localhost:8000
-                </div>
+              <div class="ignored code" data-type="php">
+$fs->renameDir("new", "items");
+$fs->renameDir("home/new", "home/items");
+              </div>
+            </div>
+
+            <h2 class="ui dividing header">FS File Methods</h2>
+
+            <div class="no example">
+              <h4 class="ui header">createFile</h4>
+              <p>
+                createFile is used to create a new file in the base directory. It takes in the filename or path+filename. If the file already exists, it gives 
+                the new file a different name.
+              </p>
+
+              <div class="ignored code" data-type="php">
+$fs->createFile("items.txt");
+$fs->createFile("home/items.txt");
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">writeFile</h4>
+              <p>
+                writeFile is used to add content to a file, if the file already has content, all the content in there is replaced with the new content.
+                Also, if the file doesn't exist, it will be created and all the content will be added to it. It takes in 2 parameters, the name/path+name 
+                of the file and the content;
+              </p>
+
+              <div class="ignored code" data-type="php">
+$fs->writeFile("items.txt", "Hello");
+$fs->writeFile("items.txt", [
+  "name" => "Item 1"
+]);
+$fs->writeFile("items.txt", 1);
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">appendFile</h4>
+              <p>
+                appendFile is almost exactly the same as writeFile, except that instead of replacing the contant in a file, it adds to it.
+              </p>
+
+              <div class="ignored code" data-type="php">
+$data = $fs->appendFile("items.txt", "Item name");
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">readFile</h4>
+              <p>
+                readFile returns the data found in a file. It takes 1 parameter: the file name/path+file name.
+              </p>
+
+              <div class="ignored code" data-type="php">
+$data = $fs->readFile("./home/items.txt");
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">renameFile</h4>
+              <p>
+                renameFile renames a file. It takes 2 parameter: the file name/path+file name to rename and it's new name.
+              </p>
+
+              <div class="ignored code" data-type="php">
+$data = $fs->renameFile("./home/items.txt", "home/products.txt");
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">copyFile</h4>
+              <p>
+                copyFile copies a file from the base directory to another directory. It takes in 3 parameters: the filename, the new path + filename 
+                and whether to rename the file if it exists in the new directory. The 3rd parameter is optional, if nothing is passed for the 3rd parameter,
+                 it will rename the file. Pass in <code>true</code> to rename the file if it already exists, <code>false</code> to override the file content.
+              </p>
+
+              <div class="ignored code" data-type="php">
+$data = $fs->copyFile("items.txt", "./home/");
+$data = $fs->copyFile("items.txt", "./home/", false);
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">copyToFile</h4>
+              <p>
+                copyToFile also copies a file from the base directory to another directory, but unlike copyFile, copyToFile includes the filename, and it takes in 2 parameters: the filename and the path+filename to rename to.
+              </p>
+
+              <div class="ignored code" data-type="php">
+$data = $fs->copyFile("items.txt", "./home/products.txt");
               </div>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="../introduction/re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
             <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
-            <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
-            <a href="../core/response.html" style="font-size: 18px;">Response</a>
+            <a href="./form.html" style="font-size: 18px;">Simple Form Validation</a><br />
+            <a href="./simple-authentication.html" style="font-size: 18px;">Simple Authentication</a><br />
+            <a href="../config/database.html" style="font-size: 18px;">Database Config</a>
           </div>
 
           <div class="ui  vertical footer segment">

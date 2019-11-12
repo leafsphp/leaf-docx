@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Getting Started</title>
+    <title>Simple Field Validation</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -137,7 +137,7 @@
         </a>
 
         <div class="item">
-          Getting Started
+          Simple Field Validation
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -197,11 +197,11 @@
                 <a class="item" href="../routing/sub-routing.html">Sub routing</a>
                 <a class="item" href="../routing/named-parameters.html">Named parameters</a>
                 <a class="item" href="../routing/pcre-patterns.html">PCRE based patterns</a>
-          <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
-          <a class="item" href="../routing/controllers.html">Using Controllers</a>
-          <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
-          <a class="item" href="../routing/middleware.html">Using Middleware</a>
-          <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
+                <a class="item" href="../routing/optional-subpatterns.html">Optional Sub-patterns</a>
+                <a class="item" href="../routing/controllers.html">Using Controllers</a>
+                <a class="item" href="../routing/library-integration.html">Integrating with other libraries</a>
+                <a class="item" href="../routing/middleware.html">Using Middleware</a>
+                <a class="item" href="../routing/sub-folder.html">Sub-folder Support</a>
               </div>
             </div>
 
@@ -213,7 +213,7 @@
                 <a class="item" href="../core/date-manipulation.html">Date Manipulation</a>
                 <a class="item" href="../core/request.html">Request</a>
                 <a class="item" href="../core/response.html">Response</a>
-          <a class="item" href="../core/session.html">Session</a>
+                <a class="item" href="../core/session.html">Session</a>
               </div>
             </div>
 
@@ -231,10 +231,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Getting Started
+                  Simple Field Validation
 
                   <div class="sub header">
-                    Getting up and running with Leaf PHP
+                    Setup vield validation with Leaf's simple validation tests
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -251,96 +251,55 @@
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">Preface</h2>
-
+            <h2 class="ui dividing header">Intro</h2>
             <div class="no example">
-              <h4 class="ui header">What is Leaf</h4>
-
               <p>
-                Basically, Leaf is a PHP starter kit that helps you quickly
-                write simple yet powerful web applications and APIs without any
-                framework..
+                Leaf v1.4.1 has introduced a new Leaf Form module which is the replacement for Simple Validation from v1.2.0 which was 
+                discontinued in v1.3.0. Leaf Form contains methods to handle input from the user...
               </p>
               <p>
-                Leaf gives you a simple but very efficient structure for what
-                ever kind of app you wish to build.
-              </p>
-
-              <p>
-                Leaf also includes a bunch of handy functions that help you
-                achieve a whole lot simmpler and faster.
-              </p>
-              <p>Simply install leaf, and you're good to go.</p>
-            </div>
-            <div class="ui large info message">
-              <div class="ui header">Setup</div>
-              <p>
-                If you just need the files you can download them as a zip from
-                GitHub.
-              </p>
-              <a
-                href="https://github.com/leafsphp/leaf/tree/v1.3.0"
-                class="ui secondary button"
-                >Download Zip</a
-              >
-              <!-- <a href="https://github.com/leafsphp" class="ui button" target="_blank">View all Leaf Repos </a> -->
-            </div>
-
-            <h2 class="ui dividing header">Installing Leaf PHP</h2>
-
-            <div class="no example">
-              <h4 class="ui header">Install with composer</h4>
-              <p>
-                If you don't already have composer, you can get it at the
-                <a href="https://getcomposer.org/" target="_blank"
-                  >download page</a
-                >
-                on
-                <a href="https://getcomposer.org/" target="_blank"
-                  >getcomposer.org</a
-                >
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <p>After installing composer,</p>
-                <div class="ignored code" data-type="bash">
-                  composer require leafs/leaf ^1.3.0
+                To use Leaf Form, you simply have to import it:
+                <div class="ignored code" data-type="php">
+                  $form = new Leaf\Core\Form;
                 </div>
-              </div>
+              </p>
+            </div>
+
+            <h2 class="ui dividing header">Leaf Form Methods</h2>
+            <div class="no example">
+              <h4 class="ui header">sanitizeInput</h4>
+              <p>
+                sanitizeInput offers basic security for input data, i.e. sanitizing input against SQL injection.
+                <div class="ignored code" data-type="php">
+                  $username = $form->sanitizeInput($username);
+                </div>
+              </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">Use the starter template</h4>
+              <h4 class="ui header">isEmpty</h4>
               <p>
-                This method uses git. If you don't already have git, you can get
-                it at the
-                <a href="https://git-scm.com/" target="_blank">download page</a>
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
-                <div class="ignored code" data-type="bash">
-                  git clone git@github.com:leafsphp/leaf-starter.git cd
-                  leaf-starter php -S localhost:8000
+                isEmpty checks a field to see if it's empty. If it's empty, it adds an error to Leaf Form's errors. It takes in 3 parameters: 
+                the data to test, the name of that data and the error message if it's empty(optional).
+                <div class="ignored code" data-type="php">
+                  $form->isEmpty($username, "username"); // error will be: This field is required
+                  $form->isEmpty($username, "username", "Username is required");
                 </div>
-              </div>
+              </p>
             </div>
 
-            <h2 class="ui dividing header">Next Steps</h2>
-
-            <a href="../introduction/re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
-            <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
-            <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
-            <a href="../core/response.html" style="font-size: 18px;">Response</a>
-          </div>
-
-          <div class="ui  vertical footer segment">
-            <div class="ui center aligned container">
-              <img alt="pic" src="..\..\images\logo.png" class="ui centered mini image" />
-              <div class="ui horizontal small divided link list">
-                <a class="item" href="#" target="_blank">Free & Open Source (MIT)</a>
-              </div>
+            <div class="no example">
+              <h4 class="ui header">isNull</h4>
+              <p>
+                isNull checks a field to see if it's null. If it's null, it adds an error to Leaf Form's errors. It takes in 3 parameters: 
+                the data to test, the name of that data and the error message if it's empty(optional).
+                <div class="ignored code" data-type="php">
+                  $form->isNull($username, "username"); // error will be: This field cannot be null
+                  $form->isNull($username, "username", "Username can't be null");
+                </div>
+              </p>
             </div>
-          </div>
+
         </div>
       </div>
     </div>

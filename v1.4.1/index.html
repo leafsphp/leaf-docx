@@ -14,7 +14,7 @@
   <title>Leaf PHP</title>
 
   <meta name="description" content="Leaf PHP is a micro-framework that allows you to create clean, simple but powerful web applications and APIs quickly..">
-  <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
+  <meta name="keywords" content="PHP, backend, library, framework, api, server, routing, leaf php, php framework, micro-framework">
     
   <link rel="stylesheet" type="text/css" class="ui" href="..\dist\semantic.min.css">
   <link rel="stylesheet" type="text/css" href="..\stylesheets\docs.css">
@@ -33,8 +33,8 @@
     <a class="item" href="introduction\getting-started.html">
       <b>Getting Started</b>
     </a>
-    <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
-      <b>New in v1.3.0</b>
+    <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.4.1/CHANGELOG.md">
+      <b>New in v1.4.1</b>
     </a>
     <div class="item">
       <div class="header">Introduction</div>
@@ -125,6 +125,10 @@
           </a>
           <div class="right menu">
             <div class="item">
+              <a class="twitter-share-button twitter" href="http://twitter.com/share" data-text="Leaf PHP v1.4.1 is out😎🔥🔥🎂🎄, create web apps and APIs faster than ever before🔥" data-url="https://leaf-docs.netlify.com" data-via="leafphp"></a>
+              <script type="text/javascript">
+                window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+              </script>
               <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
             </div>
             <div class="ui language floating dropdown link item" id="languages">
@@ -160,7 +164,7 @@
           <br/>
           <h1 class="ui inverted header">
             <span class="library">
-              Leaf PHP <small style="font-size: 22px !important;;">1.3.0</small>
+              Leaf PHP <small style="font-size: 22px !important;;">v1.4.1</small>
             </span>
             <span class="tagline">
               Create clean, simple but powerful web applications and APIs quickly.
@@ -169,7 +173,7 @@
           <div class="ui hidden divider"></div>
 
           <a href="introduction\getting-started.html" class="ui huge inverted download button">Get Started</a>
-          <a href="https://github.com/leafsphp/leaf/tree/v1.3.0" class="ui huge inverted basic button" download>Download v1.3.0</a>
+          <a href="https://github.com/leafsphp/leaf/tree/v1.4.1" class="ui huge inverted basic button" download>Download v1.4.1</a>
         </div>
         <!-- <div class="inverted advertisement">
           
@@ -188,8 +192,7 @@
         <div class="row">
           <div class="twelve wide column">
             <div class="hidden code" data-type="php">
-              // Sample index.php
-              require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 $leaf = new Leaf\Core\Leaf;
 $response = new Leaf\Core\Http\Response;
@@ -218,25 +221,38 @@ $leaf->run();
       <div class="stackable very relaxed ui grid container">
         <div class="row">
           <div class="seven wide column" style="margin-bottom: -100px !important;;">
-            <h2>What's new in 1.3.0</h2>
+            <h2>What's new in v1.4.1</h2>
           </div>
         </div>
         <div class="row">
           <div class="seven wide column">
-            <h2 class="ui header">Session Support</h2>
-            <p>Leaf now has support for the normal php session and has provided very handy method for approprately using it.</p>
-            <p>This will provide an extra way for handling users, even in APIs;  You can use sessions instead of tokens....or you can just use both😅😅.</p>
+            <h2 class="ui header">Leaf FileSystem</h2>
             <p>
+              This is a simple functionality inspired by node js' FileSystem(fs) module. Leaf FS aims to make directory and file management 
+              much simpler than what you're currently used to, so as to speed up and ease the dev process.😊👌😎
+            </p>
+            <p>
+              Leaf FS allows you to read/write to file, create, rename, copy and paste files/directories all with just a few lines of code. All this is
+              performed while maintaining Leaf's simplicity.
+            </p>
+            <p>
+              View Leaf FS' docs <a href="core/fs.html">here</a>
+            </p>
           </div>
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
 $leaf = new Leaf\Core\Leaf;
 $response = new Leaf\Core\Http\Response;
-$session = new Leaf\Core\Http\Session;
+$fs = new Leaf\Core\FS(__DIR__);
 
-$leaf->get('/session/create', function() use($session, $response) {
-  $session->set('name', 'Michael');
-  $response->respond(['message' => 'session created']);
+$leaf->get('/fs/demo', function() use($fs, $response) {
+  $fs->mkDir("files");
+  $fs->setBaseDir("files");
+  $fs->createFile("newFile.html");
+  $fs->writeFile("newFile.html", "
+       This is dummy code😅
+  ");
+  $response->renderMarkUp($fs->readFile("newFile.html"));
 });
             </div>
           </div>
@@ -244,24 +260,70 @@ $leaf->get('/session/create', function() use($session, $response) {
         <div class="ui divider"></div>
         <div class="row">
           <div class="seven wide column">
-            <h2 class="ui header">More Date Syntaxes</h2>
-            <p>Leaf PHP comes with more handy functions in this version. One of them is the <code>Date</code> object(previously CustomDate).</p>
-            <p>With the new <code>Date</code> object, you can make your apps and APIs quicker.</p>
+            <h2 class="ui header">More Handy Session Methods</h2>
+            <p>
+              Leaf comes with more methods attached to the session object, which generally make session 
+              management much easier and smoother.
+            </p>
+            <p>
+              With Leaf session, you can create, reset and delete sessions, add, remove and return session variables.<br>
+              View <a href="core/session.html">session docs</a>
+            </p>
           </div>
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
-$date = new Leaf\Core\Date;
+$session = new Leaf\Core\Http\Session;
 
-$date->setTimeZone('Africa/Accra');
-$date->now();
+...
+$session->set("name", "Michael");
+$session->getParam("name");
+$session->remove("name");
+...
+$session->getBody();
+$session->reset(true);
             </div>
-            <a href="core/request.html">View Request Docs</a>
+          </div>
+        </div>
+        <div class="ui divider"></div>
+        <div class="row">
+          <div class="seven wide column">
+            <h2 class="ui header">Leaf Token</h2>
+            <p>
+              This is a simple token authentication system available in v1.4.1 upwards. This is a token authentication for people who
+              do no want to use the already supported JWT token methods supported in Leaf.
+            </p>
+            <p>
+              Currently, it is not as secure as JWT, therefore we do not recommend it for anything but personal projects, however, it is under
+              constant development and will receive upgrades in almost every version of Leaf.
+            </p>
+            <p>
+              View <a href="core/token.html">Token docs</a>
+            </p>
+          </div>
+          <div class="nine wide column">
+            <div class="hidden code" data-type="php">
+$leaf = new Leaf\Core\Leaf;
+$token = new Leaf\Core\Token;
+
+$leaf->get("/home", function() use($token) {
+  // generate simple token
+  $token->generateSimpleToken($username, $user_id, $expiry_time);
+
+  // generate token
+  $token->generateToken($token_data, $expiry_time);
+
+  // validate a token passed to app by user
+  $userToken = $token->validateToken($userToken);
+
+  // token is actually more useful than you think😎👌
+});
+            </div>
           </div>
         </div>
         <div class="ui divider"></div>
         <div class="row">
           <div class="seven wide column" style="margin-bottom: -100px !important;;">
-            <h2>Find out more <a href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md" target="_blank" rel="noopener noreferrer">here</a></h2>
+            <h2>Find out more <a href="https://github.com/leafsphp/leaf/blob/v1.4.1/CHANGELOG.md" target="_blank" rel="noopener noreferrer">here</a></h2>
           </div>
         </div>
       </div>
