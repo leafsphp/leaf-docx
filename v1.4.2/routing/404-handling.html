@@ -284,7 +284,7 @@
 
 $leaf->set404(function () use($response) {
   header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-  $response->renderHtmlPage('..link/to/page');
+  $response->renderHtml('..link/to/page');
 });
               </div>
             </div>

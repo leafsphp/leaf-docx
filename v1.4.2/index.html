@@ -193,7 +193,7 @@ $leaf->get('/book/{id}', function($id) use($response) {
 });
 
 $leaf->get('/home', function() use($response) {
-  $response->renderHtmlPage('./index.html');
+  $response->renderHtml('./index.html');
 });
 
 $leaf->post('/books/add', function() use($request, $response) {

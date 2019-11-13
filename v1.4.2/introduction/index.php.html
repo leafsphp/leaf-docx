@@ -340,7 +340,7 @@ $leaf->run();
 
 
             <div class="no example">
-              <h4 class="ui header">RenderHtmlPage()</h4>
+              <h4 class="ui header">renderHtml()</h4>
               <p>
                 This method simply displays an already created html/PHP page with the appropriate content type. This method is especially suited to
                 server side routing.
@@ -356,7 +356,7 @@ $leaf = new Leaf();
 $response = new Response();
 
 $leaf->get('/', function() use($response) {
-  $response->renderHtmlPage('./link/to/page');
+  $response->renderHtml('./link/to/page');
 });
 
 $leaf->run();

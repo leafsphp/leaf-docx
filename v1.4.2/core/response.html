@@ -277,7 +277,7 @@ use Leaf\Core\Http\Response;
 $response = new Response();
 
 $leaf->get('/', function() use($response) {
-  $response->renderHtmlPage('./link/to/page');
+  $response->renderHtml('./link/to/page');
 });
                 </div>
                 Here, we set <code>$response</code> to the <code>Response</code> class, and we pass it into the route with <code>use()</code>.
@@ -352,9 +352,12 @@ $leaf->get('/name', function() use($response) {
 
 
             <div class="no example">
-              <h4 class="ui header">renderHtmlPage()</h4>
+              <h4 class="ui header">renderHtml()</h4>
               <p>
-                renderHtmlPage is a method built for websites and webapps. This method is can be used with the routing to achieve server side routing, for example:
+                In v1.4.2, renderHtmlPage has been renamed to renderHtml for clarity and simplicity.
+              </p>
+              <p>
+                renderHtml is a method built for websites and webapps. This method is can be used with the routing to achieve server side routing, for example:
               </p>
 
               <div class="ui active basic tab vertical segment" data-tab="mac">
@@ -364,7 +367,7 @@ use Leaf\Core\Http\Response;
 $response = new Response();
 
 $leaf->get('/homepage', function() use($response) {
-  $response->renderHtmlPage('link/to/home.html');
+  $response->renderHtml('link/to/home.html');
 });
                 </div>
                 With this, whenever the route <code>/homepage</code> is invoked, Leaf loads up <code>home.html</code> and outputs it to the user
@@ -394,7 +397,7 @@ $leaf->get('/homepage', function() use($response) {
 });
               </div>
               You might be wondering why we don't just use <div class="ignored code" data-type="html">echo "<h1>hello</h1>";</div>
-              The reason is, Leaf has default headers which set the content type to JSON, in order to correctly output HTML, you need to change this....Leaf has taken care of this, all within <code>renderMarkup</code> and <code>renderHtmlPage</code>
+              The reason is, Leaf has default headers which set the content type to JSON, in order to correctly output HTML, you need to change this....Leaf has taken care of this, all within <code>renderMarkup</code> and <code>renderHtml</code>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
