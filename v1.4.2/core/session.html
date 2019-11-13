@@ -263,8 +263,8 @@
           <div class="main ui intro container">
             <h2 class="ui dividing header">Overview</h2>
             <p>
-              Leaf v1.3.0 comes along with support for the native PHP session. We have directly tied it into leaf's core as a module, so you can use it without <code>middleware</code>
-              as done in some other API based frameworks.
+              Leaf v1.4.2 has thrown in a few more stuff since our session support in v1.3. We have a few more methods and better usability
+              to offer. Let's check it out.
             </p>
 
             <div class="no example">
@@ -281,6 +281,9 @@ $leaf->post('/session/start', function() use($session, $request) {
 });
                 </div>
                 Here, we set <code>$session</code> to the <code>Session</code> class, and we pass it into the route with <code>use()</code>.
+              </p>
+              <p>
+                In v1.4.2, starting a new session will automatically generate a session id for you.
               </p>
             </div>
             
@@ -302,7 +305,7 @@ $leaf->post('/session/start', function() use($session, $request) {
             <div class="no example">
               <h4 class="ui header">set()</h4>
               <p>
-                set() simply adds another key value pair to the native $_SESSION array. It takes in 2 parameters: The array key and it's pair..both as strings
+                set() simply adds another key value pair to the native $_SESSION array. It takes in 2 parameters: The array key and it's pair.
               </p>
 
               <div class="ui active basic tab vertical segment" data-tab="mac">
@@ -317,6 +320,114 @@ $leaf->post('/name/add', function() use($session) {
                 </div>
               </div>
             </div>
+
+
+            <div class="no example">
+              <h4 class="ui header">remove() <span style="border: 1px solid green; color: green; border-radius: 3px; padding: 4px;">new in v1.4.2</span></h4>
+              
+              <p>
+                remove() simply deletes a session variable. It takes in 1 parameter: the key of the variable to delete.
+              </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Http\Session;
+
+$session = new Session();
+
+$leaf->post('/name/remove', function() use($session) {
+  $name = $session->remove('name');
+});
+                </div>
+              </div>
+            </div>
+
+
+            <div class="no example">
+              <h4 class="ui header">reset() <span style="border: 1px solid green; color: green; border-radius: 3px; padding: 4px;">new in v1.4.2</span></h4>
+              
+              <p>
+                reset() simply re-initialises a session.
+              </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Http\Session;
+
+$session = new Session();
+
+$leaf->post('/session/reset', function() use($session) {
+  $session->reset();
+});
+                </div>
+              </div>
+            </div>
+
+
+            <div class="no example">
+              <h4 class="ui header">id() <span style="border: 1px solid green; color: green; border-radius: 3px; padding: 4px;">new in v1.4.2</span></h4>
+              
+              <p>
+                id() sets and/or returns the current session id. It takes in an optional parameter: the ID to overwrite the session id.
+              </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Http\Session;
+
+$session = new Session();
+
+$leaf->post('/user/add', function() use($session) {
+  $id = $session->id();
+  $newId = $session->id("new session id");
+});
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="no example">
+              <h4 class="ui header">regenerate() <span style="border: 1px solid green; color: green; border-radius: 3px; padding: 4px;">new in v1.4.2</span></h4>
+              
+              <p>
+                regenerate() simply generates a new session id. It takes in 1 parameter, whether to delete all session data or not(boolean)
+              </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Http\Session;
+
+$session = new Session();
+
+$leaf->post('/session/regenerate', function() use($session) {
+  $session->regenerate(false);
+  $session->regenerate(true); // will clear all session data
+});
+                </div>
+              </div>
+            </div>
+
+
+            <div class="no example">
+              <h4 class="ui header">destroy()</h4>
+              
+              <p>
+                destroy() ends a session and deletes all it's data
+              </p>
+
+              <div class="ui active basic tab vertical segment" data-tab="mac">
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Http\Session;
+
+$session = new Session();
+
+$leaf->post('/session/destroy', function() use($session) {
+  $session->destroy();
+});
+                </div>
+              </div>
+            </div>
+
 
             <div class="no example">
               <h4 class="ui header">getParam()</h4>
