@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Session</title>
+    <title>Core Controller</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -56,18 +56,18 @@
       <a class="item" href="../introduction/getting-started.html">
         <b>Getting Started</b>
       </a>
-      <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
-      <b>New in v1.3.0</b>
+      <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.4.2/CHANGELOG.md">
+      <b>New in v1.4.2</b>
     </a>
-      <a class="item" href="v1.3.0/introduction/getting-started.html">
-        <b>View v1.3.0 docs</b>
+      <a class="item" href="v1.4.2/introduction/getting-started.html">
+        <b>View v1.4.2 docs</b>
       </a>
       <div class="item">
         <div class="header">Versions</div>
         <div class="menu">
-            <a class="item" href="./v1.3.0/index.html">Version 1.3.0</a>
-            <a class="item" href="./v1.4.1/index.html">Version 1.4.1</a>
-            <a class="item" href="./v1.4.2/index.html">Version 1.4.1</a>
+            <a class="item" href="../../v1.4.2/index.html">Version 1.3.0</a>
+            <a class="item" href="../../v1.4.1/index.html">Version 1.4.1</a>
+            <a class="item" href="../../v1.4.2/index.html">Version 1.4.2</a>
         </div>
       </div>
 
@@ -142,7 +142,7 @@
         </a>
 
         <div class="item">
-          Session
+          Core Controller
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -165,15 +165,15 @@
             <a class="item" href="../introduction/getting-started.html">
               <b>Getting Started</b>
             </a>
-            <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.3.0/CHANGELOG.md">
-              <b>New in v1.3.0</b>
+            <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.4.2/CHANGELOG.md">
+              <b>New in v1.4.2</b>
             </a>
             <div class="item">
               <div class="header">Versions</div>
               <div class="menu">
-                  <a class="item" href="./v1.3.0/index.html">Version 1.3.0</a>
-                  <a class="item" href="./v1.4.1/index.html">Version 1.4.1</a>
-                  <a class="item" href="./v1.4.2/index.html">Version 1.4.1</a>
+                  <a class="item" href="../../v1.4.2/index.html">Version 1.3.0</a>
+                  <a class="item" href="../../v1.4.1/index.html">Version 1.4.1</a>
+                  <a class="item" href="../../v1.4.2/index.html">Version 1.4.2</a>
               </div>
             </div>
 
@@ -183,14 +183,6 @@
                 <a class="item" href="../introduction/re-routing-to-index.html">Re-routing to index</a>
                 <a class="item" href="../introduction/index.php.html">Your First Leaf App</a>
                 <!-- <a class="item" href="../introduction/init.html">Class Initialisations</a> -->
-              </div>
-            </div>
-
-            <div class="item">
-              <div class=" header">Config</div>
-              <div class="menu">
-                <a class="item" href="../config/database.html">Database</a>
-                <a class="item" href="../config/app-headers.html">App Headers</a>
               </div>
             </div>
 
@@ -241,10 +233,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Session
+                  Core Controller
 
                   <div class="sub header">
-                    Using sessions with Leaf
+                    Core Controller for your Leaf app
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -263,98 +255,174 @@
           <div class="main ui intro container">
             <h2 class="ui dividing header">Overview</h2>
             <p>
-              Leaf v1.3.0 comes along with support for the native PHP session. We have directly tied it into leaf's core as a module, so you can use it without <code>middleware</code>
-              as done in some other API based frameworks.
+              Leaf v1.4.2 includes a core controller which you can extend to create your own controllers. This gives you access to a bunch of handy 
+              functions for use in your app.
             </p>
 
             <div class="no example">
-              <h4 class="ui header">Including Session</h4>
+              <h4 class="ui header">Including the Controller</h4>
               <p>
-                To include the Session object in a route, use this:
+                To include the Controller object in a route, use this:
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Session;
+use Leaf\Core\Controller;
 
-$session = new Session();
-
-$leaf->post('/session/start', function() use($session, $request) {
-  $session->set('name', 'Michael Darko');
-});
+class NameController extends Controller
                 </div>
-                Here, we set <code>$session</code> to the <code>Session</code> class, and we pass it into the route with <code>use()</code>.
+                After this, you should have access to Leaf's core controller methods. Note that Leaf's core controller is already integrated with 
+                Leaf Veins and a customised response object, so all Vein and Response methods will be available to you.
               </p>
             </div>
             
             
 
-            <h2 class="ui dividing header">Session Methods</h2>
+            <h2 class="ui dividing header">Controller Methods</h2>
+            <h3 class="ui dividing header">Responses</h3>
+            Leaf Core controller contains methods to appropriately return data to the user.
 
             <div class="no example">
-              <h4 class="ui header">Starting a new session</h4>
+              <h4 class="ui header">respond</h4>
               <p>
-                Starting a new session with leaf is actually very simple😅..
+                respond returns json encoded data to the user.
                 <div class="ignored code" data-type="php">
-                  $session = new Leaf\Core\Http\Session;
+use Leaf\Core\Controller;
+
+class NameController extends Controller {
+  public function index() {
+        $this->respond([
+          "message" => "hello"
+        ]);
+  }
+}
                 </div>
-                This line of code checks for an active session....if none is found, it creates a new session, if one is running, it just instanciates the Session object to be used in Leaf
               </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">set()</h4>
+              <h4 class="ui header">respondWithCode</h4>
               <p>
-                set() simply adds another key value pair to the native $_SESSION array. It takes in 2 parameters: The array key and it's pair..both as strings
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
+                respond returns json encoded data to the user along with an HTTP code.
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Session;
+use Leaf\Core\Controller;
 
-$session = new Session();
-
-$leaf->post('/name/add', function() use($session) {
-  $name = $session->set('name', 'Michael Darko');
-});
+class NameController extends Controller {
+  public function index() {
+        $this->respondWithCode([
+          "message" => "hello"
+        ], 200);
+  }
+}
                 </div>
-              </div>
+              </p>
+            </div>
+
+            <h3 class="header">View <a href="./response.html">Response Docx</a> for all Response methods</h3>
+
+
+            <h3 class="ui dividing header">Veins</h3>
+            Veins simply help you pass data from the controller to the view, Vein itself can serve as a view layer on it's own. 
+
+            <div class="no example">
+              <h4 class="ui header">configure</h4>
+              <p>
+                Basic configuration for veins
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Controller;
+
+class NameController extends Controller {
+  public function index() {
+        $this->veins->configure([
+          "veins_dir" => "app/views/",
+          "cache_dir" => "app/views/build/"
+        ]);
+  }
+}
+                </div>
+                <code>veins_dir</code> refers to the directory in which your veins(View Layer Code) are kept<br>
+                <code>cache_dir</code> refers to the directory in which compiled veins(View Layer Code) are kept<br>
+              </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">getParam()</h4>
+              <h4 class="ui header">set</h4>
               <p>
-                getParam is a method built for APIs, but can be used in a normal web app/website. It takes in one parameter: the name of the param passed into the app through the session
-                It works just like how <code>$_SESSION['key']</code> does
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
+                Pass information to your view. It takes in one parameter, an array ofitems to pass into the view
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Session;
+use Leaf\Core\Controller;
 
-$session = new Session();
-
-$leaf->post('/name/add', function() use($session) {
-  $name = $session->getParam('name');
-});
+class NameController extends Controller {
+  public function index() {
+        $this->set([
+          "name" => "Mychi"
+        ]);
+  }
+}
                 </div>
-              </div>
+              </p>
+              <p>
+                You can access the name value passed into the view:
+                <div class="ignored code" data-type="php">
+                  Hello {$name}
+                </div>
+              </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">getBody()</h4>
+              <h4 class="ui header">render</h4>
               <p>
-                getBody() returns the key => value pairs of all the session data including any CSRF data
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
+                Outputs a vein(view)
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Session;
+use Leaf\Core\Controller;
 
-$session = new Session();
-
-$leaf->post('/name/add', function() use($session) {
-  $body = $session->getBody();
-});
+class NameController extends Controller {
+  public function index() {
+        $this->set([
+          "name" => "Mychi"
+        ]);
+        $this->render("index"); // refers to index.vein in the veins_dir
+  }
+}
                 </div>
-              </div>
+                <code>veins_dir</code> refers to the directory in which your veins(View Layer Code) are kept<br>
+              </p>
+            </div>
+
+            <h3 class="header">View <a href="../../veins/intro.html">Veins Docx</a> for all Vein methods</h3>
+
+
+            <div class="no example">
+              <h4 class="ui header">file_upload</h4>
+              <p>
+                file_upload is for simple file uploads. It takes in 3 parameters, the path to save the file, the file and the file type(optional).
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Controller;
+
+class NameController extends Controller {
+  public function index() {
+        $profilePic = $_FILES["profile_pic"];
+        $this->file_upload("./images/", $profilePic);
+        $this->file_upload("./images/", $profilePic, "image");
+  }
+}
+                </div>
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">objectify</h4>
+              <p>
+                Objectify converts an array to an object.
+                <div class="ignored code" data-type="php">
+use Leaf\Core\Controller;
+
+class NameController extends Controller {
+  public function index() {
+        $obj = $this->objectify([
+          "name" => "Mychi"
+        ]);
+  }
+}
+                </div>
+              </p>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>

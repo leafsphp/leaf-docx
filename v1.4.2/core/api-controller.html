@@ -65,9 +65,9 @@
       <div class="item">
         <div class="header">Versions</div>
         <div class="menu">
-            <a class="item" href="./v1.4.2/index.html">Version 1.3.0</a>
-            <a class="item" href="./v1.4.1/index.html">Version 1.4.1</a>
-            <a class="item" href="./v1.4.2/index.html">Version 1.4.1</a>
+            <a class="item" href="../../v1.4.2/index.html">Version 1.3.0</a>
+            <a class="item" href="../../v1.4.1/index.html">Version 1.4.1</a>
+            <a class="item" href="../../v1.4.2/index.html">Version 1.4.2</a>
         </div>
       </div>
 
@@ -171,9 +171,9 @@
             <div class="item">
               <div class="header">Versions</div>
               <div class="menu">
-                  <a class="item" href="./v1.4.2/index.html">Version 1.3.0</a>
-                  <a class="item" href="./v1.4.1/index.html">Version 1.4.1</a>
-                  <a class="item" href="./v1.4.2/index.html">Version 1.4.1</a>
+                  <a class="item" href="../../v1.4.2/index.html">Version 1.3.0</a>
+                  <a class="item" href="../../v1.4.1/index.html">Version 1.4.1</a>
+                  <a class="item" href="../../v1.4.2/index.html">Version 1.4.2</a>
               </div>
             </div>
 
@@ -220,18 +220,6 @@
             </div>
 
             <div class="item">
-              <div class=" header">Core Modules</div>
-              <div class="menu">
-                <a class="item" href="../core/simple-authentication.html">Simple Authentication</a>
-                <!-- <a class="item" href="../core/field-validation.html">Field Validation</a> -->
-                <a class="item" href="../core/date-manipulation.html">Date Manipulation</a>
-                <a class="item" href="../core/request.html">Request</a>
-                <a class="item" href="../core/response.html">Response</a>
-                <a class="item" href="../core/session.html">Session</a>
-              </div>
-            </div>
-
-            <div class="item">
               <div class=" header">Helpers</div>
               <div class="menu">
                 <a class="item" href="../helpers/constants.html">Constants</a>
@@ -267,97 +255,99 @@
           <div class="main ui intro container">
             <h2 class="ui dividing header">Overview</h2>
             <p>
-              Leaf v1.4.2 includes a 
+              Leaf v1.4.2 includes a core api controller which you can extend to create your own controllers. This gives you access to a bunch of handy 
+              functions for use in your API.
             </p>
 
             <div class="no example">
-              <h4 class="ui header">Including Session</h4>
+              <h4 class="ui header">Including the API controller</h4>
               <p>
-                To include the Session object in a route, use this:
+                To include the API Controller object in a route, use this:
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Session;
+use Leaf\Core\ApiController;
 
-$session = new Session();
-
-$leaf->post('/session/start', function() use($session, $request) {
-  $session->set('name', 'Michael Darko');
-});
+class NameController extends ApiController
                 </div>
-                Here, we set <code>$session</code> to the <code>Session</code> class, and we pass it into the route with <code>use()</code>.
+                After this, you should have access to Leaf's core API controller methods
               </p>
             </div>
             
             
 
-            <h2 class="ui dividing header">Session Methods</h2>
+            <h2 class="ui dividing header">Controller Methods</h2>
+            <h3 class="ui dividing header">Responses</h3>
+            Leaf Core controller contains methods to appropriately return data to the user.
 
             <div class="no example">
-              <h4 class="ui header">Starting a new session</h4>
+              <h4 class="ui header">respond</h4>
               <p>
-                Starting a new session with leaf is actually very simple😅..
+                respond returns json encoded data to the user.
                 <div class="ignored code" data-type="php">
-                  $session = new Leaf\Core\Http\Session;
+use Leaf\Core\ApiController;
+
+class NameController extends ApiController {
+  public function index() {
+        $this->respond([
+          "message" => "hello"
+        ]);
+  }
+}
                 </div>
-                This line of code checks for an active session....if none is found, it creates a new session, if one is running, it just instanciates the Session object to be used in Leaf
               </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">set()</h4>
+              <h4 class="ui header">respondWithCode</h4>
               <p>
-                set() simply adds another key value pair to the native $_SESSION array. It takes in 2 parameters: The array key and it's pair..both as strings
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
+                respond returns json encoded data to the user along with an HTTP code.
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Session;
+use Leaf\Core\ApiController;
 
-$session = new Session();
-
-$leaf->post('/name/add', function() use($session) {
-  $name = $session->set('name', 'Michael Darko');
-});
+class NameController extends ApiController {
+  public function index() {
+        $this->respondWithCode([
+          "message" => "hello"
+        ], 200);
+  }
+}
                 </div>
-              </div>
+              </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">getParam()</h4>
+              <h4 class="ui header">file_upload</h4>
               <p>
-                getParam is a method built for APIs, but can be used in a normal web app/website. It takes in one parameter: the name of the param passed into the app through the session
-                It works just like how <code>$_SESSION['key']</code> does
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
+                file_upload is for simple file uploads. It takes in 3 parameters, the path to save the file, the file and the file type(optional).
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Session;
+use Leaf\Core\ApiController;
 
-$session = new Session();
-
-$leaf->post('/name/add', function() use($session) {
-  $name = $session->getParam('name');
-});
+class NameController extends ApiController {
+  public function index() {
+        $profilePic = $_FILES["profile_pic"];
+        $this->file_upload("./images/", $profilePic);
+        $this->file_upload("./images/", $profilePic, "image");
+  }
+}
                 </div>
-              </div>
+              </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">getBody()</h4>
+              <h4 class="ui header">objectify</h4>
               <p>
-                getBody() returns the key => value pairs of all the session data including any CSRF data
-              </p>
-
-              <div class="ui active basic tab vertical segment" data-tab="mac">
+                Objectify converts an array to an object.
                 <div class="ignored code" data-type="php">
-use Leaf\Core\Http\Session;
+use Leaf\Core\ApiController;
 
-$session = new Session();
-
-$leaf->post('/name/add', function() use($session) {
-  $body = $session->getBody();
-});
+class NameController extends ApiController {
+  public function index() {
+        $obj = $this->objectify([
+          "name" => "Mychi"
+        ]);
+  }
+}
                 </div>
-              </div>
+              </p>
             </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
