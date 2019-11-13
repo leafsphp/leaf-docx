@@ -66,7 +66,7 @@
         <div class="header">Versions</div>
         <div class="menu">
             <a class="item" href="../../v1.3.0/index.html">Version 1.3.0</a>
-            <a class="item" href="../../v1.4.1/index.html">Version 1.4.1</a>
+            <a class="item" href="https://github.com/leafsphp/leaf/releases/tag/v1.4.1">Version 1.4.1</a>
             <a class="item" href="../../v1.4.2/index.html">Version 1.4.2</a>
         </div>
       </div>
@@ -172,7 +172,7 @@
               <div class="header">Versions</div>
               <div class="menu">
                   <a class="item" href="../../v1.3.0/index.html">Version 1.3.0</a>
-                  <a class="item" href="../../v1.4.1/index.html">Version 1.4.1</a>
+                  <a class="item" href="https://github.com/leafsphp/leaf/releases/tag/v1.4.1">Version 1.4.1</a>
                   <a class="item" href="../../v1.4.2/index.html">Version 1.4.2</a>
               </div>
             </div>
@@ -261,9 +261,14 @@
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">Overview</h2>
+            <h2 class="ui dividing header">info</h2>
 
-            <div class="no example">
+            <div>
+              Leaf Config Database is being discontinued for the time being, until we solve a few issues here and there. Please hang in tight
+               Leaf DB will be back better than before.
+            </div>
+
+            <!-- <div class="no example">
               <h4 class="ui header">Databse Overview</h4>
               <p>
                 Leaf doesn't come with a full featured database layer, however, we have miniature database manipulation methods.<br>
@@ -319,6 +324,22 @@ $leaf->post('/users/add', function() use($connection) {
                 </div>
               </p>
             </div>
+
+            <div class="no example">
+              <h4 class="ui header">mysqli query</h4>
+              <p>
+                mysqli query made simpler
+                <div class="ignored code" data-type="php">
+                  use Leaf\Config\Database;
+                  
+$database = new Database($host, $dbname, $user, $password, "mysqli");
+
+$leaf->post('/users/add', function() use($database) {
+  $
+});
+                </div>
+              </p>
+            </div> -->
 
             <h2 class="ui dividing header">Next Steps</h2>
 
