@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
-  <link rel="image_src" type="image/jpeg" href="images\logo.png">
-  <link rel="shortcut icon" type="image/jpeg" href="images\logo.png">
+  <link rel="image_src" type="image/jpeg" href="..\images\logo.png">
+  <link rel="shortcut icon" type="image/jpeg" href="..\images\logo.png">
 
   <!-- Site Properities -->
   <!-- <meta name="generator" content="DocPad v6.79.4"> -->
@@ -26,18 +26,12 @@
   <div class="ui vertical inverted sidebar menu" id="toc">
     <div class="item">
       <a class="ui logo icon image" href="index.html">
-        <img alt="pic" src="images\logo.png">
+        <img alt="pic" src="..\images\logo.png">
       </a>
       <a href="index.html"><b>Leaf Docs</b></a>
     </div>
     <a class="item" href="introduction\getting-started.html">
       <b>Getting Started</b>
-    </a>
-    <a class="item" href="https://github.com/leafsphp/leaf/blob/v1.4.2/CHANGELOG.md">
-      <b>New in v1.4.2</b>
-    </a>
-    <a class="item" href="v1.4.2/introduction/getting-started.html">
-      <b>View v1.4.2 docs</b>
     </a>
     <div class="item">
       <div class="header">Versions</div>
@@ -127,7 +121,7 @@
             <div class="ui logo shape">
               <div class="sides">
                 <div class="active ui side">
-                  <img alt="pic" class="ui image" src="images\logo.png">
+                  <img alt="pic" class="ui image" src="..\images\logo.png">
                 </div>
               </div>
             </div>
@@ -191,8 +185,8 @@
         <div class="row">
           <div class="twelve wide column">
             <div class="hidden code" data-type="php">
-              // Sample index.php
-              require_once __DIR__ . '/vendor/autoload.php';
+// Sample index.php
+require_once __DIR__ . '/vendor/autoload.php';
 
 $leaf = new Leaf\Core\Leaf;
 $response = new Leaf\Core\Response;
@@ -283,7 +277,7 @@ $leaf->post('/token/create', function() use($response, $authentication) {
           </div>
         </div>
     </div>
-    <div class="ui email alternate stripe vertical segment">
+    <!-- <div class="ui email alternate stripe vertical segment">
       <div class="ui center aligned grid container">
         <div class="column">
           <h3 class="ui header">
@@ -303,8 +297,9 @@ $leaf->post('/token/create', function() use($response, $authentication) {
           </form>
         </div>
       </div>
-    </div>
+    </div> -->
     
+    <div class="ui section divider"></div>
     <div class="ui  vertical footer segment" style="margin-bottom: -6% !important;">
       <div class="ui center aligned container">
         <div class="ui stackable grid">
@@ -333,7 +328,7 @@ $leaf->post('/token/create', function() use($response, $authentication) {
           </div> -->
         </div>
         <div class="ui section divider"></div>
-        <img alt="pic" src="images\logo.png" class="ui centered mini image">
+        <img alt="pic" src="..\images\logo.png" class="ui centered mini image">
         <div class="ui horizontal small divided link list">
           <a class="item" href="#" target="_blank">Free & Open Source (MIT)</a>
         </div>
