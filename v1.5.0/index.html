@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-  <!-- Standard Meta -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
@@ -14,7 +13,7 @@
   <title>Leaf PHP</title>
 
   <meta name="description" content="Leaf PHP is a micro-framework that allows you to create clean, simple but powerful web applications and APIs quickly..">
-  <meta name="keywords" content="PHP, backend, library, framework, api, server, routing, leaf php, php framework, micro-framework">
+  <meta name="keywords" content="PHP, backend, library, framework, api, server, routing, leaf php, php framework, micro-framework, leaf, leafMVC, leaf mvc, Michael Darko">
     
   <link rel="stylesheet" type="text/css" class="ui" href="..\dist\semantic.min.css">
   <link rel="stylesheet" type="text/css" href="..\stylesheets\docs.css">
@@ -53,6 +52,24 @@
     </div>
 
     <div class="item">
+      <div class=" header">Core Modules</div>
+      <div class="menu">
+        <a class="item" href="./core/form.html">Field Validation</a>
+        <a class="item" href="./core/fs.html">Leaf Filesystem</a>
+        <a class="item" href="./core/auth.html">Auth <span style="border: 1px solid rgb(5, 214, 5); color: rgb(5, 214, 5); padding: 2px; float: right;">new</span></a>
+        <a class="item" href="./core/db.html">Database <span style="border: 1px solid rgb(5, 214, 5); color: rgb(5, 214, 5); padding: 2px; float: right;">new</span></a>
+        <a class="item" href="./core/controller.html">Controllers</a>
+        <a class="item" href="./core/models.html">Models</a>
+        <a class="item" href="./core/date-manipulation.html">Date Manipulation</a>  
+        <a class="item" href="./core/request.html">Request</a>  
+        <a class="item" href="./core/response.html">Response</a>
+        <a class="item" href="./core/session.html">Session</a>
+        <a class="item" href="./core/simple-authentication.html">Simple Authentication</a>
+        <a class="item" href="./core/token.html">Simple Token</a>
+      </div>
+    </div>
+
+    <div class="item">
       <div class=" header">Routing</div>
       <div class="menu">
         <a class="item" href="./routing/simple-routing.html">Simple routing</a>
@@ -69,21 +86,9 @@
     </div>
 
     <div class="item">
-      <div class=" header">Core Modules</div>
-      <div class="menu">
-        <a class="item" href="./core/simple-authentication.html">Simple Authentication</a>
-        <!-- <a class="item" href="./core/field-validation.html">Field Validation</a>-->
-        <a class="item" href="./core/date-manipulation.html">Date Manipulation</a>  
-        <a class="item" href="./core/request.html">Request</a>  
-        <a class="item" href="./core/response.html">Response</a>
-        <a class="item" href="./core/session.html">Session</a>
-      </div>
-    </div>
-
-    <div class="item">
       <div class=" header">Helpers</div>
       <div class="menu">
-        <a class="item" href="./helpers/constants.html">Constants</a>
+        <a class="item" href="./helpers/str.html">Leaf STR <span style="border: 1px solid rgb(5, 214, 5); color: rgb(5, 214, 5); padding: 2px; float: right;">New</span></a>
         <a class="item" href="./helpers/jwt.html">JWT</a>
       </div>
     </div>
@@ -123,33 +128,11 @@
             <i class="sidebar icon"></i> Menu
           </a>
           <div class="right menu">
-            <div class="item">
-              <!-- <a class="twitter-share-button twitter" href="http://twitter.com/share" data-text="Leaf PHP v1.4.2 is out😎🔥🔥🎂🎄, create web apps and APIs faster than ever before🔥" data-url="https://leaf-docs.netlify.com" data-via="leafphp"></a>
-              <script type="text/javascript">
-                window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
-              </script> -->
+            <div class="item" style="margin-right: -80px;">
               <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-follow-button twitter-follow-button-rendered" style="position: static; visibility: visible; width: 238px; height: 20px;" title="Twitter Follow Button" src="https://platform.twitter.com/widgets/follow_button.2d991e3dfc9abb2549972ce8b64c5d85.en.html#dnt=false&amp;id=twitter-widget-0&amp;lang=en&amp;screen_name=leafphp&amp;show_count=true&amp;show_screen_name=true&amp;size=m&amp;time=1573826693283" data-screen-name="leafphp"></iframe>
-              <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
             </div>
-            <div class="ui language floating dropdown link item" id="languages">
-              <i class="world icon"></i>
-              <div class="text">Search</div>
-              <div class="menu">
-                <div class="header">Search Our Docs</div>
-                <div class="ui icon search input">
-                  <i class="search icon"></i>
-                  <input type="text" placeholder="Search languages...">
-                </div>
-                <div class="scrolling menu"style="width: 100px !important;">
-                  <a href="introduction/getting-started.html" class="item" >
-                    <!-- <span class="description">Getting Started</span> -->
-                    Getting Started
-                  </a>
-                  <a href="#" class="item" >
-                    Database Connection
-                  </a>
-                </div>
-              </div>
+            <div class="item">
+              <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
             </div>
           </div>
         </div>
@@ -164,7 +147,7 @@
           <br/>
           <h1 class="ui inverted header">
             <span class="library">
-              Leaf PHP <small style="font-size: 22px !important;;">v1.4.2</small>
+              Leaf PHP <small style="font-size: 22px !important;;">v1.5.0</small>
             </span>
             <span class="tagline">
               Create clean, simple but powerful web applications and APIs quickly.
@@ -187,6 +170,9 @@ require_once __DIR__ . '/vendor/autoload.php';
 $leaf = new Leaf\Core\Leaf;
 $response = new Leaf\Core\Http\Response;
 $request = new Leaf\Core\Http\Request;
+$db = new Leaf\Core\Db\Mysqli;
+
+$db->connect("host", "username", "password", "dbname");
               
 $leaf->get('/book/{id}', function($id) use($response) {
   $response->respond(["id" => $id]);
@@ -196,53 +182,83 @@ $leaf->get('/home', function() use($response) {
   $response->renderPage('./index.html');
 });
 
-$leaf->post('/books/add', function() use($request, $response) {
+$leaf->post('/books/add', function() use($request, $response, $db) {
   $title = $request->get('title');
-  $response->respond(["message" => "hello"]);
+  $db->insert("books", "title", "?", [$title]);
+  $response->respond(["message" => "$title added"]);
 });
 
 $leaf->run();
             </div>
+            <br>
             <h1 class="ui header">Quickly Create PHP Projects</h1>
-            <p>Leaf is a PHP micro-framework <!--inspired by Slim--> which helps you create web applications and APIs from the ground up in minutes.</p>
+            <p>PHP made even simpler! Leaf is a simple but powerful web framework suitable for both pro devs and beginners alike. Leaf provides a ton of functionality which lets you easily get your project running💪</p>
           </div>
         </div>
       </div>
       <div class="stackable very relaxed ui grid container">
         <div class="row">
           <div class="seven wide column" style="margin-bottom: -100px !important;;">
-            <h2>What's new in v1.4.2</h2>
+            <h2>What's new in v1.5.0</h2>
           </div>
         </div>
         <div class="row">
           <div class="seven wide column">
-            <h2 class="ui header">Leaf FileSystem</h2>
+            <h2 class="ui header">Leaf Database Tool</h2>
             <p>
-              This is a simple functionality inspired by node js' FileSystem(fs) module. Leaf FS aims to make directory and file management 
-              much simpler than what you're currently used to, so as to speed up and ease the dev process.😊👌😎
+              Leaf's "simple query builder" provides a convenient but usual way to quickly create and run database queries. It can be used to perform most database operations in your app.
             </p>
             <p>
-              Leaf FS allows you to read/write to file, create, rename, copy and paste files/directories all with just a few lines of code. All this is
-              performed while maintaining Leaf's simplicity.
+              Leaf's "simple query builder" currently supports Mysqli and PDO connections, though we still recommend using Mysqli. There's no need to worry about SQL injection as parameter binding is also supported and easy to use😉💪
             </p>
             <p>
-              View Leaf FS' docs <a href="core/fs.html">here</a>
+              View Leaf DB' docs <a href="core/db.html">here</a>
             </p>
           </div>
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
 $leaf = new Leaf\Core\Leaf;
 $response = new Leaf\Core\Http\Response;
-$fs = new Leaf\Core\FS(__DIR__);
+$db = new Leaf\Core\Db\Mysqli;
 
-$leaf->get('/fs/demo', function() use($fs, $response) {
-  $fs->mkDir("files");
-  $fs->setBaseDir("files");
-  $fs->createFile("newFile.html");
-  $fs->writeFile("newFile.html", "
-       This is dummy code😅
-  ");
-  $response->renderMarkUp($fs->readFile("newFile.html"));
+$db->connect("host", "username", "password", "dbname");
+
+$leaf->get('/posts/all', function() use($db, $response) {
+  # get all rows from "posts" table
+  $posts = $this->select("posts")->fetchAll();
+  $response->respond($posts);
+});
+
+$leaf->run();
+            </div>
+          </div>
+        </div>
+        <div class="ui divider"></div>
+        <div class="row">
+          <div class="seven wide column">
+            <h2 class="ui header">Leaf Simple Auth</h2>
+            <p>
+              Setting up a login and sign-up system can sometimes be a very unpleasant experience, especially for new devs. For pro devs, the challenge is "the standard". For this, Leaf has prepared something really simple.
+            </p>
+            <p>
+              Leaf Simple Auth allows you to set-up authentication in just one line of code😅😅. Literally 1 line😎.
+            </p>
+            <p>
+              View <a href="core/auth.html">auth docs</a>
+            </p>
+          </div>
+          <div class="nine wide column">
+            <div class="hidden code" data-type="php">
+$leaf = new Leaf\Core\Leaf;
+$response = new Leaf\Core\Http\Response;
+
+$leaf->post("/auth/register", function() use($response, $auth) {
+  $username = $auth->get("username");
+  ...
+  $auth->basicRegister($username, $email, $password, $confirm_password);
+  $response->respondWithCode(
+        $auth->basicLogin($username, $password), 
+  200);
 });
             </div>
           </div>
@@ -250,62 +266,31 @@ $leaf->get('/fs/demo', function() use($fs, $response) {
         <div class="ui divider"></div>
         <div class="row">
           <div class="seven wide column">
-            <h2 class="ui header">More Handy Session Methods</h2>
+            <h2 class="ui header">New Form Validate method</h2>
             <p>
-              Leaf comes with more methods attached to the session object, which generally make session 
-              management much easier and smoother.
+              Leaf now provides a much simpler way to validate a parameter using Leaf Forms. In one line, you can create a bunch of rules to validate a parameter with. Validate simply makes sure that the passed selected parameters pass these validation tests. It's never been simpler😎
             </p>
             <p>
-              With Leaf session, you can create, reset and delete sessions, add, remove and return session variables.<br>
-              View <a href="core/session.html">session docs</a>
-            </p>
-          </div>
-          <div class="nine wide column">
-            <div class="hidden code" data-type="php">
-$session = new Leaf\Core\Http\Session;
-
-...
-$session->set("name", "Michael");
-$session->get("name");
-$session->remove("name");
-...
-$session->getBody();
-$session->reset(true);
-            </div>
-          </div>
-        </div>
-        <div class="ui divider"></div>
-        <div class="row">
-          <div class="seven wide column">
-            <h2 class="ui header">Leaf Token</h2>
-            <p>
-              This is a simple token authentication system available in v1.4.2 upwards. This is a token authentication for people who
-              do no want to use the already supported JWT token methods supported in Leaf.
+              Parameters which fail the form validation are saved in the form's errors which can be accessed with <code>errors()</code>
             </p>
             <p>
-              Currently, it is not as secure as JWT, therefore we do not recommend it for anything but personal projects, however, it is under
-              constant development and will receive upgrades in almost every version of Leaf.
-            </p>
-            <p>
-              View <a href="core/token.html">Token docs</a>
+              View <a href="core/form.html">Form docs</a>
             </p>
           </div>
           <div class="nine wide column">
             <div class="hidden code" data-type="php">
 $leaf = new Leaf\Core\Leaf;
-$token = new Leaf\Core\Token;
+$response = new Leaf\Core\Http\Response;
+$form = new Leaf\Core\Form;
 
-$leaf->get("/home", function() use($token) {
-  // generate simple token
-  $token->generateSimpleToken($username, $user_id, $expiry_time);
+$leaf->get("/login", function() use($form, $response) {
+  $form->validate([
+        "username" => "validUsername",
+        "email" => "email",
+        "password" => "required"
+  ]);
 
-  // generate token
-  $token->generateToken($token_data, $expiry_time);
-
-  // validate a token passed to app by user
-  $userToken = $token->validateToken($userToken);
-
-  // token is actually more useful than you think😎👌
+  !empty($form->errors()) ? $response->respond($form->errors()) : null;
 });
             </div>
           </div>
@@ -313,29 +298,8 @@ $leaf->get("/home", function() use($token) {
         <div class="ui divider"></div>
         <div class="row">
           <div class="seven wide column" style="margin-bottom: -100px !important;;">
-            <h2>Find out more <a href="https://github.com/leafsphp/leaf/blob/v1.4.2/CHANGELOG.md" target="_blank" rel="noopener noreferrer">here</a></h2>
+            <h2>Find out more <a href="https://github.com/leafsphp/leaf/blob/v1.5.0/CHANGELOG.md" target="_blank" rel="noopener noreferrer">here</a></h2>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui email alternate stripe vertical segment">
-      <div class="ui center aligned grid container">
-        <div class="column">
-          <h3 class="ui header">
-            Get informed on all imrovements made to leaf
-          </h3>
-          <form class="ui form" method="post" action="#">
-            <input type="hidden" name="action" value="subscribe">
-            <input type="hidden" name="lists" value="29450">
-            <div class="field">
-              <div class="ui huge input">
-                <input type="text" name="email_address" data-validate="email" placeholder="E-mail">
-              </div>
-              <button type="submit" value="Subscribe" class="ui huge secondary submit button">
-                Sign-up
-              </button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
@@ -354,7 +318,6 @@ $leaf->get("/home", function() use($token) {
             <h4 class="ui header">Network</h4>
             <div class="ui link list">
               <a class="item" href="https://github.com/leafsphp/leaf/" target="_blank">GitHub Repo</a>
-              <a class="item" href="https://github.com/leafsphp/leaf/tree/v1.0.0">1.0.0 Docs</a>
             </div>
           </div>
           <!-- <div class="seven wide right floated column">
