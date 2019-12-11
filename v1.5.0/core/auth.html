@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Simple Authentication</title>
+    <title>Leaf Auth</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -141,7 +141,7 @@
         </a>
 
         <div class="item">
-          Simple Authentication
+          Leaf Auth
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -244,7 +244,7 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Simple Authentication
+                  Leaf Auth
 
                   <div class="sub header">
                     Simple Authentication methods for faster development
@@ -267,79 +267,57 @@
             <h2 class="ui dividing header">Overview</h2>
 
             <div class="no example">
-              <h4 class="ui header">Working with tokens</h4>
+              <h4 class="ui header">Intro</h4>
               <p>
-                Leaf provides you with the $jwt object which includes various methods for creating and parsing token data....but we do not advice directly using the $jwt object. For this reason, a special $authentication object has been created to work with all the $jwt data.
-                To use $authentication, 
-                <div class="ignored code" data-type="php">
-                  $authentication = new Leaf\Core\Authentication();
-                </div>
-              </p>
+              Setting up a login and sign-up system can sometimes be a very unpleasant experience, especially for new devs. For pro devs, the challenge is "the standard". For this, Leaf has prepared something really simple.
+            </p>
+            <p>
+              Leaf Leaf Auth allows you to set-up authentication in just one line of code😅😅. Literally 1 line😎.  To use Leaf Auth, you simply need to initialise the Leaf Auth package.
+            </p>
+            <div class="ignored code" data-type="php">
+              $auth = new Leaf\Core\Auth;
+            </div>
             </div>
             
             <h2 class="ui dividing header">Authentication methods:</h2>
 
             <div class="no example">
-              <h4 class="ui header">generateSimpleToken()</h4>
+              <h4 class="ui header">basicLogin()</h4>
               <p>
-                This method generates a new JSON Web Token. It takes 2 arguments. check out <a href="https://tools.ietf.org/html/rfc7519#section-4.1">JWT</a> for more info on JWT params
-                <ul>
-                  <li>(int) - A user id to encode</li>
-                  <li>(string) - A secret phrase to encode with the token</li>
-                </ul>
+                Basic login is used to create a user login. It takes in a username and a password, it checks for the provided username and password in the <code>users</code>
+                table of your database, so, for basicLogin to work, you need a <code>users</code> table. Also, the key for the data you pass in should
+                be <code>username</code> and <code>password</code>. It returns the user data and a generated JSON Web Token.
               </p>
-
-              <div class="ignored code" data-type="bash">
-                $token = $authentication->generateSimpleToken(24', 'LEAF PHP SECRET CODE 1442');
+              <div class="ignored code" data-type="php">
+                $user = $auth->basicLogin("Mychi", "pACCw0R4");
+              </div>
+              <p>
+                If this data comes from a form, be sure to make the <code>name</code> options <code>username</code> and <code>password</code>
+              </p>
+              <div class="ignored code" data-type="html">
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
               </div>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">generateToken()</h4>
+              <h4 class="ui header">basicRegister()</h4>
               <p>
-                This method generates a new JSON Web Token: the same as <code>generateSimpleToken()</code>, the only difference is that this method gives you more control over the token
-                i.e. expiry time..... In v1.3, this method takes in 2 params, the entire payload of your JWT and a secret phrase. check out <a href="https://tools.ietf.org/html/rfc7519#section-4.1">JWT</a> for more info on JWT payload params.
-                <ul>
-                  <li>(array) - JWT payload</li>
-                  <li>(string) - A secret phrase to encode with the token</li>
-                </ul>
+                Basic register is used to create a user register. It takes in a username, email, password and a password confirmation, 
+                it inserts the provided data into the <code>users</code> table of your database, so, for basicRegister to work, you need a <code>users</code> table. 
               </p>
-
-              <div class="ignored code" data-type="bash">
-                $token = $authentication->generateToken($payload, "secret phrase");
+              <div class="ignored code" data-type="php">
+                $auth->basicRegister("Mychi", "mick@gmail.com", "pACCw0R4", "pACCw0R4");
               </div>
-            </div>
-
-            <div class="no example">
-              <h4 class="ui header">validateToken()</h4>
               <p>
-                This method is used to confirm the identity of a token from an authorization header
+                After this, you can call the basicLogin method to get a token for the user <br>
+                If this data comes from a form, be sure to make the <code>name</code> options <code>username</code>, <code>email</code>, <code>password</code> and <code>confirm_password</code>
               </p>
-
-              <div class="ignored code" data-type="bash">
-                $token = $authentication->validateToken();
-              </div>
-            </div>
-
-            <div class="no example">
-              <h4 class="ui header">getBearerToken()</h4>
-              <p>
-                This method is used to get the bearer token from an authorization header
-              </p>
-
-              <div class="ignored code" data-type="bash">
-                $token = $authentication->getBearerToken();
-              </div>
-            </div>
-
-            <div class="no example">
-              <h4 class="ui header">getAuthorizationHeader()</h4>
-              <p>
-                This method is used to an authorization header
-              </p>
-
-              <div class="ignored code" data-type="bash">
-                $authHeader = $authentication->getAuthorizationHeader();
+              <div class="ignored code" data-type="html">
+                <input type="text" name="username" placeholder="Username">
+                <input type="text" name="email" placeholder="Email">
+                <input type="text" name="password" placeholder="Password">
+                <input type="text" name="confirm_password" placeholder="Confirm Password">
               </div>
             </div>
 
