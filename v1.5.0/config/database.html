@@ -264,89 +264,16 @@
             <h2 class="ui dividing header">info</h2>
 
             <div>
-              Leaf Config Database is being discontinued for the time being, until we solve a few issues here and there. Please hang in tight
-               Leaf DB will be back better than before.
+              As promised, Leaf DB is back, but is no longer <code>Leaf\Config\DB</code> but <code>Leaf\Core\DB</code>. <br>
+              Check out the <a href="../core/db.html">new db docs</a>
             </div>
-
-            <!-- <div class="no example">
-              <h4 class="ui header">Databse Overview</h4>
-              <p>
-                Leaf doesn't come with a full featured database layer, however, we have miniature database manipulation methods.<br>
-                To use these methods, 
-                <div class="ignored code" data-type="php">
-                  $database = new Leaf\Config\Database();
-                </div>
-                Now these methods are available in our code...let's take a look
-              </p>
-            </div>
-
-            <h2 class="ui dividing header">Database Connection</h2>
-
-            <div class="no example">
-              <h4 class="ui header">Mysqli connection</h4>
-              <p>
-                We have prepared a simple mysqli connection object for you
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
-                  
-                  $database = new Database();
-                  $connection = $database->connectMysqli($host, $user, $password, $dbname);
-                </div>
-              </p>
-            </div>
-
-            <div class="no example">
-              <h4 class="ui header">PDO connection</h4>
-              <p>
-                We have prepared a simple PDO connection object for you
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
-                  
-                  $database = new Database();
-                  $connection = $database->connectPDO($host, $dbname, $user, $password);
-                </div>
-              </p>
-            </div>
-
-            <div class="no example">
-              <h4 class="ui header">Using connection in a route</h4>
-              <p>
-                To use the connection object inside a route($leaf) use:
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
-                  
-$database = new Database();
-$connection = $database->connectPDO($host, $dbname, $user, $password);
-
-$leaf->post('/users/add', function() use($connection) {
-  // your code
-});
-                </div>
-              </p>
-            </div>
-
-            <div class="no example">
-              <h4 class="ui header">mysqli query</h4>
-              <p>
-                mysqli query made simpler
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
-                  
-$database = new Database($host, $dbname, $user, $password, "mysqli");
-
-$leaf->post('/users/add', function() use($database) {
-  $
-});
-                </div>
-              </p>
-            </div> -->
 
             <h2 class="ui dividing header">Next Steps</h2>
 
-            <a href="../introduction/re-routing-to-index.html" style="font-size: 18px;">Re-routing to index.php</a><br />
-            <a href="../routing/simple-routing.html" style="font-size: 18px;">Simple Routing</a><br />
-            <a href="../core/request.html" style="font-size: 18px;">Request</a><br />
-            <a href="../core/response.html" style="font-size: 18px;">Response</a>
+            <a href="../core/model.html" style="font-size: 18px;">Working with models</a><br />
+            <a href="../core/api-controller.html" style="font-size: 18px;">API controllers</a><br />
+            <a href="../core/form.html" style="font-size: 18px;">Leaf Form</a><br />
+            <a href="../core/auth.html" style="font-size: 18px;">Leaf Simple Auth</a>
           </div>
 
           <div class="ui  vertical footer segment">

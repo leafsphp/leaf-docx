@@ -14,7 +14,7 @@
 
     <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.79.4" />
-    <title>Core Db</title>
+    <title>Leaf DB</title>
 
     <meta name="description" content="Leaf is a PHP starter kit that helps you quickly write simple yet powerful web applications and APIs without any framework.">
     <meta name="keywords" content="PHP, backend, library, framework, api, server, routing">
@@ -141,7 +141,7 @@
         </a>
 
         <div class="item">
-          Core Db
+          Leaf DB
         </div>
         <div class="right menu">
           <div class="vertically fitted borderless item">
@@ -242,10 +242,10 @@
             <div class="ui container">
               <div class="introduction">
                 <h1 class="ui header">
-                  Core Db
+                  Leaf DB
 
                   <div class="sub header">
-                    Working with databases in Leaf
+                    Leaf's simple database query builder
                     <iframe class="github" src="https://ghbtns.com/github-btn.html?user=leafsphp&repo=leaf&type=star&count=true&amp;" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
                   </div>
                 </h1>
@@ -262,85 +262,271 @@
           </div>
 
           <div class="main ui intro container">
-            <h2 class="ui dividing header">info</h2>
+            <h2 class="ui dividing header">Leaf DB Overview</h2>
 
-            <div>
-              Leaf Config Database is being discontinued for the time being, until we solve a few issues here and there. Please hang in tight
-               Leaf DB will be back better than before.
-            </div>
-
-            <!-- <div class="no example">
-              <h4 class="ui header">Databse Overview</h4>
+            <div class="no example">
+              <h4 class="ui header">Introduction</h4>
               <p>
-                Leaf doesn't come with a full featured database layer, however, we have miniature database manipulation methods.<br>
-                To use these methods, 
-                <div class="ignored code" data-type="php">
-                  $database = new Leaf\Config\Database();
-                </div>
-                Now these methods are available in our code...let's take a look
+                Leaf's "simple query builder" provides a convenient but usual way to quickly create and run database queries. It can be used to perform most database operations in your app.
+              </p>
+              <p>
+                Leaf's "simple query builder" currently supports Mysqli and PDO connections, though we still recommend using Mysqli. There's no need to worry about SQL injection as parameter binding is also supported and easy to use😉💪
               </p>
             </div>
 
-            <h2 class="ui dividing header">Database Connection</h2>
+            <h2 class="ui dividing header">Init</h2>
 
             <div class="no example">
-              <h4 class="ui header">Mysqli connection</h4>
+              <h4 class="ui header">Initialising Leaf DB</h4>
               <p>
-                We have prepared a simple mysqli connection object for you
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
-                  
-                  $database = new Database();
-                  $connection = $database->connectMysqli($host, $user, $password, $dbname);
-                </div>
+                Leaf DB has 2 different packages, 1 for mysqli and the other for PDO. So you can import which ever package you wish to use. <span style="color: red;">Leaf recommends using the mysqli package.</span>
               </p>
-            </div>
+              <div class="ignored code" data-type="php">
+use Leaf\Core\DB\Mysqli;
 
-            <div class="no example">
-              <h4 class="ui header">PDO connection</h4>
+$db = new Mysqli();
+              </div>
+              <div class="ignored code" data-type="php">
+use Leaf\Core\DB\PDO;
+
+$db = new PDO();
+              </div>
               <p>
-                We have prepared a simple PDO connection object for you
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
-                  
-                  $database = new Database();
-                  $connection = $database->connectPDO($host, $dbname, $user, $password);
-                </div>
+                Both DB:PDO and DB:Mysqli use the same methods, so all the code below works the same for whichever you're using. We'll alert you if something works differently.
               </p>
             </div>
 
             <div class="no example">
-              <h4 class="ui header">Using connection in a route</h4>
+              <h4 class="ui header">DB connection</h4>
               <p>
-                To use the connection object inside a route($leaf) use:
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
+                The first thing you need to do to use Leaf DB is to connect to your database. This can be achieved with <code>connect()</code><br>
+              </p>
+              <div class="ignored code" data-type="php">
+                use Leaf\Core\DB\Mysqli;
+                
+                $db = new Mysqli();
+                $db->connect($host, $user, $password, $dbname);
+              </div>
+              <div class="ignored code" data-type="php">
+                  use Leaf\Core\DB\PDO;
                   
-$database = new Database();
-$connection = $database->connectPDO($host, $dbname, $user, $password);
+                  $db = new PDO();
+                  $db->connect($host, $dbname, $user, $password);
+                </div>
+                This will set the connection for use within Leaf DB, but if you also want to save this connection in a variable, you can do so.
+                <div class="ignored code" data-type="php">
+                  $connection = $db->connect($host, $dbname, $user, $password);
+                </div>
+            </div>
 
-$leaf->post('/users/add', function() use($connection) {
-  // your code
+            <h2 class="ui dividing header">Queries</h2>
+
+            <div class="no example">
+              <h4 class="ui header">Making simple queries</h4>
+              <p>
+                Queries with with Leaf DB are much like what you're used to. Though a query builder, we wan't to maintain the flexibility of normal database queries,
+                hence, we provided the <code>query()</code> method to make your normal database queries.
+              </p>
+              <div class="ignored code" data-type="php">
+$db = new Leaf\Core\DB\Mysqli();
+$db->connect($host, $user, $password, $dbname);
+
+$leaf->post('/users/all', function() use($db) {
+  $users = $db->query("SELECT username FROM users")->fetchAll();
 });
                 </div>
-              </p>
+                <p>
+                  As normal as this seems, we take it a step further by providing you with a much simpler way to use prepared statements.
+                </p>
+                <div class="ignored code" data-type="php">
+$db = new Leaf\Core\DB\Mysqli();
+$db->connect($host, $user, $password, $dbname);
+
+$leaf->post('/users/{id}', function($id) use($db) {
+  $users = $db->query("SELECT username FROM users WHERE id = ?", [$id])->fetchAll();
+});
+                </div>
+                <p>
+                  We've looked at making queries, but then <code>query()</code> still makes you type out whatever query you need 
+                  to use. It's certainly easier than raw queries, but it's nothing impressive. Below are some of Leaf DB's handy methods to make
+                  queries even easier.💪😉
+                </p>
+            </div>
+
+            <h2 class="ui dividing header">Retrieving Data</h2>
+            <p>
+              If you're attempting to use this, you've probably seen or used SELECT statements before. Leaf DB has provided an even easier 
+              way to use select.
+            </p>
+            <div class="ignored code" data-type="php">
+              $db->select();
             </div>
 
             <div class="no example">
-              <h4 class="ui header">mysqli query</h4>
+              <h4 class="ui header">Getting all rows from a table</h4>
               <p>
-                mysqli query made simpler
-                <div class="ignored code" data-type="php">
-                  use Leaf\Config\Database;
-                  
-$database = new Database($host, $dbname, $user, $password, "mysqli");
-
-$leaf->post('/users/add', function() use($database) {
-  $
-});
-                </div>
+                To do this, we use the <code>select()</code> method we saw above. All that we have to do is to pass in the table we 
+                want to retrieve. For example, to get all users from the "users" table, we simply do:
               </p>
-            </div> -->
+              <div class="ignored code" data-type="php">
+                $db->select("users");
+              </div>
+              <p>
+                To actually get the results, we'll have to chain <code>fetchAll()</code> to the select method. <code>fetchAll()</code>
+                does the same thing that <code>mysqli_fetch_all()</code> does to an mysqli result
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->select("users")->fetchAll();
+              </div>
+              <p>
+                To add a limit to the query, just use:
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->select("users", "*", "LIMIT 10")->fetchObj();
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Getting a column from a table</h4>
+              <p>
+                Getting a single column, eg: getting all usernames from the users table
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->select("users", "username")->fetchAll();
+              </div>
+              <p>
+                This is like saying <code>SELECT username FROM users</code>. You can also pass in multiple options
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->select("users", "username, email")->fetchAll();
+              </div>
+              <p>
+                You can get all columns with:
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->select("users")->fetchAll();
+                # or
+                $db->select("users", "*")->fetchAll();
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Getting a particular row from a table</h4>
+              <p>
+                Getting a particular row, eg: getting the user with the id of 1 from the users table. You acan achieve this with:
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->select("users", "*", "WHERE id = 2")->fetchObj();
+              </div>
+              <p>
+                <code>fetchObj</code> does the same thing as <code>mysqli_fetch_obj</code> and <code>fetch(PDO::FETCH_OBJ)</code>
+              </p>
+              <p>
+                If you don't need the whole row, you can use:
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->select("users", "username, email", "WHERE id = 2")->fetchObj();
+              </div>
+            </div>
+
+            <h2 class="ui dividing header">Inserting Data</h2>
+
+            <p>
+              This operation uses INSERT. With Leaf DB:
+            </p>
+            <div class="ignored code" data-type="php">
+              $db->insert();
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Inserting Data</h4>
+              <p>
+                We use Leaf DB's insert method which takes in a "table" to insert data, a "column" and it's "value"
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->insert("posts", "title", "This is post One");
+              </div>
+              <p>
+                You can also add multiple columns like so:
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->insert("posts", "title, body", "post One, This is the body of post One");
+              </div>
+            </div>
+
+            <h2 class="ui dividing header">Updating Data</h2>
+            
+            <p>
+              This operation uses UPDATE. With Leaf DB:
+            </p>
+            <div class="ignored code" data-type="php">
+              $db->update();
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Update</h4>
+              <p>
+                We use Leaf DB's update method which takes in a "table", a "column-value" to update and "conditions".
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->update("posts", "title = 'Post 1'", "title = 'Post One'");
+              </div>
+              <p>
+                This will look for a post with the title of "Post One" and change it to "Post 1". <br>
+                You can also have multiple options:
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->update("posts", "title = 'Post 1'", "id = '1'");
+              </div>
+            </div>
+
+            <h2 class="ui dividing header">Deleting Data</h2>
+            
+            <p>
+              This operation uses DELETE. With Leaf DB:
+            </p>
+            <div class="ignored code" data-type="php">
+              $db->delete();
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Delete</h4>
+              <p>
+                We use Leaf DB's delete method which takes in a "table", and "conditions".
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->delete("posts", "title = 'Post 1'");
+              </div>
+              <p>
+                This will look for a post with the title of "Post 1" and delete it. <br>
+                You can also have multiple conditions:
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->update("posts", "title = 'Post 1' AND author = 'Mychi Darko'");
+              </div>
+            </div>
+
+            <h2 class="ui dividing header">Others</h2>
+
+            <div class="no example">
+              <h4 class="ui header">Row Count</h4>
+              <p>
+                Get the number of rows from select
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->select("posts")->count();
+              </div>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">Connection Close</h4>
+              <p>
+                Close the connection
+              </p>
+              <div class="ignored code" data-type="php">
+                $db->close();
+              </div>
+            </div>
 
             <h2 class="ui dividing header">Next Steps</h2>
 

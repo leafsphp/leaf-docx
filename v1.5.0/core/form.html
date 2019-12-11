@@ -312,7 +312,37 @@
             </div>
 
             <div class="no example">
-              <h4 class="ui header">returnErrors</h4>
+              <h4 class="ui header">Validate <span style="border: 1px solid green; color: green; border-radius: 3px; padding: 4px;">new in v1.5.0</span></h4>
+              <p>
+                Leaf now provides a much simpler way to validate a parameter using Leaf Forms. In one line, you can create a bunch of rules to validate 
+                a parameter with. Validate simply makes sure that the passed selected parameters pass these validation tests. It's never been simpler😎
+              </p>
+              <p>
+                Parameters which fail the form validation are saved in the form's errors which can be accessed with <code>errors()</code>
+              </p>
+              <div class="ignored code" data-type="php">
+$form->validate([
+      "username" => "validUsername",
+      "email" => "email",
+      "password" => "required"
+]);
+              </div>
+              <p>
+                This is a list of all supported validate rules
+                <ul>
+                  <li>required</li>
+                  <li>number</li>
+                  <li>textOnly</li>
+                  <li>validUsername</li>
+                  <li>email</li>
+                  <li>NoSpaces</li>
+                </ul>
+                Note that these rules aren't case-sensitive, so you can write the however you want, as long as the spelling is the same
+              </p>
+            </div>
+
+            <div class="no example">
+              <h4 class="ui header">errors</h4>
               <p>
                 Remember we talked about Leaf Form errors? Leaf Form holds errors for all failed tests, you get all these errors back with returnErrors
                 <div class="ignored code" data-type="php">
